@@ -36,6 +36,9 @@ public class Main extends Application {
 	private Timeline loop;
 	private int frm_width = 600;
 	private int frm_height = 750;
+	private int ball_radius=15;
+	boolean screen_mover = false;
+	private ArrayList<ShapeObstacle> Obstacles;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -46,102 +49,37 @@ public class Main extends Application {
 			primaryStage.setTitle("Bouncing Ball");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			circle = new Circle(15, Color.BLUE);
-			circle.relocate(300, 600);
-			canvas.getChildren().add(circle);
-//			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
-//			Scene scene = new Scene(root,400,400);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			Circle circle;
-		    List<Line> lines = new ArrayList<>();
-		    List<Arc> arcs = new ArrayList<>();
-		    Ring rg = new Ring(100);
-		    arcs= rg.give();
+			Ball ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
+			Circle myBall=ball.Ball_make();
+			canvas.getChildren().add(myBall);
+
+			Obstacles=new ArrayList<>();
+		    Ring rng=new Ring(100,100,frm_width/2,300);
+		    rng.makeShape();
 		    
-//		    Color defaultStroke = Color.GREEN;
-//		    Color defaultFill = defaultStroke.deriveColor(1, 1, 1, 0.3);
+		    
+		    SquareObstacle sqr_obst=new SquareObstacle(150,150,frm_width/2,25);
+		    sqr_obst.makeShape();
+		    
+		    Obstacles.add(rng);
+		    Obstacles.add(sqr_obst);
 
-//		    Color hitStroke = Color.RED;
-//		    Color hitFill = hitStroke.deriveColor(1, 1, 1, 0.3);
-//		    Group root = new Group();
-
-//	        circle = new Circle(350, 600, 20);
-//	        circle.setStroke( defaultStroke);
-//	        circle.setFill( defaultFill);
-
-//	        Polygon octagon = new Polygon(500, 50, 1200, 50, 1600, 300, 1600, 800, 1200, 1000, 500, 1000, 100, 800, 100, 300);
-	        Polygon octagon = new Polygon(325,100,325,250,475,250,475,100);
-
-	        // create lines out of the octagon
-	        Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
-	        int size = octagon.getPoints().size();
-	        int count=0;
-	        for (int i = 0; i < size; i += 2) {
-	        	
-	            double startX = octagon.getPoints().get(i);
-	            double startY = octagon.getPoints().get(i + 1);
-	            double endX = octagon.getPoints().get((i + 2) % size);
-	            double endY = octagon.getPoints().get((i + 3) % size);
-	            
-	            
-	            Line line = new Line(startX, startY, endX, endY);
-	            line.setStrokeWidth(10);
-	            line.setStroke(clr_arr[count]);
-	            count++;
-
-	            lines.add(line);
-	        }
+	        ArrayList<Rotate> arr_rotate=new ArrayList<>();
 	        
-	        
-	        
-	        Rotate rotate = new Rotate();  
-	        
-	        //setting properties for the rotate object.   
-	        rotate.setAngle(0);  
-	        rotate.setPivotX(400);  
-	        rotate.setPivotY(175); 
-	        
-	        for (int i = 0; i < 4; i++) {
-				lines.get(i).getTransforms().add(rotate);
+	        for (int i = 0; i < Obstacles.size(); i++) {
+	        	Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
+	 	        arr_rotate.add(rotate1);
+	 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
 			}
-
-//	        MouseGestures mg = new MouseGestures();
-//	        mg.makeDraggable(circle);
+	       
 	        
-	        canvas.getChildren().addAll(lines);
-	        canvas.getChildren().addAll(arcs);
-//	        canvas.getChildren().add(circle);
-	        
-//	        final Timeline loop = new Timeline(new KeyFrame(Duration.millis(10), new
-//	       		 EventHandler<ActionEvent>() {
-//	       		 double dx = 1;
-//	       		 double dy = 1;
-//	       		 @Override
-//	       		 public void handle(final ActionEvent t) {
-//	       		 circle.setLayoutX(circle.getLayoutX() + dx);
-//	       		 circle.setLayoutY(circle.getLayoutY() + dy);
-//	       		 Bounds bounds = canvas.getBoundsInLocal();
-//	       		 System.out.println(circle.getLayoutY()+"    "+(bounds.getMaxY() - circle.getRadius()));
-//	       		 System.out.println();
-//	       		 if ( circle.getLayoutY() >= bounds.getMaxY() - circle.getRadius() ) {
-//	       			 dy = -dy;
-////	       			 System.out.println("gf");
-//	       		 }
-//	       		 
-//	       		 
-//	       		
-//	       		 }
-//	       		 }));
-	        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(circle,lines,rotate)));
+	        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate)));
 	        
 	        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	            @Override
 	            public void handle(KeyEvent event) {
 	                if (event.getCode()== KeyCode.UP ) {
-//	                	System.out.println("hhh");
 	                	gameup=1;
-	                	
-	                	
 	                }
 	            }
 	        });
@@ -150,49 +88,57 @@ public class Main extends Application {
 	            @Override
 	            public void handle(KeyEvent event) {
 	                if (event.getCode()== KeyCode.UP) {
-	              
-//	                	System.out.println("yyy");
 	                	gameup=-1;
-	        
 	                }
 	            }
 	        });
 	        
 	        loop.setCycleCount(Timeline.INDEFINITE);         
 	        loop.play();
-//	        primaryStage.setScene(new Scene(canvas, 800, 700));
-//	        primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void run(Circle circle, List<Line> lines ,Rotate rotate) {
+	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate) {
 		
-		rotate.setAngle(rotate.getAngle()+0.3);
+		for (int i = 0; i < arr_rotate.size(); i++) {
+			arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+0.5);
+		}
 		
-		for (int i =0 ; i<4;i++) {
-//			System.out.println(lines.get(i).getBoundsInParent()+"         "+(circle.getBoundsInParent()));
-			Shape shape = Shape.intersect(circle, lines.get(i));
-			boolean intersects = shape.getBoundsInLocal().getWidth() != -1;
-			if (intersects) {
-				System.out.println("Touch");
-				System.out.println(lines.get(i).getStroke());
-				circle.setFill(lines.get(i).getStroke());
-//				loop.stop();
+		if(circle.getLayoutY()<frm_height/2) {
+			screen_mover=true;
+		}
+		
+		for (int i = 0; i < Obstacles.size(); i++) {
+			for (int j = 0; j < Obstacles.get(i).getList_shape().size(); j++) {
+				Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
+				boolean intersects = shape.getBoundsInLocal().getWidth() != -1;
+				if (intersects) {
+					
+//					System.out.println(Obstacles.get(i).getList_shape().get(j).getStroke());
+					circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
+//					loop.stop();
+				}
 			}
-//			if(circle.getBoundsInParent().intersects(lines.get(i).getBoundsInLocal())) {
-//				System.out.println("Touch");
-//				loop.stop();
-//			}
 		}
 		
 		if (gameup==1) {
-			circle.setLayoutY(circle.getLayoutY() -3);
+			circle.setLayoutY(circle.getLayoutY() -7);
+			for (int i = 0; i < Obstacles.size(); i++) {
+				if(screen_mover) {
+					Obstacles.get(i).setYpos(Obstacles.get(i).getYpos()+2);
+					Obstacles.get(i).makeShape();
+//					ShapeObstacle obst
+//					canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
+				}
+			}
+			
 		}
 		else if (gameup==-1) {
-			circle.setLayoutY(circle.getLayoutY() +1);
+			circle.setLayoutY(circle.getLayoutY() +2);
 		}
+		
 	}
 	
 	public static void main(String[] args) {
