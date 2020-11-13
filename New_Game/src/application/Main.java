@@ -30,22 +30,24 @@ import javafx.geometry.Bounds;
 
 public class Main extends Application {
 	
-	public static Circle circle;
-	public static Pane canvas;
-	public int gameup =0;
-	public Timeline loop;
+	private static Circle circle;
+	private static Pane canvas;
+	private int gameup =0;
+	private Timeline loop;
+	private int frm_width = 600;
+	private int frm_height = 750;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			canvas = new Pane();
-			final Scene scene = new Scene(canvas, 800, 600);
+			final Scene scene = new Scene(canvas, frm_width, frm_height);
 			scene.setFill(Color.BLACK);
 			primaryStage.setTitle("Bouncing Ball");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			circle = new Circle(15, Color.BLUE);
-			circle.relocate(400, 500);
+			circle.relocate(300, 600);
 			canvas.getChildren().add(circle);
 //			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
 //			Scene scene = new Scene(root,400,400);
@@ -53,7 +55,9 @@ public class Main extends Application {
 //			Circle circle;
 		    List<Line> lines = new ArrayList<>();
 		    List<Arc> arcs = new ArrayList<>();
-
+		    Ring rg = new Ring(100);
+		    arcs= rg.give();
+		    
 //		    Color defaultStroke = Color.GREEN;
 //		    Color defaultFill = defaultStroke.deriveColor(1, 1, 1, 0.3);
 
@@ -105,6 +109,7 @@ public class Main extends Application {
 //	        mg.makeDraggable(circle);
 	        
 	        canvas.getChildren().addAll(lines);
+	        canvas.getChildren().addAll(arcs);
 //	        canvas.getChildren().add(circle);
 	        
 //	        final Timeline loop = new Timeline(new KeyFrame(Duration.millis(10), new
