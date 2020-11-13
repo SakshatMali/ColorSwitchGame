@@ -30,7 +30,7 @@ import javafx.geometry.Bounds;
 
 public class Main extends Application {
 	
-	private static Circle circle;
+//	private static Circle circle;
 	private static Pane canvas;
 	private int gameup =0;
 	private Timeline loop;
@@ -38,6 +38,8 @@ public class Main extends Application {
 	private int frm_height = 750;
 	private int ball_radius=15;
 	boolean screen_mover = false;
+	private double diff_obst = 450;
+//	private int cnt_obst = 0;
 	private ArrayList<ShapeObstacle> Obstacles;
 	@Override
 	public void start(Stage primaryStage) {
@@ -56,12 +58,10 @@ public class Main extends Application {
 			Obstacles=new ArrayList<>();
 		    Ring rng=new Ring(100,100,frm_width/2,300);
 		    rng.makeShape();
-		    
-		    
-		    SquareObstacle sqr_obst=new SquareObstacle(150,150,frm_width/2,25);
-		    sqr_obst.makeShape();
-		    
 		    Obstacles.add(rng);
+		    
+		    SquareObstacle sqr_obst=new SquareObstacle(150,150,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst);
+		    sqr_obst.makeShape();
 		    Obstacles.add(sqr_obst);
 
 	        ArrayList<Rotate> arr_rotate=new ArrayList<>();
@@ -71,8 +71,6 @@ public class Main extends Application {
 	 	        arr_rotate.add(rotate1);
 	 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
 			}
-	       
-	        
 	        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate)));
 	        
 	        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -103,9 +101,9 @@ public class Main extends Application {
 	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate) {
 		
 		for (int i = 0; i < arr_rotate.size(); i++) {
-			arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+0.5);
+			arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
 		}
-		
+		ShapeObstacle hell = Obstacles.get(0);
 		if(circle.getLayoutY()<frm_height/2) {
 			screen_mover=true;
 		}
@@ -115,8 +113,6 @@ public class Main extends Application {
 				Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
 				boolean intersects = shape.getBoundsInLocal().getWidth() != -1;
 				if (intersects) {
-					
-//					System.out.println(Obstacles.get(i).getList_shape().get(j).getStroke());
 					circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
 //					loop.stop();
 				}
@@ -125,20 +121,22 @@ public class Main extends Application {
 		
 		if (gameup==1) {
 			circle.setLayoutY(circle.getLayoutY() -7);
-			for (int i = 0; i < Obstacles.size(); i++) {
-				if(screen_mover) {
-					Obstacles.get(i).setYpos(Obstacles.get(i).getYpos()+2);
-					Obstacles.get(i).makeShape();
-//					ShapeObstacle obst
-//					canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
-				}
-			}
 			
+			if(screen_mover) {
+				for (int i = 0; i < Obstacles.size(); i++) {
+					for (int j = 0; j < Obstacles.get(i).getList_shape().size(); j++) {
+					Obstacles.get(i).getList_shape().get(j).setLayoutY(Obstacles.get(i).getList_shape().get(j).getLayoutY()+3);
+					System.out.println("ha");
+				
+					}
+				}	
+			}
 		}
+		
 		else if (gameup==-1) {
 			circle.setLayoutY(circle.getLayoutY() +2);
 		}
-		
+//		hell.makeShape();
 	}
 	
 	public static void main(String[] args) {
