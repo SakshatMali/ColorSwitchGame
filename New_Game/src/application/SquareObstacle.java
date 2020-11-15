@@ -13,6 +13,8 @@ public class SquareObstacle extends ShapeObstacle{
 	
 	@Override
 	public void makeShape() {
+		
+
 		Polygon square = new Polygon(getXpos()-getWidth()/2,getYpos()-getHeight()/2,
 									getXpos()-getWidth()/2,getYpos()+getHeight()/2,
 									getXpos()+getWidth()/2,getYpos()+getHeight()/2,
