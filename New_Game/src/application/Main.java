@@ -44,9 +44,14 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			canvas = new Pane();
+//			BorderPane menu = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
+//			canvas.getChildren(menu);
+//			canvas.getChildren().add
+//			canvas.getChildren().add(menu);
 			final Scene scene = new Scene(canvas, frm_width, frm_height);
 			scene.setFill(Color.BLACK);
 			primaryStage.setTitle("Bouncing Ball");
+			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			Ball ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
