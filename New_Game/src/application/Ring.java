@@ -8,10 +8,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 
 public class Ring extends ShapeObstacle{
-	public Ring(double height,double width,double xpos,double ypos) {
-		super(height, width, xpos, ypos);
+	public Ring(double height,double width,double xpos,double ypos,int rotate) {
+		super(height, width, xpos, ypos,rotate);
 	}
 	
 	@Override
@@ -30,5 +31,18 @@ public class Ring extends ShapeObstacle{
 			arc.setType(ArcType.OPEN);
 			getList_shape().add(arc);
 		}
+	}
+	
+	@Override
+	public Rotate makeRotate(List<Shape> list) {
+	    Rotate rotate = new Rotate(); 
+        rotate.setAngle(0);  
+        rotate.setPivotX(getXpos());  
+        rotate.setPivotY(getYpos());
+      
+        for (int i = 0; i < list.size()-5; i++) {
+			list.get(i).getTransforms().add(rotate);
+		}
+        return rotate;
 	}
 }

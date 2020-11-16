@@ -5,10 +5,12 @@ import java.util.List;
 
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
 
 public class SquareObstacle extends ShapeObstacle{
-	public SquareObstacle(double height, double width, double xpos, double ypos){
-		super(height, width, xpos, ypos);
+	public SquareObstacle(double height, double width, double xpos, double ypos, int rotate){
+		super(height, width, xpos, ypos,rotate);
 	}
 	
 	@Override
@@ -36,5 +38,17 @@ public class SquareObstacle extends ShapeObstacle{
 	            getList_shape().add(line);
 	        }
 	}
-
+	
+	@Override
+	public Rotate makeRotate(List<Shape> list) {
+	    Rotate rotate = new Rotate(); 
+        rotate.setAngle(0);  
+        rotate.setPivotX(getXpos());  
+        rotate.setPivotY(getYpos());
+      
+        for (int i = 0; i < list.size()-5; i++) {
+			list.get(i).getTransforms().add(rotate);
+		}
+        return rotate;
+	}
 }

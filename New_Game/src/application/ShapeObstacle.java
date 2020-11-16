@@ -16,6 +16,7 @@ public abstract class ShapeObstacle extends Shape {
 	private double width;
 	private double xpos;
 	private double ypos;
+	private int _rotate=0;
 	private List<Shape> list_shape = new ArrayList<>();
 	private Star star;
 	private ColorChange clr_chng;
@@ -25,12 +26,13 @@ public abstract class ShapeObstacle extends Shape {
 	private double[] ypoints = {centroid,-centroid/2,-centroid/2};
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	
-	public ShapeObstacle(double height, double width, double xpos, double ypos) {
+	public ShapeObstacle(double height, double width, double xpos, double ypos, int rotate) {
 		super();
 		this.height = height;
 		this.width = width;
 		this.xpos = xpos;
 		this.ypos = ypos;
+		_rotate=rotate;
 		star=new Star();
 //		clr_chng=new ColorChange(size_clr_change);
 	
@@ -78,17 +80,9 @@ public abstract class ShapeObstacle extends Shape {
 		this.clr_chng = clr_chng;
 	}
 	public abstract void makeShape();
-	public Rotate makeRotate(List<Shape> list) {
-	    Rotate rotate = new Rotate(); 
-        rotate.setAngle(0);  
-        rotate.setPivotX(xpos);  
-        rotate.setPivotY(ypos);
-      
-        for (int i = 0; i < list.size()-4; i++) {
-			list.get(i).getTransforms().add(rotate);
-		}
-        return rotate;
-	}
+
+	public abstract Rotate makeRotate(List<Shape> list);
+	
 	public Rotate makeRotate_Clr_chng(List<Shape> list,double diff) {
 		Rotate clr_chng_rotate =new Rotate();
 		clr_chng_rotate.setAngle(0);  
@@ -98,6 +92,14 @@ public abstract class ShapeObstacle extends Shape {
         	list.get(i).getTransforms().add(clr_chng_rotate);
 		}
         return clr_chng_rotate;
+	}
+	public Rotate makeRotate_Star(List<Shape> list) {
+		Rotate star_rotate =new Rotate();
+		star_rotate.setAngle(0);  
+	    star_rotate.setPivotX(xpos);  
+	    star_rotate.setPivotY(ypos);
+	    list.get(list.size()-5).getTransforms().add(star_rotate);
+        return star_rotate;
 	}
 	public void makeStar() {
 		Polygon _star = new Polygon(xpos+xpoints[0],ypos+ypoints[0],
@@ -136,5 +138,11 @@ public abstract class ShapeObstacle extends Shape {
 			getList_shape().add(arc);
 		}
 		
+	}
+	public int get_rotate() {
+		return _rotate;
+	}
+	public void set_rotate(int _rotate) {
+		this._rotate = _rotate;
 	}
 }
