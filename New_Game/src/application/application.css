@@ -1,1 +1,8 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.glyph-icon{
+    -fx-fill: White;
+}
+.glyph-icon:hover{
+    -fx-cursor: hand;
+    -fx-fill: black;
+}

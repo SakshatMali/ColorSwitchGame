@@ -1,5 +1,25 @@
 package application;
-	
+
+import java.util.ArrayList;
+
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
+import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
+
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -12,6 +32,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -28,52 +49,53 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
-
-
-public class Main extends Application {
-//	private static Pane canvas;
-//	private int gameup =0;
-//	private Timeline loop;
+public class GamePlayController {
+	private static Pane canvas;
+	private int gameup =0;
+	private Timeline loop;
 	private int frm_width = 600;
 	private int frm_height = 750;
-//	private int ball_radius=15;
-//	private int clr_change_radius=13;
-//	boolean screen_mover = false;
-//	private double diff_obst = 450;
-//	private boolean hrzntl_mov=false;
-//	private ArrayList<ShapeObstacle> Obstacles;
+	private int ball_radius=15;
+	private int clr_change_radius=13;
+	boolean screen_mover = false;
+	private double diff_obst = 450;
+	private boolean hrzntl_mov=false;
+	private ArrayList<ShapeObstacle> Obstacles;
 	
-	
-	@Override
-	public void start(Stage primaryStage) throws IOException {
-		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        Scene scene = new Scene(mainRoot,frm_width,frm_height);
-        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        scene.setFill(Color.BLACK);
-        mainRoot.setStyle("-fx-background-color: #000000;");
-        primaryStage.setTitle("Bouncing Ball");
-        primaryStage.setScene(scene);
-//        scene.setFill(Color.BLACK);
-        primaryStage.show();
+	public void play(ActionEvent event) {
+		PlayGame(event);
 	}
 	
-	
-	/*@Override
-	public void start(Stage primaryStage) {
+	public void PlayGame(ActionEvent event) {
 		try {
-			canvas = new Pane();
-//			BorderPane menu = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
-//			canvas.getChildren(menu);
-//			canvas.getChildren().add
-//			canvas.getChildren().add(menu);
-			Parent mainPage=FXMLLoader.load(getClass().getResource("Sample.fxml"));
-			canvas.getChildren().add(mainPage);
-			final Scene scene = new Scene(canvas, frm_width, frm_height);
-			scene.setFill(Color.BLACK);
-			primaryStage.setTitle("Bouncing Ball");
 			
+			canvas = new Pane();
+//			canvas.getChildren().add(backg);
+			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			
+			Scene scene = new Scene(canvas,frm_width,frm_height);
+			scene.setFill(Color.BLACK);
+			canvas.setStyle("-fx-background-color: #000000;");
+		
+			primaryStage.setTitle("Byll");
 			primaryStage.setScene(scene);
+////			scene.setFill(Color.BLACK);
 			primaryStage.show();
+			
+			
+			Image image = new Image(new FileInputStream("C:/Users/SAKSHAT/git/New_Game/New_Game/src/Colour Images/Pause.png"));  
+			
+		      
+		      //Setting the image view 
+		    ImageView imageView = new ImageView(image); 
+		    
+		    imageView.setX(480);
+		    imageView.setY(20);
+		    
+		    imageView.setFitHeight(100);
+		    imageView.setFitWidth(100);
+		    canvas.getChildren().add(imageView);	
+		    
 			Ball ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
 			Circle myBall=ball.Ball_make();
 //			canvas.getChildren().add(myBall);
@@ -255,9 +277,5 @@ public class Main extends Application {
 			circle.setLayoutY(circle.getLayoutY() +2);
 		}
 	}
-	*/
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 }
