@@ -171,8 +171,9 @@ public class Main extends Application {
 			arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
 		}
 		for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
-			for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
+//			for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
 //				(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+.5);
+<<<<<<< HEAD
 //				if(!hrzntl_mov) {
 //					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+.5);
 //				}
@@ -182,12 +183,31 @@ public class Main extends Application {
 				}
 				while(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()>xx) {
 					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-.1);
+=======
+				if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-300 && hrzntl_mov==false){
+					for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
+						(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-1);
+					}
+					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()==-300)hrzntl_mov=true;
+					
+>>>>>>> branch 'master' of https://github.com/SakshatMali/New_Game.git
 				}
+				else if(hrzntl_mov==true){
+					for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
+						(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+1);
+					}
+					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=300) {
+						hrzntl_mov=false;
+					}
+				}
+//				if(!hrzntl_mov) {
+//					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+.5);
+//				}
 //				else {
 //					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-1);
 //				}
 //				hrzntl_mov=!hrzntl_mov;
-			}
+//			}
 //			for (int j = 0; j < 4; j++) {
 //				(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-1);
 //			}
@@ -195,6 +215,9 @@ public class Main extends Application {
 		}
 		if(circle.getLayoutY()<frm_height/2) {
 			screen_mover=true;
+		}
+		else {
+			screen_mover=false;
 		}
 		
 		for (int i = 0; i < Obstacles.size(); i++) {
@@ -241,13 +264,13 @@ public class Main extends Application {
 		if (gameup==1) {
 			circle.setLayoutY(circle.getLayoutY() -7);
 			
-			if(screen_mover) {
+			if(screen_mover ) {
 				for (int i = 0; i < Obstacles.size(); i++) {
 					for (int j = 0; j < Obstacles.get(i).getList_shape().size(); j++) {
-					Obstacles.get(i).getList_shape().get(j).setLayoutY(Obstacles.get(i).getList_shape().get(j).getLayoutY()+3);
-				
+						Obstacles.get(i).getList_shape().get(j).setLayoutY(Obstacles.get(i).getList_shape().get(j).getLayoutY()+3);
 					}
-				}	
+				}
+				frm_height+=3;
 			}
 		}
 		

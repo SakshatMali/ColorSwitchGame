@@ -39,6 +39,18 @@ public class LineObstacle extends ShapeObstacle{
 		Line l8 = new Line(getXpos()+quarter_frm-4*quarter_frm,getYpos()-50,getXpos()+quarter_frm+quarter_frm-4*quarter_frm,getYpos()-50);
 		l8.setStroke(clr_arr[3]);
 		l8.setStrokeWidth(15);
+		Line l9 = new Line(getXpos()-2*quarter_frm+4*quarter_frm,getYpos()-50,getXpos()-2*quarter_frm+quarter_frm+4*quarter_frm,getYpos()-50);
+		l9.setStroke(clr_arr[0]);
+		l9.setStrokeWidth(15);
+		Line l10 = new Line(getXpos()-quarter_frm+4*quarter_frm,getYpos()-50,getXpos()-quarter_frm+quarter_frm+4*quarter_frm,getYpos()-50);
+		l10.setStroke(clr_arr[1]);
+		l10.setStrokeWidth(15);
+		Line l11 = new Line(getXpos()+4*quarter_frm,getYpos()-50,getXpos()+quarter_frm+4*quarter_frm,getYpos()-50);
+		l11.setStroke(clr_arr[2]);
+		l11.setStrokeWidth(15);
+		Line l12 = new Line(getXpos()+quarter_frm+4*quarter_frm,getYpos()-50,getXpos()+quarter_frm+quarter_frm+4*quarter_frm,getYpos()-50);
+		l12.setStroke(clr_arr[3]);
+		l12.setStrokeWidth(15);
 		getList_shape().add(l1);
 		getList_shape().add(l2);
 		getList_shape().add(l3);
@@ -47,6 +59,10 @@ public class LineObstacle extends ShapeObstacle{
 		getList_shape().add(l6);
 		getList_shape().add(l7);
 		getList_shape().add(l8);
+		getList_shape().add(l9);
+		getList_shape().add(l10);
+		getList_shape().add(l11);
+		getList_shape().add(l12);
 	}
 	@Override
 	public Rotate makeRotate(List<Shape> list) {
