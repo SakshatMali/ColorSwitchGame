@@ -8,10 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,6 +33,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -60,6 +63,9 @@ public class GamePlayController {
 	boolean screen_mover = false;
 	private double diff_obst = 450;
 	private boolean hrzntl_mov=false;
+//	private Button pause_button;
+	private Image pause;
+	
 	private ArrayList<ShapeObstacle> Obstacles;
 	
 	public void play(ActionEvent event) {
@@ -85,17 +91,22 @@ public class GamePlayController {
 		primaryStage.show();
 		
 		
-		Image image = new Image(new FileInputStream("src/Colour Images/Pause.png"));  
-		
+		pause = new Image(new FileInputStream("src/Colour Images/Pause.png"));  
+//		pause_button = new Button();
 	      
 	      //Setting the image view 
-	    ImageView imageView = new ImageView(image); 
+	    ImageView imageView = new ImageView(pause); 
+	    
 	    
 	    imageView.setX(480);
 	    imageView.setY(20);
+//	    pause_button.setTranslateX(480);
+//	    pause_button.setTranslateY(20);
+//	    pause_button.setPrefSize(100, 100);
 	    
 	    imageView.setFitHeight(100);
 	    imageView.setFitWidth(100);
+//	    pause_button.setGraphic(imageView);
 	    canvas.getChildren().add(imageView);
 		scene.setFill(Color.BLACK);
 		primaryStage.setTitle("Bouncing Ball");
@@ -163,6 +174,35 @@ public class GamePlayController {
         
         canvas.getChildren().add(myBall);
         loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate,arr_hrzntl_rotate)));
+        
+        imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        	
+            @Override
+            public void handle(MouseEvent event) {
+//            	pause_button.setCursor(Cursor.HAND); 
+            	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//            	window.getScene().getRoot().setCursor(Cursor.WAIT);
+
+
+//                System.out.println("Tile pressed ");
+//                event.consume();
+                Parent tableViewParent = null;
+				try {
+					tableViewParent = FXMLLoader.load(getClass().getResource("PauseDialogBox.fxml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    	        Scene tableViewScene = new Scene(tableViewParent);
+//    	        tableViewScene.setFill(Color.BLACK);
+    	        
+    	        //This line gets the Stage information
+    	        
+//    	        tableViewParent.setStyle("-fx-background-color: #000000;");
+    	        window.setScene(tableViewScene);
+    	        window.show();
+            }
+       });
         
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
