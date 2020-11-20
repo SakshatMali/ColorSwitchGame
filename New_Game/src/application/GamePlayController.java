@@ -18,6 +18,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
@@ -64,7 +68,11 @@ public class GamePlayController {
 	private double diff_obst = 450;
 	private boolean hrzntl_mov=false;
 //	private Button pause_button;
+	private Ball ball;
+	private Player player;
 	private Image pause;
+	private Text scr;
+//	private Image pause;
 	
 	private ArrayList<ShapeObstacle> Obstacles;
 	
@@ -107,12 +115,21 @@ public class GamePlayController {
 	    imageView.setFitHeight(100);
 	    imageView.setFitWidth(100);
 //	    pause_button.setGraphic(imageView);
-	    canvas.getChildren().add(imageView);
+	    scr = new Text();       
+	    scr.setText("0"); 
+	    scr.setX(50); 
+	    scr.setY(80); 
+	    scr.setFill(Color.WHITE);
+	    scr.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 60));
+	    
+	    
+	    canvas.getChildren().addAll(imageView,scr);
 		scene.setFill(Color.BLACK);
 		primaryStage.setTitle("Bouncing Ball");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		Ball ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
+		player=new Player(0,0,0);
+		ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
 		Circle myBall=ball.Ball_make();
 //		canvas.getChildren().add(myBall);
 
@@ -294,8 +311,10 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 		Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
 		boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 		if (intersects) {
+			player.setCurr_scr(player.getCurr_scr()+1);
 			Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setFill(null);
 			Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
+			scr.setText(Integer.toString(player.getCurr_scr()));
 		}
 	}
 	
