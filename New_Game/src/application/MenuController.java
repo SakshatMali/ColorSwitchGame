@@ -72,7 +72,6 @@ public class MenuController {
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
         
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
