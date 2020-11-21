@@ -101,7 +101,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="19.0" layoutY="7.0" mnemonicParsing="false" opacity="0.0" prefHeight="73.0" prefWidth="77.0" text="Button" textFill="TRANSPARENT">
+            <Button layoutX="19.0" layoutY="7.0" mnemonicParsing="false" onAction="#help" opacity="0.0" prefHeight="73.0" prefWidth="77.0" text="Button" textFill="TRANSPARENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
