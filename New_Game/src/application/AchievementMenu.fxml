@@ -7,21 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
    <children>
       <ImageView fitHeight="750.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Colour%20Images/HelpMenu.png" />
+            <Image url="@../Colour%20Images/AchievementMenu.png" />
          </image>
       </ImageView>
-      <Pane layoutX="466.0" layoutY="23.0" prefHeight="120.0" prefWidth="120.0">
+      <Pane layoutX="466.0" layoutY="22.0" prefHeight="120.0" prefWidth="120.0">
          <children>
             <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/home.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" opacity="0.0" prefHeight="120.0" prefWidth="120.0" text="Button" textFill="TRANSPARENT">
+            <Button mnemonicParsing="false" opacity="0.0" prefHeight="118.0" prefWidth="120.0" text="Button" textFill="TRANSPARENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
