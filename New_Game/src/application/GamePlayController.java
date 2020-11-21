@@ -57,7 +57,7 @@ import javafx.scene.transform.Rotate;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 public class GamePlayController {
-	private static Pane canvas;
+	private Pane canvas;
 	private int gameup =0;
 	private Timeline loop;
 	private int frm_width = 600;
