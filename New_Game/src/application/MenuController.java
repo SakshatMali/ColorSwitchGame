@@ -16,19 +16,10 @@ public class MenuController {
 
 	
 	public void StartGame(ActionEvent event) throws IOException {
-//		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GamePlay.fxml"));
-//		 AnchorPane pane=fxmlLoader.load();
-//		mainRoot.getChildren().setAll(pane);
 		
-		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
-	        Scene tableViewScene = new Scene(tableViewParent);
-	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
-	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	        tableViewParent.setStyle("-fx-background-color: #000000;");
-	        window.setScene(tableViewScene);
-	        window.show();
+		GamePlayController gc = new GamePlayController();
+		gc.play(event);
+
 	}
 	
 	public void help(ActionEvent event) throws IOException {
