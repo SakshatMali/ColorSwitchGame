@@ -72,9 +72,23 @@ public class GamePlayController {
 	private Player player;
 	private Image pause;
 	private Text scr;
-//	private Image pause;
-	
+	private DataTable datatable;
 	private ArrayList<ShapeObstacle> Obstacles;
+	
+//	public GamePlayController(Pane canvas, Timeline loop, Ball ball, Player player, Image pause, Text scr,
+//			DataTable datatable, ArrayList<ShapeObstacle> obstacles) {
+//		super();
+//		this.canvas = canvas;
+//		this.loop = loop;
+//		this.ball = ball;
+//		this.player = player;
+//		this.pause = pause;
+//		this.scr = scr;
+//		this.datatable = datatable;
+//		Obstacles = obstacles;
+//	}
+
+	
 	
 	public void play(ActionEvent event) {
 		PlayGame(event);
@@ -196,28 +210,43 @@ public class GamePlayController {
         	
             @Override
             public void handle(MouseEvent event) {
-//            	pause_button.setCursor(Cursor.HAND); 
-            	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//            	window.getScene().getRoot().setCursor(Cursor.WAIT);
-
-
-//                System.out.println("Tile pressed ");
-//                event.consume();
-                Parent tableViewParent = null;
-				try {
-					tableViewParent = FXMLLoader.load(getClass().getResource("PauseDialogBox.fxml"));
+////            	pause_button.setCursor(Cursor.HAND); 
+//            	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+////            	window.getScene().getRoot().setCursor(Cursor.WAIT);
+//
+//
+////                System.out.println("Tile pressed ");
+////                event.consume();
+//                Parent tableViewParent = null;
+//				try {
+//					tableViewParent = FXMLLoader.load(getClass().getResource("PauseDialogBox.fxml"));
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//    	        Scene tableViewScene = new Scene(tableViewParent);
+////    	        tableViewScene.setFill(Color.BLACK);
+//    	        
+//    	        //This line gets the Stage information
+//    	        
+////    	        tableViewParent.setStyle("-fx-background-color: #000000;");
+//    	        window.setScene(tableViewScene);
+            	
+//    	        window.show();
+            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
+            	
+            	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
+            	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            	 try {
+					window.setScene(new Scene(loader.load()));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-    	        Scene tableViewScene = new Scene(tableViewParent);
-//    	        tableViewScene.setFill(Color.BLACK);
-    	        
-    	        //This line gets the Stage information
-    	        
-//    	        tableViewParent.setStyle("-fx-background-color: #000000;");
-    	        window.setScene(tableViewScene);
-    	        window.show();
+            	 PauseDialogBoxController controller = loader.getController();
+            	  controller.initData(datatable);
+
+            	  window.show();
             }
        });
         
@@ -312,6 +341,8 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 		boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 		if (intersects) {
 			player.setCurr_scr(player.getCurr_scr()+1);
+			player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
+			player.setTotal_stars(player.getTotal_stars()+1);
 			Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setFill(null);
 			Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
 			scr.setText(Integer.toString(player.getCurr_scr()));
@@ -336,6 +367,7 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 	
 	if (gameup==1) {
 		circle.setLayoutY(circle.getLayoutY() -7);
+		ball.setYpos(ball.getYpos()-7);
 		
 		if(screen_mover ) {
 			for (int i = 0; i < Obstacles.size(); i++) {
@@ -349,6 +381,7 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 	
 	else if (gameup==-1) {
 		circle.setLayoutY(circle.getLayoutY() +2);
+		ball.setYpos(ball.getYpos()+2);
 	}
 	}
 
