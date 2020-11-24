@@ -74,6 +74,7 @@ public class GamePlayController {
 	private Text scr;
 	private DataTable datatable;
 	private ArrayList<ShapeObstacle> Obstacles;
+	//ok
 	
 //	public GamePlayController(Pane canvas, Timeline loop, Ball ball, Player player, Image pause, Text scr,
 //			DataTable datatable, ArrayList<ShapeObstacle> obstacles) {
