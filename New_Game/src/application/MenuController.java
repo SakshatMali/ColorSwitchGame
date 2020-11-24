@@ -19,9 +19,9 @@ public class MenuController {
 //		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GamePlay.fxml"));
 //		 AnchorPane pane=fxmlLoader.load();
 //		mainRoot.getChildren().setAll(pane);
-		GamePlayController gc=new GamePlayController();
-		gc.play(event);
-		
+//		GamePlayController gc=new GamePlayController();
+//		gc.play(event);
+
 //		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
 //	        Scene tableViewScene = new Scene(tableViewParent);
 //	        tableViewScene.setFill(Color.BLACK);
@@ -31,6 +31,9 @@ public class MenuController {
 //	        tableViewParent.setStyle("-fx-background-color: #000000;");
 //	        window.setScene(tableViewScene);
 //	        window.show();
+		GamePlayController gc = new GamePlayController();
+		gc.play(event);
+
 	}
 	
 	public void help(ActionEvent event) throws IOException {
