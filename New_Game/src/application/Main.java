@@ -1,5 +1,6 @@
 package application;
 	
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -18,6 +19,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Arc;
@@ -36,6 +40,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		
+	
 		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(mainRoot,frm_width,frm_height);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -45,6 +51,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
 //        scene.setFill(Color.BLACK);
         primaryStage.show();
+//        mediaPlayer.play();
 	}
 	
 	public static void main(String[] args) {
