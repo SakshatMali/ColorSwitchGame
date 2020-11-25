@@ -35,7 +35,7 @@ public class DataTable implements Serializable{
 	            System.out.println("IOException is caught"); 
 	        } 
 	}
-	public static void deserialize() {
+	public  void deserialize() {
 		 try{    
 	            // Reading the object from a file 
 			 	DataTable datatable=null;
@@ -45,10 +45,12 @@ public class DataTable implements Serializable{
 	              
 	            in.close(); 
 	            file.close(); 
+	            total_stars = datatable.getTotal_stars();
+	            SaveController.setStar_text(total_stars);
 	              
-	            System.out.println("Object has been deserialized "); 
-	            System.out.println("Current Score = " + datatable.getCurr_scr());
-	            System.out.println("Max Score = " + datatable.getMax_scr());
+//	            System.out.println("Object has been deserialized "); 
+//	            System.out.println("Current Score = " + datatable.getCurr_scr());
+//	            System.out.println("Max Score = " + datatable.getMax_scr());
 	            System.out.println("Total stars = " + datatable.getTotal_stars());
 //	            System.out.println("Current Score = " + datatable.getCurr_scr());
 //	            System.out.println("Ball y = " + player.getTotal_stars()); 

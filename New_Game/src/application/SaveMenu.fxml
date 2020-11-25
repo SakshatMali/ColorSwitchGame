@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SaveController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Colour%20Images/SaveMenu.png" />
+            <Image url="@../Colour%20Images/SaveMenu2.png" />
          </image>
       </ImageView>
       <Pane layoutX="466.0" layoutY="26.0" prefHeight="120.0" prefWidth="120.0">
@@ -29,5 +28,40 @@
             </Button>
          </children>
       </Pane>
+      <Button fx:id="str0" layoutX="143.0" layoutY="246.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="str1" layoutX="143.0" layoutY="308.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="str2" layoutX="143.0" layoutY="367.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="str3" layoutX="143.0" layoutY="426.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="str4" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="str5" layoutX="143.0" layoutY="545.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="str6" layoutX="143.0" layoutY="600.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

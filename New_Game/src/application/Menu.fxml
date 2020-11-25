@@ -14,7 +14,7 @@
             <Image url="@../Colour%20Images/Groupback.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="120.0" layoutX="142.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="play" fitHeight="150.0" fitWidth="120.0" layoutX="142.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/Play.png" />
          </image>

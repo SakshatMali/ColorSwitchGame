@@ -1,6 +1,11 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +17,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MenuController {
-
+public class MenuController implements Serializable {
+	
+	/**
+	 * 
+	 */
+//	private static final long serialVersionUID = 11L;
+//	private int save_count=0;
+	
+	
 	
 	public void StartGame(ActionEvent event) throws IOException {
 //		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GamePlay.fxml"));
@@ -73,6 +85,7 @@ public class MenuController {
 	}
 	
 	public void save(ActionEvent event) throws IOException {
+//		setSave_count(getSave_count() + 1);
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SaveMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
@@ -82,4 +95,7 @@ public class MenuController {
         window.setScene(tableViewScene);
         window.show();
 	}
+	
+
+
 }
