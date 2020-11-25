@@ -181,6 +181,36 @@ public class GamePlayController {
 	    _line.make_Clr_chng(diff_obst,clr_change_radius);
 	    Obstacles.add(_line);
 	    
+	    ShapeObstacle vert_line=new VerticalObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
+	    vert_line.makeShape();
+	    vert_line.makeStar();
+	    vert_line.make_Clr_chng(diff_obst,clr_change_radius);
+	    Obstacles.add(vert_line);
+	    
+	    ShapeObstacle dot_obst=new DotObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
+	    dot_obst.makeShape();
+	    dot_obst.makeStar();
+	    dot_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    Obstacles.add(dot_obst);
+	    
+	    ShapeObstacle diag_obst=new DiagonalObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
+	    diag_obst.makeShape();
+	    diag_obst.makeStar();
+	    diag_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    Obstacles.add(diag_obst);
+	    
+	    ShapeObstacle two_ring_obst=new Two_ring_obst(100,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
+	    two_ring_obst.makeShape();
+	    two_ring_obst.makeStar();
+	    two_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    Obstacles.add(two_ring_obst);
+	    
+	    ShapeObstacle rotating_ring_obst=new Rotating_Ring_Obst(100,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
+	    rotating_ring_obst.makeShape();
+	    rotating_ring_obst.makeStar();
+	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    Obstacles.add(rotating_ring_obst);
+	    
         ArrayList<Rotate> arr_rotate=new ArrayList<>();
         ArrayList<ShapeObstacle> arr_hrzntl_rotate=new ArrayList<>();
         for (int i = 0; i < Obstacles.size(); i++) {
@@ -286,18 +316,18 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 	for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
 //		for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
 //			(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+.5);
-			if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-300 && hrzntl_mov==false){
-				for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
-					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-1);
+			if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-250 && hrzntl_mov==false){
+				for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
+					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-2);
 				}
-				if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()==-300)hrzntl_mov=true;
+				if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()==-250)hrzntl_mov=true;
 				
 			}
 			else if(hrzntl_mov==true){
-				for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size(); j++) {
-					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+1);
+				for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
+					(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+2);
 				}
-				if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=300) {
+				if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=250) {
 					hrzntl_mov=false;
 				}
 			}
