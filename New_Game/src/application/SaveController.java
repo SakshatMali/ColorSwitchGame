@@ -24,7 +24,8 @@ public class SaveController implements Initializable {
 //	@FXML private Button str9;
 //	@FXML private Button str10;
 //	DataTab0;
-	private static int star_text ;
+	private static int star_text;
+	private static int save_counter;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -43,15 +44,18 @@ public class SaveController implements Initializable {
 //		ArrText.add(str0);
 		
 		
-		for (int i=0 ; i<7 ; i++) {
-			ArrText.get(i).setText("");
-		}
-//		ArrText.get(1).setText(star_text+"");
+//		for (int i=0 ; i<7 ; i++) {
+//			ArrText.get(i).setText("");
+//		}
+		
+		ArrText.get(save_counter%7).setText("Game "+star_text);
+		
 //		System.out.println("hh");
 	}
 	
-	public void load(ActionEvent event ) {
-		GamePlayController gc = new GamePlayController();
+	public void load(ActionEvent event) {
+		Player p1 = new Player(0,0,0);
+		GamePlayController gc = new GamePlayController(p1,4,5);
 		gc.play(event);
 	}
 
@@ -61,6 +65,14 @@ public class SaveController implements Initializable {
 
 	public static void setStar_text(int star_text1) {
 		star_text = star_text1;
+	}
+
+	public static int getSave_counter() {
+		return save_counter;
+	}
+
+	public static void setSave_counter(int save_counter) {
+		SaveController.save_counter = save_counter;
 	}
 
 }

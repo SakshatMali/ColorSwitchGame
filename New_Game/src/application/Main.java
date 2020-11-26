@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -43,11 +44,21 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-//		String s = "BackSound.mp3";
-//		Media h = new Media(Paths.get(s).toUri().toString());
-//		mediaPlayer = new MediaPlayer(h);
+//		String s = "/src/Colour%20Sounds/BackSound.mp3";
+//		Media media = new Media(getClass().getResource("/src/Colour%20Sounds/BackSound.wav").toExternalForm());
+//		mediaPlayer = new MediaPlayer(media);
 		
 //		pdc.serialize();
+		
+		
+		//MUSIC
+		AudioClip audioPath = new AudioClip("file:src/Colour%20Sounds/BackSound.wav");
+		audioPath.setVolume(0.05);
+        audioPath.play();
+        audioPath.setCycleCount(AudioClip.INDEFINITE);
+		
+		
+		
 		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(mainRoot,frm_width,frm_height);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -61,6 +72,8 @@ public class Main extends Application {
 //        "/src/Game Sounds/BackSound.mp3"
         primaryStage.show();
 //        mediaPlayer.play();
+//        mediaPlayer.setAutoPlay(true);
+        
 	}
 	
 	public static void main(String[] args) {

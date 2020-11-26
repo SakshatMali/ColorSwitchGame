@@ -14,6 +14,7 @@ public class DataTable implements Serializable{
 	private int total_stars;
 	private int num_obst1;
 	private int num_obst2;
+	
 	public DataTable(int curr_scr, int max_scr, int total_stars, int num_obst1, int num_obst2) {
 		super();
 		this.curr_scr = curr_scr;
@@ -24,7 +25,7 @@ public class DataTable implements Serializable{
 	}
 	public void serialize() {
 		  try{    
-	            FileOutputStream file = new FileOutputStream("Da.txt"); 
+	            FileOutputStream file = new FileOutputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt"); 
 	            ObjectOutputStream out = new ObjectOutputStream(file);  
 	            out.writeObject(this); 
 	            out.close(); 
@@ -35,11 +36,12 @@ public class DataTable implements Serializable{
 	            System.out.println("IOException is caught"); 
 	        } 
 	}
-	public  void deserialize() {
+	public DataTable deserialize() {
+		DataTable datatable=null;
 		 try{    
 	            // Reading the object from a file 
-			 	DataTable datatable=null;
-	            FileInputStream file = new FileInputStream("Da.txt"); 
+			 	
+	            FileInputStream file = new FileInputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt"); 
 	            ObjectInputStream in = new ObjectInputStream(file); 
 	            datatable = (DataTable)in.readObject(); 
 	              
@@ -52,16 +54,18 @@ public class DataTable implements Serializable{
 //	            System.out.println("Current Score = " + datatable.getCurr_scr());
 //	            System.out.println("Max Score = " + datatable.getMax_scr());
 	            System.out.println("Total stars = " + datatable.getTotal_stars());
-//	            System.out.println("Current Score = " + datatable.getCurr_scr());
+	            System.out.println("Current Score = " + datatable.getCurr_scr());
 //	            System.out.println("Ball y = " + player.getTotal_stars()); 
 	        } 
-	          
+	        
 	        catch(IOException ex) { 
 	            System.out.println("IOException is caught"); 
 	        } 
 	        catch(ClassNotFoundException ex) { 
 	            System.out.println("ClassNotFoundException is caught"); 
 	        }
+		 return datatable;
+		
 	}
 	public int getCurr_scr() {
 		return curr_scr;
