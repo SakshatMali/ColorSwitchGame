@@ -9,14 +9,7 @@
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GamePlayController">
    <children>
       <BorderPane prefHeight="750.0" prefWidth="600.0">
-         <top>
-            <Circle fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="CENTER" />
-         </top>
-         <bottom>
-            <Button mnemonicParsing="false" onAction="#play" text="Button" BorderPane.alignment="CENTER" />
-         </bottom>
-         <center>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+
          </center>
       </BorderPane>
    </children>

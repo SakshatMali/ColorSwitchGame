@@ -26,6 +26,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -79,7 +80,7 @@ public class GamePlayController {
 	private ArrayList<ShapeObstacle> arr_copy_obst;
 	//ok
 	
-	public GamePlayController(Player player, int obst1, int obst2) {
+	public GamePlayController(Player player, int obst1, int obst2) throws FileNotFoundException {
 		super();
 //		this.canvas = canvas;
 		canvas = new Pane();
@@ -88,7 +89,8 @@ public class GamePlayController {
 //		Obstacles = obstacles;
 		this.setObst1(obst1);
 		this.setObst2(obst2);
-		
+		pause = new Image(new FileInputStream("src/Colour Images/Pause.png")); 
+		scr = new Text();
 	}
 	
 	public void check_instance(int ind) {
@@ -148,17 +150,24 @@ public class GamePlayController {
 //		canvas.getChildren().add(backg);
 		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
+		
+		
+//		Scene scene = primaryStage.getScene();
+//		scene.setRoot(canvas);
 		Scene scene = new Scene(canvas,frm_width,frm_height);
-		scene.setFill(Color.BLACK);
+//		scene.setFill(Color.BLACK);
 		canvas.setStyle("-fx-background-color: #000000;");
 	
 		primaryStage.setTitle("Byll");
+		
+		
+		
 		primaryStage.setScene(scene);
 ////		scene.setFill(Color.BLACK);
 		primaryStage.show();
 		
 		
-		pause = new Image(new FileInputStream("src/Colour Images/Pause.png"));  
+//		pause = new Image(new FileInputStream("src/Colour Images/Pause.png"));  
 //		pause_button = new Button();
 	      
 	      //Setting the image view 
@@ -174,7 +183,7 @@ public class GamePlayController {
 	    imageView.setFitHeight(100);
 	    imageView.setFitWidth(100);
 //	    pause_button.setGraphic(imageView);
-	    scr = new Text();       
+//	    scr = new Text();       
 	    scr.setText("0"); 
 	    scr.setX(50); 
 	    scr.setY(80); 
@@ -261,7 +270,7 @@ public class GamePlayController {
 	    check_instance(obst2);
 //	    arr_copy_obst.add(Obstacles.get(obst1));
 //	    arr_copy_obst.add(Obstacles.get(obst2));
-	    for (int i = 0; i < 5; i++) {
+	    for (int i = 0; i < 25; i++) {
 			Random rd = new Random();
 			int p =rd.nextInt(9);
 			check_instance(p);
@@ -397,12 +406,12 @@ public class GamePlayController {
             	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            	 try {
-					window.setScene(new Scene(loader.load()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//            	 try {
+//					window.setScene(new Scene(loader.load()));
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
             	 PauseDialogBoxController controller = loader.getController();
             	  controller.initData(datatable);
 
@@ -490,7 +499,7 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 					continue;
 				}
 				else {
-					loop.stop();
+//					loop.stop();
 				}
 //				circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
 			}
@@ -544,7 +553,7 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 		circle.setLayoutY(circle.getLayoutY() +2);
 		ball.setYpos(ball.getYpos()+2);
 	}
-	System.out.println(circle.getLayoutY());
+//	System.out.println(circle.getLayoutY());
 	}
 
 
