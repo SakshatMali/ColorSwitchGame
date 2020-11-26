@@ -74,20 +74,64 @@ public class GamePlayController {
 	private Text scr;
 	private DataTable datatable;
 	private ArrayList<ShapeObstacle> Obstacles;
+	private int obst1;
+	private int obst2;
+	private ArrayList<ShapeObstacle> arr_copy_obst;
 	//ok
 	
-//	public GamePlayController(Pane canvas, Timeline loop, Ball ball, Player player, Image pause, Text scr,
-//			DataTable datatable, ArrayList<ShapeObstacle> obstacles) {
-//		super();
+	public GamePlayController(Player player, int obst1, int obst2) {
+		super();
 //		this.canvas = canvas;
-//		this.loop = loop;
+		canvas = new Pane();
 //		this.ball = ball;
-//		this.player = player;
-//		this.pause = pause;
-//		this.scr = scr;
-//		this.datatable = datatable;
+		this.player = player;
 //		Obstacles = obstacles;
-//	}
+		this.setObst1(obst1);
+		this.setObst2(obst2);
+		
+	}
+	
+	public void check_instance(int ind) {
+		ShapeObstacle newobst;
+		if (Obstacles.get(ind) instanceof Ring) {
+			 newobst = new Ring(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof SquareObstacle) {
+			 newobst = new SquareObstacle(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof Plus) {
+			 newobst = new Plus(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof LineObstacle) {
+			 newobst = new LineObstacle(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof VerticalObstacle) {
+			 newobst = new VerticalObstacle(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof DotObstacle) {
+			 newobst = new DotObstacle(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof DiagonalObstacle) {
+			 newobst = new DiagonalObstacle(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		else if (Obstacles.get(ind) instanceof Two_ring_obst) {
+			 newobst = new Two_ring_obst(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+//		if (Obstacles.get(ind) instanceof Rotating_Ring_Obst) {
+		else {
+			 newobst = new Rotating_Ring_Obst(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
+					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
+		} 
+		arr_copy_obst.add(newobst);
+	}
 
 	
 	
@@ -100,7 +144,7 @@ public class GamePlayController {
 		
 //		final Scene scene = new Scene(canvas, frm_width, frm_height);
 		try {
-		canvas = new Pane();
+//		canvas = new Pane();
 //		canvas.getChildren().add(backg);
 		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		
@@ -149,6 +193,7 @@ public class GamePlayController {
 //		canvas.getChildren().add(myBall);
 
 		Obstacles=new ArrayList<>();
+		arr_copy_obst = new ArrayList<>();
 //		double[] xpoints = {10, 85, 110, 135, 210, 160,
 //		        170, 110, 50, 60};
 //		double[] ypoints = {85, 75, 10, 75, 85, 125,
@@ -211,31 +256,115 @@ public class GamePlayController {
 	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
 	    Obstacles.add(rotating_ring_obst);
 	    
+	    
+	    check_instance(obst1);
+	    check_instance(obst2);
+//	    arr_copy_obst.add(Obstacles.get(obst1));
+//	    arr_copy_obst.add(Obstacles.get(obst2));
+	    for (int i = 0; i < 5; i++) {
+			Random rd = new Random();
+			int p =rd.nextInt(9);
+			check_instance(p);
+//			int p=0;
+//			ShapeObstacle newobst;
+//			if (Obstacles.get(p) instanceof Ring) {
+//				 newobst = new Ring(Obstacles.get(p).getHeight(),Obstacles.get(p).getWidth(),
+//						Obstacles.get(p).getXpos(),Obstacles.get(p).getYpos(),Obstacles.get(p).get_rotate()); 
+//			} 
+////			
+//			else {
+//				 newobst = new Plus(Obstacles.get(p).getHeight(),Obstacles.get(p).getWidth(),
+//						Obstacles.get(p).getXpos(),Obstacles.get(p).getYpos(),Obstacles.get(p).get_rotate()); 
+//			}
+////			ShapeObstacle newobst = new Ring(Obstacles.get(p).getHeight(),Obstacles.get(p).getWidth(),
+////					Obstacles.get(p).getXpos(),Obstacles.get(p).getYpos(),Obstacles.get(p).get_rotate()); 
+//			arr_copy_obst.add(newobst);
+			
+			
+		}
+	    
+	    
+	    
         ArrayList<Rotate> arr_rotate=new ArrayList<>();
         ArrayList<ShapeObstacle> arr_hrzntl_rotate=new ArrayList<>();
-        for (int i = 0; i < Obstacles.size(); i++) {
-        		if(Obstacles.get(i).get_rotate()==1) {
-        			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-		 	        arr_rotate.add(rotate1);
-        		}
-        		else {
-//	        		ShapeObsta rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-		 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
-        		}
-//        		Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//	 	        arr_rotate.add(rotate1);
-	 	        
-        		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
-	 	        arr_rotate.add(rotate2);
-	 	        
-	 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
-	 	        arr_rotate.add(rotate3);
-	 	        
-	 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
+        
+        for (int i = 0; i < arr_copy_obst.size(); i++) {
+        	if (i==0) {
+        		arr_copy_obst.get(0).setYpos(300);
+        	} 
+        	
+        	else {
+        		arr_copy_obst.get(i).setYpos(arr_copy_obst.get(i-1).getYpos()-diff_obst);
+        	}
+        	System.out.println(i+ "hell");
+        	arr_copy_obst.get(i).makeShape();
+        	arr_copy_obst.get(i).makeStar();
+        	arr_copy_obst.get(i).make_Clr_chng(diff_obst,clr_change_radius);
+        	if(arr_copy_obst.get(i).get_rotate()==1) {
+    			Rotate rotate1=arr_copy_obst.get(i).makeRotate(arr_copy_obst.get(i).getList_shape());
+	 	        arr_rotate.add(rotate1);
+    		}
+    		else {
+	 	        arr_hrzntl_rotate.add(arr_copy_obst.get(i));	
+    		}
+ 	        
+    		Rotate rotate2=arr_copy_obst.get(i).makeRotate_Clr_chng(arr_copy_obst.get(i).getList_shape(),diff_obst);
+ 	        arr_rotate.add(rotate2);
+ 	        
+ 	        Rotate rotate3=arr_copy_obst.get(i).makeRotate_Star(arr_copy_obst.get(i).getList_shape());
+ 	        arr_rotate.add(rotate3);
+ 	        
+ 	        canvas.getChildren().addAll(arr_copy_obst.get(i).getList_shape());
+ 	        
+		}
+        for (int i = 0; i < arr_copy_obst.size(); i++) {
+			System.out.println(arr_copy_obst.get(i).getYpos());
 		}
         
+//        for (int i = 0; i < Obstacles.size(); i++) {
+//    		if(Obstacles.get(i).get_rotate()==1) {
+//    			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
+//	 	        arr_rotate.add(rotate1);
+//    		}
+//    		else {
+//	 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
+//    		}
+// 	        
+//    		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
+// 	        arr_rotate.add(rotate2);
+// 	        
+// 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
+// 	        arr_rotate.add(rotate3);
+// 	        
+// 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
+//	}
+        
+//        for (int i = 0; i < Obstacles.size(); i++) {
+//        		if(Obstacles.get(i).get_rotate()==1) {
+//        			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
+//		 	        arr_rotate.add(rotate1);
+//        		}
+//        		else {
+////	        		ShapeObsta rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
+//		 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
+//        		}
+////        		Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
+////	 	        arr_rotate.add(rotate1);
+//	 	        
+//        		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
+//	 	        arr_rotate.add(rotate2);
+//	 	        
+//	 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
+//	 	        arr_rotate.add(rotate3);
+//	 	        
+//	 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
+//		}
+        
+        
+        
         canvas.getChildren().add(myBall);
-        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate,arr_hrzntl_rotate)));
+//        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate,arr_hrzntl_rotate)));
+        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,arr_copy_obst,arr_rotate,arr_hrzntl_rotate)));
         
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	
@@ -278,6 +407,7 @@ public class GamePlayController {
             	  controller.initData(datatable);
 
             	  window.show();
+            	  loop.pause();
             }
        });
         
@@ -414,6 +544,55 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 		circle.setLayoutY(circle.getLayoutY() +2);
 		ball.setYpos(ball.getYpos()+2);
 	}
+	System.out.println(circle.getLayoutY());
 	}
+
+
+
+
+
+public int getObst1() {
+	return obst1;
+}
+
+
+
+
+
+public void setObst1(int obst1) {
+	this.obst1 = obst1;
+}
+
+
+
+
+
+public int getObst2() {
+	return obst2;
+}
+
+
+
+
+
+public void setObst2(int obst2) {
+	this.obst2 = obst2;
+}
+
+
+
+
+
+public ArrayList<ShapeObstacle> getArr_copy_obst() {
+	return arr_copy_obst;
+}
+
+
+
+
+
+public void setArr_copy_obst(ArrayList<ShapeObstacle> arr_copy_obst) {
+	this.arr_copy_obst = arr_copy_obst;
+}
 
 }

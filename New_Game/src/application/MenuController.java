@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.Glow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -24,7 +26,7 @@ public class MenuController implements Serializable {
 	 */
 //	private static final long serialVersionUID = 11L;
 //	private int save_count=0;
-	
+	DataTable dt;
 	
 	
 	public void StartGame(ActionEvent event) throws IOException {
@@ -43,7 +45,9 @@ public class MenuController implements Serializable {
 //	        tableViewParent.setStyle("-fx-background-color: #000000;");
 //	        window.setScene(tableViewScene);
 //	        window.show();
-		GamePlayController gc = new GamePlayController();
+//		dt=dt.deserialize();			//doubt
+		Player p1 = new Player(0, 0,0);
+		GamePlayController gc = new GamePlayController(p1,4,5);
 		gc.play(event);
 
 	}
@@ -95,6 +99,29 @@ public class MenuController implements Serializable {
         window.setScene(tableViewScene);
         window.show();
 	}
+	
+	public void volume(MouseEvent event) {
+		System.out.println("Volume");
+	}
+	
+	@FXML
+    void glowImage(MouseEvent event) throws IOException {
+//		System.out.println("On Image");
+        Glow glow=new Glow();
+        Node source = (Node) event.getSource();
+        source.setEffect(glow);
+        glow.setLevel(0.4);
+    }
+	
+	 @FXML
+	    void stopGlowing(MouseEvent event) throws IOException{
+//		 System.out.println("Out Image");
+	        Node source= (Node) event.getSource();
+	        Glow glow=(Glow) source.getEffect();
+	        source.setEffect(glow);
+	        glow.setLevel(0.0);
+	    }
+
 	
 
 
