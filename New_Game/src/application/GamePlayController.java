@@ -360,7 +360,7 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 					continue;
 				}
 				else {
-//					loop.stop();
+					loop.stop();
 				}
 //				circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
 			}
