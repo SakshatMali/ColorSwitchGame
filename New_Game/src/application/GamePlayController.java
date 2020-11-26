@@ -406,12 +406,12 @@ public class GamePlayController {
             	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//            	 try {
-//					window.setScene(new Scene(loader.load()));
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+            	 try {
+					window.setScene(new Scene(loader.load()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	 PauseDialogBoxController controller = loader.getController();
             	  controller.initData(datatable);
 
