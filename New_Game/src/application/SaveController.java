@@ -1,6 +1,9 @@
 package application;
 
 import java.io.IOException;
+
+import java.io.FileNotFoundException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -100,7 +103,11 @@ public class SaveController implements Initializable {
 //		System.out.println("hh");
 	}
 	
-	public void load(MouseEvent event) {
+
+	
+
+	public void load(MouseEvent event) throws FileNotFoundException {
+
 		Player p1 = new Player(0,0,0);
 		GamePlayController gc = new GamePlayController(p1,4,5);
 		gc.play(event);

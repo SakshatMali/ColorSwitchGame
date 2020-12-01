@@ -34,12 +34,20 @@ public class MenuController implements Serializable,Initializable {
 	/**
 	 * 
 	 */
+
 	private static final long serialVersionUID = 15L;
 
 
 	/**
 	 * 
 	 */
+
+	@FXML
+	private AnchorPane mainRoot;
+	
+	
+	
+
 //	private static final long serialVersionUID = 11L;
 //	private int save_count=0;
 	DataTable dt;
@@ -95,6 +103,7 @@ public class MenuController implements Serializable,Initializable {
 
 	}
 	
+
 	public void help(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("HelpMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -106,7 +115,9 @@ public class MenuController implements Serializable,Initializable {
         window.setScene(tableViewScene);
         window.show();
 	}
+
 	
+
 	public void setting(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -118,7 +129,7 @@ public class MenuController implements Serializable,Initializable {
         window.setScene(tableViewScene);
         window.show();
 	}
-	
+
 	public void achievement(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("AchievementMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -130,17 +141,24 @@ public class MenuController implements Serializable,Initializable {
         window.setScene(tableViewScene);
         window.show();
 	}
+
 	
 	public void save(MouseEvent event) throws IOException {
 //		setSave_count(getSave_count() + 1);
-		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SaveMenu.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        tableViewScene.setFill(Color.BLACK);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        tableViewParent.setStyle("-fx-background-color: #000000;");
-        window.setScene(tableViewScene);
-        window.show();
+		
+		
+		 AnchorPane pane= FXMLLoader.load(getClass().getResource("SaveMenu.fxml"));
+	     mainRoot.getChildren().setAll(pane);
+		
+		
+//		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SaveMenu.fxml"));
+//        Scene tableViewScene = new Scene(tableViewParent);
+//        tableViewScene.setFill(Color.BLACK);
+//        
+//        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        tableViewParent.setStyle("-fx-background-color: #000000;");
+//        window.setScene(tableViewScene);
+//        window.show();
 	}
 	
 	public void volume(MouseEvent event) {
