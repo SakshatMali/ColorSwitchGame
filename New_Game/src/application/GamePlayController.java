@@ -135,11 +135,11 @@ public class GamePlayController {
 
 	
 	
-	public void play(ActionEvent event) {
+	public void play(MouseEvent event) {
 		PlayGame(event);
 	}
 	
-	public void PlayGame(ActionEvent event) {
+	public void PlayGame(MouseEvent event) {
 //		canvas = new Pane();
 		
 //		final Scene scene = new Scene(canvas, frm_width, frm_height);
@@ -544,7 +544,7 @@ public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rot
 		circle.setLayoutY(circle.getLayoutY() +2);
 		ball.setYpos(ball.getYpos()+2);
 	}
-	System.out.println(circle.getLayoutY());
+//	System.out.println(circle.getLayoutY());
 	}
 
 

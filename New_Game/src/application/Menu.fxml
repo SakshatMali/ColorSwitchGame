@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
    <children>
@@ -16,7 +13,7 @@
             <Image url="@../Colour%20Images/Groupback.png" />
          </image>
       </ImageView>
-      <ImageView id="play" fitHeight="150.0" fitWidth="120.0" layoutX="142.0" layoutY="258.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="play" fx:id="play" fitHeight="150.0" fitWidth="120.0" layoutX="142.0" layoutY="258.0" onMouseClicked="#StartGame" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/Play.png" />
          </image>
@@ -24,19 +21,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Button layoutX="155.0" layoutY="292.0" mnemonicParsing="false" onAction="#StartGame" opacity="0.0" prefHeight="103.0" prefWidth="99.0" text="Button" textFill="TRANSPARENT">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <tooltip>
-            <Tooltip text="Play Game">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Tooltip>
-         </tooltip>
-      </Button>
-      <ImageView fitHeight="154.0" fitWidth="166.0" layoutX="308.0" layoutY="257.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="load" fitHeight="154.0" fitWidth="166.0" layoutX="308.0" layoutY="257.0" onMouseClicked="#save" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/Load.png" />
          </image>
@@ -44,14 +29,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Button layoutX="343.0" layoutY="287.0" mnemonicParsing="false" onAction="#save" opacity="0.0" prefHeight="101.0" prefWidth="100.0" text="Button" textFill="TRANSPARENT">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Pane layoutX="128.0" layoutY="457.0" prefHeight="127.0" prefWidth="125.0">
          <children>
-            <ImageView fitHeight="127.0" fitWidth="125.0" layoutX="14.0" layoutY="-7.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="achieve" fitHeight="127.0" fitWidth="125.0" layoutX="14.0" layoutY="-7.0" onMouseClicked="#achievement" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/winning.png" />
                </image>
@@ -59,16 +39,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="22.0" layoutY="1.0" mnemonicParsing="false" onAction="#achievement" opacity="0.0" prefHeight="104.0" prefWidth="111.0" text="Button" textFill="TRANSPARENT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
       <Pane layoutX="308.0" layoutY="457.0" prefHeight="127.0" prefWidth="125.0">
          <children>
-            <ImageView fitHeight="127.0" fitWidth="125.0" layoutX="14.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="setting" fitHeight="127.0" fitWidth="125.0" layoutX="14.0" layoutY="-7.0" onMouseClicked="#setting" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/setting.png" />
                </image>
@@ -76,16 +51,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="22.0" layoutY="1.0" mnemonicParsing="false" onAction="#setting" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" opacity="0.0" prefHeight="104.0" prefWidth="111.0" text="Button" textFill="TRANSPARENT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
       <Pane layoutX="2.0" layoutY="21.0" prefHeight="102.0" prefWidth="111.0">
          <children>
-            <ImageView fitHeight="114.0" fitWidth="125.0" onMouseClicked="#volume" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="volume" fitHeight="114.0" fitWidth="125.0" onMouseClicked="#volume" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/volume.png" />
                </image>
@@ -93,23 +63,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="13.0" layoutY="17.0" mnemonicParsing="false" onAction="#volume" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" opacity="0.0" prefHeight="89.0" prefWidth="89.0" text="Button" textFill="TRANSPARENT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Volume">
-                     <font>
-                        <Font name="System Bold Italic" size="24.0" />
-                     </font>
-                  </Tooltip>
-               </tooltip>
-            </Button>
          </children>
       </Pane>
       <Pane layoutX="481.0" layoutY="36.0" prefHeight="94.0" prefWidth="111.0">
          <children>
-            <ImageView fitHeight="89.0" fitWidth="92.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="help" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseClicked="#help" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/help.png" />
                </image>
@@ -117,16 +75,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="19.0" layoutY="7.0" mnemonicParsing="false" onAction="#help" opacity="0.0" prefHeight="73.0" prefWidth="77.0" text="Button" textFill="TRANSPARENT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
       <Pane layoutX="2.0" layoutY="647.0" prefHeight="102.0" prefWidth="111.0">
          <children>
-            <ImageView fitHeight="89.0" fitWidth="92.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="reward" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/Rewards.png" />
                </image>
@@ -134,16 +87,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" opacity="0.0" prefHeight="73.0" prefWidth="77.0" text="Button" textFill="TRANSPARENT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
       <Pane layoutX="474.0" layoutY="640.0" prefHeight="102.0" prefWidth="111.0">
          <children>
-            <ImageView fitHeight="89.0" fitWidth="92.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exit" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/exit.png" />
                </image>
@@ -151,11 +99,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Button layoutX="17.0" layoutY="7.0" mnemonicParsing="false" opacity="0.0" prefHeight="73.0" prefWidth="77.0" text="Button" textFill="TRANSPARENT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
          </children>
       </Pane>
    </children>

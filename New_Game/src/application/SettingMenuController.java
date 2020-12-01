@@ -1,18 +1,12 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
@@ -22,17 +16,9 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class SaveController implements Initializable {
+public class SettingMenuController {
 	
-	@FXML private Button str0;
-	@FXML private Button str1;
-	@FXML private Button str2;
-	@FXML private Button str3;
-	@FXML private Button str4;
-	@FXML private Button str5;
-	@FXML private Button str6;
-	
-	@FXML ImageView home;
+@FXML ImageView home;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -66,60 +52,4 @@ public class SaveController implements Initializable {
 	        source.setEffect(glow);
 	        glow.setLevel(0.0);
 	    }
-//	@FXML private Button str7;
-//	@FXML private Button str8;
-//	@FXML private Button str9;
-//	@FXML private Button str10;
-//	DataTab0;
-	private static int star_text;
-	private static int save_counter;
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-		ArrayList<Button> ArrText = new ArrayList<Button>();
-		
-
-		ArrText.add(str0);
-		ArrText.add(str1);
-		ArrText.add(str2);
-		ArrText.add(str3);
-		ArrText.add(str4);
-		ArrText.add(str5);
-		ArrText.add(str6);
-//		ArrText.add(str0);
-		
-		
-//		for (int i=0 ; i<7 ; i++) {
-//			ArrText.get(i).setText("");
-//		}
-		
-		ArrText.get(save_counter%7).setText("Game "+star_text);
-		
-//		System.out.println("hh");
-	}
-	
-	public void load(MouseEvent event) {
-		Player p1 = new Player(0,0,0);
-		GamePlayController gc = new GamePlayController(p1,4,5);
-		gc.play(event);
-	}
-
-	public int getStar_text() {
-		return star_text;
-	}
-
-	public static void setStar_text(int star_text1) {
-		star_text = star_text1;
-	}
-
-	public static int getSave_counter() {
-		return save_counter;
-	}
-
-	public static void setSave_counter(int save_counter) {
-		SaveController.save_counter = save_counter;
-	}
-
 }

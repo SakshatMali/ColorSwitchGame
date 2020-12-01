@@ -6,21 +6,32 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class PauseDialogBoxController implements Serializable {
+public class PauseDialogBoxController implements Serializable, Initializable{
 //	private Pane canvas;
 //	private Timeline loop;
 //	Ball ball;
@@ -46,18 +57,33 @@ public class PauseDialogBoxController implements Serializable {
 //	}
 	
 	
+    @FXML
+    private ImageView resume;
+
+    @FXML
+    private ImageView restart;
+
+    @FXML
+    private ImageView save;
+
+    @FXML
+    private ImageView save_exit;
+
+    @FXML
+    private ImageView home;
+	
 	
 	void initData(DataTable datatable) {
 		this.datatable=datatable;
 		SaveController.setSave_counter(save_count);
-		System.out.println("init Pause dialog  "+datatable.getCurr_scr());
+//		System.out.println("init Pause dialog  "+datatable.getCurr_scr());
 	}
-	public void resume(ActionEvent event) throws IOException {
+	public void resume(MouseEvent event) throws IOException {
 		Player p1 = new Player(0,0,0);
 		GamePlayController gc = new GamePlayController(p1,4,5);
 		gc.play(event);
 	}
-	public void restart(ActionEvent event) throws IOException {
+	public void restart(MouseEvent event) throws IOException {
 //		 	Parent tableViewParent = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
 //	        Scene tableViewScene = new Scene(tableViewParent);
 //	        tableViewScene.setFill(Color.BLACK);
@@ -200,7 +226,45 @@ public class PauseDialogBoxController implements Serializable {
 //	}
 	
 	
+	@FXML
+    void glowImage(MouseEvent event) throws IOException {
+//		System.out.println("On Image");
+        Glow glow=new Glow();
+        Node source = (Node) event.getSource();
+        source.setEffect(glow);
+        glow.setLevel(0.4);
+    }
 	
+	 @FXML
+	    void stopGlowing(MouseEvent event) throws IOException{
+//		 System.out.println("Out Image");
+	        Node source= (Node) event.getSource();
+	        Glow glow=(Glow) source.getEffect();
+	        source.setEffect(glow);
+	        glow.setLevel(0.0);
+	    }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		ArrayList<ImageView> img_list = new ArrayList<ImageView>();
+		ArrayList<String> name_list = new ArrayList<String>();
+		
+		img_list.add(resume) ; name_list.add("Resume Game");
+		img_list.add(restart) ; name_list.add("Restart Game");
+		img_list.add(save) ; name_list.add("Save Game");
+		img_list.add(save_exit) ; name_list.add("Save & Exit Game");
+		img_list.add(home) ; name_list.add("Home");
+//		img_list.add(help) ; name_list.add("Help");
+//		img_list.add(reward) ; name_list.add("Rewards");
+//		img_list.add(exit) ; name_list.add("Exit Game");
+//		
+		for (int i = 0; i < img_list.size(); i++) {
+			 	Tooltip tool = new Tooltip(name_list.get(i));
+		        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
+		        Tooltip.install(img_list.get(i), tool);
+		}
+	}
 	
 	
 	public static int getSave_count() {
