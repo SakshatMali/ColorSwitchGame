@@ -51,7 +51,8 @@ public class Main extends Application {
 		audioPath.setVolume(0.05);
         audioPath.play();
         audioPath.setCycleCount(AudioClip.INDEFINITE);
-
+        
+        
 		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(mainRoot,frm_width,frm_height);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

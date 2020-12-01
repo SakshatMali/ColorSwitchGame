@@ -44,8 +44,10 @@ public Ball(double xpos, double ypos, double radius, Color clr_ball) {
 	}
 	public Circle Ball_make() {
 		Circle circle=new Circle(radius,clr_ball);
-		circle.setCenterX(xpos); 
-		circle.setCenterY(ypos);
+		circle.setLayoutX(xpos);
+		circle.setLayoutY(ypos);
+//		circle.setCenterX(xpos); 
+//		circle.setCenterY(ypos);
 		return circle;
 	}
 	
