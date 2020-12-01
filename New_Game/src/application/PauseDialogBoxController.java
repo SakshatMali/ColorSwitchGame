@@ -50,11 +50,12 @@ public class PauseDialogBoxController implements Serializable {
 	void initData(DataTable datatable) {
 		this.datatable=datatable;
 		SaveController.setSave_counter(save_count);
-		System.out.println("init Pause dialog  "+datatable.getCurr_scr());
+		System.out.println("init Pause dialog  "+datatable.getNum_obst1()+" "+datatable.getNum_obst2());
+		datatable.serialize_resume();
 	}
 	public void resume(ActionEvent event) throws IOException {
-		Player p1 = new Player(0,0,0);
-		GamePlayController gc = new GamePlayController(p1,4,5);
+		Player p1 = new Player(datatable.getCurr_scr(),datatable.getMax_scr(),datatable.getTotal_stars());
+		GamePlayController gc = new GamePlayController(p1,datatable.getNum_obst1(), datatable.getNum_obst2());
 		gc.play(event);
 	}
 	public void restart(ActionEvent event) throws IOException {
@@ -68,7 +69,7 @@ public class PauseDialogBoxController implements Serializable {
 //	        window.setScene(tableViewScene);
 //	        window.show();
 //		datatable.serialize();
-		datatable.deserialize();
+//		datatable.deserialize();
 		
 //		GamePlayController gc = new GamePlayController(canvas,loop,ball,player,pause,scr,datatable,Obstacles);
 		Player p1 = new Player(0,0,0);
@@ -150,58 +151,6 @@ public class PauseDialogBoxController implements Serializable {
 		 
 		 return save_count;
 	}
-	
-	
-	
-	
-//	public void serialize_file() {
-//		  try{    
-//	            FileOutputStream file = new FileOutputStream("Save_Count"+(save_count%7)+".txt"); 
-//	            ObjectOutputStream out = new ObjectOutputStream(file);  
-//	            out.writeObject(datatable); 
-//	            out.close(); 
-//	            file.close();  
-//	            System.out.println("Object has been serialized");
-//	        } 
-//	        catch(IOException ex) { 
-//	            System.out.println("IOException is caught"); 
-//	        } 
-//	}
-//	public int deserialize_file() {
-//		 try{    
-//	            // Reading the object from a file 
-//			 	DataTable savetable=null;
-//	            FileInputStream file = new FileInputStream("Save_Count"+(save_count%7)+".txt"); 
-//	            ObjectInputStream in = new ObjectInputStream(file); 
-//	            savetable = (DataTable)in.readObject(); 
-//	              
-//	            in.close(); 
-//	            file.close(); 
-//	              
-//	            System.out.println("Object has been deserialized "); 
-//	            System.out.println("Save Count = " + savetable.);
-////	            save_count = savetable.getSave_count();
-////	            
-////	            save_count++;
-////	            serialize_file();
-//	            
-////	            setSave_coun:t(getSave_count() + 1);
-////	            savetable.setSave_count(savetable.getSave_count()+1);
-//	        } 
-//	          
-//	        catch(IOException ex) { 
-//	            System.out.println("IOException is caught"); 
-//	        } 
-//	        catch(ClassNotFoundException ex) { 
-//	            System.out.println("ClassNotFoundException is caught"); 
-//	        }
-//		 
-//		 return save_count;
-//	}
-	
-	
-	
-	
 	
 	public static int getSave_count() {
 		return save_count;
