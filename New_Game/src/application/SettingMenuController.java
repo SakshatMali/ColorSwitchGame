@@ -1,12 +1,17 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
@@ -16,13 +21,15 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class SettingMenuController {
+public class SettingMenuController implements Initializable {
 	
 @FXML ImageView home;
+@FXML CheckBox music;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
+        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
 //        tableViewScene.setFill(Color.BLACK);
         
         //This line gets the Stage information
@@ -52,4 +59,21 @@ public class SettingMenuController {
 	        source.setEffect(glow);
 	        glow.setLevel(0.0);
 	    }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+//		music.setStyle("-fx-padding: 5em 5em 6em 6em;");
+//		music.getStyleClass().add("big-check-box");
+		
+	}
+
+	
+	public void playmusic(ActionEvent event) {
+		if (music.isSelected()) {
+			Main.audioPath.play();
+		} else {
+			Main.audioPath.stop();
+		}
+	}
 }

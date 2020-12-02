@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,8 +20,15 @@
                <image>
                   <Image url="@../Colour%20Images/home.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </Pane>
+      <CheckBox fx:id="music" layoutX="401.0" layoutY="335.0" mnemonicParsing="false" onAction="#playmusic" prefHeight="0.0" prefWidth="9.0" selected="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></CheckBox>
    </children>
 </AnchorPane>

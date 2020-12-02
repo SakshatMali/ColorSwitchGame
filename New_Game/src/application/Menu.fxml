@@ -79,7 +79,7 @@
       </Pane>
       <Pane layoutX="2.0" layoutY="647.0" prefHeight="102.0" prefWidth="111.0">
          <children>
-            <ImageView fx:id="reward" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="reward" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseClicked="#rewards" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/Rewards.png" />
                </image>

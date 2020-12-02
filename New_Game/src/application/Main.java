@@ -39,6 +39,7 @@ import javafx.geometry.Bounds;
 public class Main extends Application {
 	private int frm_width = 600;
 	private int frm_height = 750;
+	static AudioClip audioPath;
 //	MediaPlayer mediaPlayer;
 	private PauseDialogBoxController pdc = new PauseDialogBoxController();
 	@Override
@@ -47,7 +48,7 @@ public class Main extends Application {
 		
 		
 		//MUSIC
-		AudioClip audioPath = new AudioClip("file:src/Colour%20Sounds/BackSound.wav");
+		audioPath = new AudioClip("file:src/Colour%20Sounds/BackSound.mp3");
 		audioPath.setVolume(0.05);
 		audioPath.setCycleCount(AudioClip.INDEFINITE);
         audioPath.play();
@@ -59,6 +60,8 @@ public class Main extends Application {
 		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(mainRoot,frm_width,frm_height);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
+//        scene.getStylesheets().add("big-check-box.css");
         scene.setFill(Color.BLACK);
         mainRoot.setStyle("-fx-background-color: #000000;");
         primaryStage.setTitle("Bouncing Ball");

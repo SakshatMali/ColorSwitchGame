@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
@@ -75,12 +76,15 @@ public class GamePlayController {
 	private Text scr;
 	private DataTable datatable;
 	private ArrayList<ShapeObstacle> Obstacles;
+	private ArrayList<Circle> explosion_list;
 	private int obst1;
 	private int obst2;
 	private ArrayList<ShapeObstacle> arr_copy_obst;
 	private int up_frame=0;
 	private int down_frame=750;
 	private int speed=1;
+	private boolean gameover=false;
+	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	//ok
 	
 	public GamePlayController(Player player, int obst1, int obst2) throws FileNotFoundException {
@@ -199,7 +203,11 @@ public class GamePlayController {
 		primaryStage.setTitle("Bouncing Ball");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		
 		player=new Player(0,0,0);
+		
+		
 		ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
 		Circle myBall=ball.Ball_make();
 //		System.out.println(myBall.getLayoutY()+"osh");
@@ -274,7 +282,7 @@ public class GamePlayController {
 	    check_instance(obst2);
 //	    arr_copy_obst.add(Obstacles.get(obst1));
 //	    arr_copy_obst.add(Obstacles.get(obst2));
-	    for (int i = 0; i <100; i++) {
+	    for (int i = 0; i <50; i++) {
 			Random rd = new Random();
 			int p =rd.nextInt(9);
 			check_instance(p);
@@ -300,6 +308,15 @@ public class GamePlayController {
 	    
         ArrayList<Rotate> arr_rotate=new ArrayList<>();
         ArrayList<ShapeObstacle> arr_hrzntl_rotate=new ArrayList<>();
+        explosion_list = new ArrayList<>();
+        
+//        for (int i = 0; i < 1; i++) {
+//			ExplosionBalls eball = new ExplosionBalls(frm_width/2,frm_height-150,5,Color.WHITE);
+////			explosion_list.add(eball);
+//			Circle exball = eball.Ball_make();
+//			explosion_list.add(exball);
+//			canvas.getChildren().add(exball);
+//		}
         
         for (int i = 0; i < arr_copy_obst.size(); i++) {
         	if (i==0) {
@@ -454,8 +471,24 @@ public class GamePlayController {
 			e.printStackTrace();
 		}
 }
+	
+//	public void gameover(Circle circle) {
+//		ArrayList<ExplosionBalls> explosion_list = new ArrayList<>();
+//		System.out.println("Game Over");
+//		for (int i = 0; i < 1; i++) {
+//			ExplosionBalls eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,Color.WHITE);
+//			explosion_list.add(eball);
+//			Circle exball = eball.Ball_make();
+//			canvas.getChildren().add(exball);
+//		}
+//		for (int i = 0; i < 600; i++) {
+//			explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
+//		}
+//		
+//	}
 
-	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene) {
+	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,
+			ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene ) {
 		 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 	            @Override
 	            public void handle(KeyEvent event) {
@@ -484,7 +517,7 @@ public class GamePlayController {
 			if ( circle.getLayoutY() >= 750 - circle.getRadius() ) {
 //				System.out.println("wtf");
 //				System.out.println("Game Over");
-				 loop.stop();
+//				 loop.stop();
 			}
 				
 			
@@ -529,6 +562,27 @@ public class GamePlayController {
 						continue;
 					}
 					else {
+						
+//						gameover(circle);
+						System.out.println("Game Over");
+						gameover=true;
+						circle.setStroke(null);
+						circle.setFill(null);
+						
+						 for (int k = 0; k < 8; k++) {
+								ExplosionBalls eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
+//								explosion_list.add(eball);
+								Circle exball = eball.Ball_make();
+								explosion_list.add(exball);
+								canvas.getChildren().add(exball);
+							}
+						
+						
+//							explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
+//							explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-1);
+							
+						
+//						circle=null;
 //						loop.stop();
 					}
 				}
@@ -545,6 +599,10 @@ public class GamePlayController {
 				Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setFill(null);
 				Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
 				scr.setText(Integer.toString(player.getCurr_scr()));
+				AudioClip audioPath = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
+				audioPath.setVolume(1);
+//				audioPath.setCycleCount(AudioClip.INDEFINITE);
+		        audioPath.play();
 			}
 		}
 //		
@@ -586,6 +644,7 @@ public class GamePlayController {
 //		System.out.println(circle.getLayoutY()+" oops "+(down_frame+up_frame)/2);
 //		System.out.println("maxY"+bounds.getMaxY());
 		if (gameup==1) {
+			
 			circle.setLayoutY(circle.getLayoutY() -7);
 			ball.setYpos(ball.getYpos()-7);
 			if(screen_mover ) {
@@ -607,6 +666,59 @@ public class GamePlayController {
 			circle.setLayoutY(circle.getLayoutY() +2*(1.0*(player.getCurr_scr()+5)/8));
 			ball.setYpos(ball.getYpos()+2*(1.0*(player.getCurr_scr()+5)/8));
 		}
+		
+		
+		if (gameover) {
+			
+//			for (int i=0 ; i<explosion_list.size() ; i++) {
+				explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+2);
+				explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-2);
+				
+				explosion_list.get(1).setLayoutX(explosion_list.get(1).getLayoutX()-2);
+				explosion_list.get(1).setLayoutY(explosion_list.get(1).getLayoutY()-2);
+				
+				explosion_list.get(2).setLayoutX(explosion_list.get(2).getLayoutX()-2);
+				explosion_list.get(2).setLayoutY(explosion_list.get(2).getLayoutY()+2);
+				
+				explosion_list.get(3).setLayoutX(explosion_list.get(3).getLayoutX()+2);
+				explosion_list.get(3).setLayoutY(explosion_list.get(3).getLayoutY()+2);
+				
+				explosion_list.get(4).setLayoutX(explosion_list.get(4).getLayoutX()+3);
+				explosion_list.get(4).setLayoutY(explosion_list.get(4).getLayoutY()-1);
+				
+				explosion_list.get(5).setLayoutX(explosion_list.get(5).getLayoutX()-3);
+				explosion_list.get(5).setLayoutY(explosion_list.get(5).getLayoutY()-1);
+				
+				explosion_list.get(6).setLayoutX(explosion_list.get(6).getLayoutX()-3);
+				explosion_list.get(6).setLayoutY(explosion_list.get(6).getLayoutY()+1);
+				
+				explosion_list.get(7).setLayoutX(explosion_list.get(7).getLayoutX()+3);
+				explosion_list.get(7).setLayoutY(explosion_list.get(7).getLayoutY()+1);
+				
+				for (int i = 0; i < explosion_list.size(); i++) {
+					if (explosion_list.get(i).getLayoutY()>750) {
+						Parent tableViewParent = null;
+						try {
+							tableViewParent = FXMLLoader.load(getClass().getResource("GameOverBox.fxml"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				        Scene tableViewScene = new Scene(tableViewParent);
+				        tableViewScene.setFill(Color.BLACK);
+				        
+				        //This line gets the Stage information
+				        Stage window = (Stage)circle.getScene().getWindow();
+				        tableViewParent.setStyle("-fx-background-color: #000000;");
+				        window.setScene(tableViewScene);
+				        window.show();
+		            	loop.pause();
+		            	break;
+					}
+				}
+//			}
+		}
+		
 		
 	//	System.out.println(circle.getLayoutY());
 	}
