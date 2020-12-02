@@ -26,37 +26,37 @@
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="str0" layoutX="143.0" layoutY="246.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str0" layoutX="143.0" layoutY="246.0" mnemonicParsing="false" onMouseClicked="#load0" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str1" layoutX="143.0" layoutY="308.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str1" layoutX="143.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#load1" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str2" layoutX="143.0" layoutY="367.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str2" layoutX="143.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#load2" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str3" layoutX="143.0" layoutY="426.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str3" layoutX="143.0" layoutY="426.0" mnemonicParsing="false" onMouseClicked="#load4" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str4" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str4" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onMouseClicked="#load5" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str5" layoutX="143.0" layoutY="545.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str5" layoutX="143.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#load5" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str6" layoutX="143.0" layoutY="600.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str6" layoutX="143.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#load6" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
