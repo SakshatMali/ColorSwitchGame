@@ -29,8 +29,8 @@ import javafx.stage.Stage;
 import jdk.nashorn.api.tree.ForInLoopTree;
 import javafx.scene.control.Tooltip;
 
-public class MenuController implements Serializable,Initializable {
-	
+public class MenuController implements Initializable {
+
 	/**
 	 * 
 	 */
@@ -50,7 +50,7 @@ public class MenuController implements Serializable,Initializable {
 
 //	private static final long serialVersionUID = 11L;
 //	private int save_count=0;
-	DataTable dt;
+//	DataTable dt;
 	
 	
 	    @FXML

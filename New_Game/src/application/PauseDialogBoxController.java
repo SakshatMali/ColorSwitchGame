@@ -38,10 +38,10 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 //	Player player;
 //	private Image pause;
 //	private Text scr;
-	DataTable datatable;
+	private DataTable datatable;
 	private static final long serialVersionUID = 11L;
 //	private int save_count = deserialize();
-	private static int save_count;
+	private int save_count = deserialize_savecount();
 	
 //	private ArrayList<ShapeObstacle> Obstacles;
 
@@ -58,29 +58,37 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	
 	
     @FXML
-    private ImageView resume;
+    private transient ImageView resume;
 
     @FXML
-    private ImageView restart;
+    private transient ImageView restart;
 
     @FXML
-    private ImageView save;
+    private transient ImageView save;
 
     @FXML
-    private ImageView save_exit;
+    private transient ImageView save_exit;
 
     @FXML
-    private ImageView home;
+    private transient ImageView home;
 	
 	
 	void initData(DataTable datatable) {
 		this.datatable=datatable;
+//		save_count=deserialize_savecount();
+//		System.out.println((save_count+1)+" my bad");
+//		save_count++;
+////		setSave_count(save_count+1);
+//		serialize_savecount();
+		
 		SaveController.setSave_counter(save_count);
-//		System.out.println("init Pause dialog  "+datatable.getCurr_scr());
+		
+//		System.out.println("init Pause dialog  "+datatable.getNum_obst1()+" "+datatable.getNum_obst2());
+		datatable.serialize_resume();
 	}
 	public void resume(MouseEvent event) throws IOException {
-		Player p1 = new Player(0,0,0);
-		GamePlayController gc = new GamePlayController(p1,4,5);
+		Player p1 = new Player(datatable.getCurr_scr(),datatable.getMax_scr(),datatable.getTotal_stars());
+		GamePlayController gc = new GamePlayController(p1,datatable.getNum_obst1(), datatable.getNum_obst2());
 		gc.play(event);
 	}
 	public void restart(MouseEvent event) throws IOException {
@@ -94,7 +102,7 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 //	        window.setScene(tableViewScene);
 //	        window.show();
 //		datatable.serialize();
-		datatable.deserialize();
+//		datatable.deserialize();
 		
 //		GamePlayController gc = new GamePlayController(canvas,loop,ball,player,pause,scr,datatable,Obstacles);
 		Player p1 = new Player(0,0,0);
@@ -102,25 +110,28 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		gc.play(event);
 	}
 	
-	public void save(ActionEvent event) throws IOException {
+	public void save(MouseEvent event) throws IOException {
 		save_count=deserialize_savecount();
-//		int des = 
-//		setSave_count(getSave_count() + 1);
-		
-		serialize_savecount();
+//		SaveController.setSave_counter(save_count);
+//		System.out.println((save_count+1)+" my bad");
+//		save_count++;
+//		setSave_count(save_count+1);
+//		serialize_savecount();
 		
 		datatable.serialize();
-		datatable.deserialize();
+		save_count++;
+		serialize_savecount();
+//		datatable.deserialize();
 		
 		
 //		datatable.deserialize();
 	}
 	
-	public void save_exit(ActionEvent event) throws IOException {
+	public void save_exit(MouseEvent event) throws IOException {
 		
 	}
 
-	public void home(ActionEvent event) throws IOException {
+	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 //        tableViewScene.setFill(Color.BLACK);
@@ -135,17 +146,20 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	public void serialize_savecount() {
 		  try{    
 	            FileOutputStream file = new FileOutputStream("Save_Count.txt"); 
-	            ObjectOutputStream out = new ObjectOutputStream(file);  
+	            ObjectOutputStream out = new ObjectOutputStream(file); 
+	            
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Object has been serialized");
+//	            System.out.println("ok kkkkkkkkkkkkk");
+	            System.out.println("Pause Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
 	            System.out.println("IOException is caught"); 
 	        } 
 	}
 	public int deserialize_savecount() {
+		int temp_save_count;
 		 try{    
 	            // Reading the object from a file 
 			 	PauseDialogBoxController savetable=null;
@@ -156,74 +170,32 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	            in.close(); 
 	            file.close(); 
 	              
-	            System.out.println("Object has been deserialized "); 
-	            System.out.println("Save Count = " + savetable.getSave_count());
-	            save_count = savetable.getSave_count();
+	            System.out.println("Pause Object has been deserialized "); 
+	            System.out.println("Save Count hu= " + savetable.getSave_count());
+	            temp_save_count = savetable.getSave_count();
 	            
-	            save_count++;
-	            serialize_savecount();
+//	            save_count++;
+//	            serialize_savecount();
 	            
 //	            setSave_coun:t(getSave_count() + 1);
 //	            savetable.setSave_count(savetable.getSave_count()+1);
 	        } 
 	          
 	        catch(IOException ex) { 
+//	        	System.out.println("am i here");
+	        	serialize_savecount();
 	            System.out.println("IOException is caught"); 
+	            temp_save_count = -1;
 	        } 
 	        catch(ClassNotFoundException ex) { 
-	            System.out.println("ClassNotFoundException is caught"); 
+	            System.out.println("ClassNotFoundException is caught");
+	            temp_save_count = -1;
 	        }
 		 
-		 return save_count;
-	}
+		 return temp_save_count;
+	}	
 	
-	
-	
-	
-//	public void serialize_file() {
-//		  try{    
-//	            FileOutputStream file = new FileOutputStream("Save_Count"+(save_count%7)+".txt"); 
-//	            ObjectOutputStream out = new ObjectOutputStream(file);  
-//	            out.writeObject(datatable); 
-//	            out.close(); 
-//	            file.close();  
-//	            System.out.println("Object has been serialized");
-//	        } 
-//	        catch(IOException ex) { 
-//	            System.out.println("IOException is caught"); 
-//	        } 
-//	}
-//	public int deserialize_file() {
-//		 try{    
-//	            // Reading the object from a file 
-//			 	DataTable savetable=null;
-//	            FileInputStream file = new FileInputStream("Save_Count"+(save_count%7)+".txt"); 
-//	            ObjectInputStream in = new ObjectInputStream(file); 
-//	            savetable = (DataTable)in.readObject(); 
-//	              
-//	            in.close(); 
-//	            file.close(); 
-//	              
-//	            System.out.println("Object has been deserialized "); 
-//	            System.out.println("Save Count = " + savetable.);
-////	            save_count = savetable.getSave_count();
-////	            
-////	            save_count++;
-////	            serialize_file();
-//	            
-////	            setSave_coun:t(getSave_count() + 1);
-////	            savetable.setSave_count(savetable.getSave_count()+1);
-//	        } 
-//	          
-//	        catch(IOException ex) { 
-//	            System.out.println("IOException is caught"); 
-//	        } 
-//	        catch(ClassNotFoundException ex) { 
-//	            System.out.println("ClassNotFoundException is caught"); 
-//	        }
-//		 
-//		 return save_count;
-//	}
+
 	
 	
 	@FXML
@@ -266,8 +238,8 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		}
 	}
 	
-	
-	public static int getSave_count() {
+	public int getSave_count() {
+		
 		return save_count;
 	}
 	public void setSave_count(int save_count) {

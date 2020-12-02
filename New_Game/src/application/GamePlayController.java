@@ -58,6 +58,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.transform.Rotate;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+
 public class GamePlayController {
 	private Pane canvas;
 	private int gameup =0;
@@ -80,12 +81,11 @@ public class GamePlayController {
 	private int obst1;
 	private int obst2;
 	private ArrayList<ShapeObstacle> arr_copy_obst;
-	private int up_frame=0;
-	private int down_frame=750;
-	private int speed=1;
 	private boolean gameover=false;
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	//ok
+
+	private ArrayList<Integer> obst_order = new ArrayList<>();	
 	
 	public GamePlayController(Player player, int obst1, int obst2) throws FileNotFoundException {
 		super();
@@ -98,9 +98,10 @@ public class GamePlayController {
 		this.setObst2(obst2);
 		pause = new Image(new FileInputStream("src/Colour Images/Pause.png")); 
 		scr = new Text();
+		
 	}
 	
-	public void check_instance(int ind) {
+	public ShapeObstacle check_instance(int ind) {
 		ShapeObstacle newobst;
 		if (Obstacles.get(ind) instanceof Ring) {
 			 newobst = new Ring(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
@@ -139,10 +140,9 @@ public class GamePlayController {
 			 newobst = new Rotating_Ring_Obst(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
 					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
 		} 
-		arr_copy_obst.add(newobst);
+		return newobst;
+//		arr_copy_obst.add(newobst);
 	}
-
-	
 	
 	public void play(MouseEvent event) {
 		PlayGame(event);
@@ -191,7 +191,8 @@ public class GamePlayController {
 	    imageView.setFitWidth(100);
 //	    pause_button.setGraphic(imageView);
 //	    scr = new Text();       
-	    scr.setText("0"); 
+//	    scr.setText("0");
+	    scr.setText(Integer.toString(player.getCurr_scr()));
 	    scr.setX(50); 
 	    scr.setY(80); 
 	    scr.setFill(Color.WHITE);
@@ -203,11 +204,7 @@ public class GamePlayController {
 		primaryStage.setTitle("Bouncing Ball");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
-		player=new Player(0,0,0);
-		
-		
+
 		ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
 		Circle myBall=ball.Ball_make();
 //		System.out.println(myBall.getLayoutY()+"osh");
@@ -215,6 +212,7 @@ public class GamePlayController {
 
 		Obstacles=new ArrayList<>();
 		arr_copy_obst = new ArrayList<>();
+		
 //		double[] xpoints = {10, 85, 110, 135, 210, 160,
 //		        170, 110, 50, 60};
 //		double[] ypoints = {85, 75, 10, 75, 85, 125,
@@ -271,39 +269,29 @@ public class GamePlayController {
 	    two_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
 	    Obstacles.add(two_ring_obst);
 	    
-	    ShapeObstacle rotating_ring_obst=new Rotating_Ring_Obst(100,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
+	    ShapeObstacle rotating_ring_obst=new Rotating_Ring_Obst(130,130,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
 	    rotating_ring_obst.makeShape();
 	    rotating_ring_obst.makeStar();
 	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
 	    Obstacles.add(rotating_ring_obst);
 	    
 	    
-	    check_instance(obst1);
-	    check_instance(obst2);
-//	    arr_copy_obst.add(Obstacles.get(obst1));
-//	    arr_copy_obst.add(Obstacles.get(obst2));
-	    for (int i = 0; i <50; i++) {
+	    ShapeObstacle neww1 = check_instance(obst1);
+	    ShapeObstacle neww2 = check_instance(obst2);
+	    obst_order.add(obst1);
+	    obst_order.add(obst2);
+	    
+	    arr_copy_obst.add(neww1);
+	    arr_copy_obst.add(neww2);
+
+	    for (int i = 0; i <30; i++) {
 			Random rd = new Random();
 			int p =rd.nextInt(9);
-			check_instance(p);
-//			int p=0;
-//			ShapeObstacle newobst;
-//			if (Obstacles.get(p) instanceof Ring) {
-//				 newobst = new Ring(Obstacles.get(p).getHeight(),Obstacles.get(p).getWidth(),
-//						Obstacles.get(p).getXpos(),Obstacles.get(p).getYpos(),Obstacles.get(p).get_rotate()); 
-//			} 
-////			
-//			else {
-//				 newobst = new Plus(Obstacles.get(p).getHeight(),Obstacles.get(p).getWidth(),
-//						Obstacles.get(p).getXpos(),Obstacles.get(p).getYpos(),Obstacles.get(p).get_rotate()); 
-//			}
-////			ShapeObstacle newobst = new Ring(Obstacles.get(p).getHeight(),Obstacles.get(p).getWidth(),
-////					Obstacles.get(p).getXpos(),Obstacles.get(p).getYpos(),Obstacles.get(p).get_rotate()); 
-//			arr_copy_obst.add(newobst);
-			
-			
+			ShapeObstacle neww = check_instance(p);
+			arr_copy_obst.add(neww);
+			obst_order.add(p);
 		}
-	    
+	    System.out.println(obst_order);
 	    
 	    
         ArrayList<Rotate> arr_rotate=new ArrayList<>();
@@ -398,36 +386,15 @@ public class GamePlayController {
 //		final Bounds bounds = canvas.getBoundsInParent();
 //		System.out.println(bounds);
 //        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate,arr_hrzntl_rotate)));
-        loop = new Timeline(new KeyFrame(Duration.millis(9), e -> run(myBall,arr_copy_obst,arr_rotate,arr_hrzntl_rotate,scene)));
+        loop = new Timeline(new KeyFrame(Duration.millis(9), e -> run(myBall,arr_copy_obst,arr_rotate,arr_hrzntl_rotate,scene,imageView)));
         
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	
             @Override
             public void handle(MouseEvent event) {
-////            	pause_button.setCursor(Cursor.HAND); 
-//            	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-////            	window.getScene().getRoot().setCursor(Cursor.WAIT);
-//
-//
-////                System.out.println("Tile pressed ");
-////                event.consume();
-//                Parent tableViewParent = null;
-//				try {
-//					tableViewParent = FXMLLoader.load(getClass().getResource("PauseDialogBox.fxml"));
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//    	        Scene tableViewScene = new Scene(tableViewParent);
-////    	        tableViewScene.setFill(Color.BLACK);
-//    	        
-//    	        //This line gets the Stage information
-//    	        
-////    	        tableViewParent.setStyle("-fx-background-color: #000000;");
-//    	        window.setScene(tableViewScene);
-            	
-//    	        window.show();
-            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
+//            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
+            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2);
+//            	System.out.println("obst1 "+ obst1 + " obst2 " + obst2 );
             	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -439,29 +406,13 @@ public class GamePlayController {
 				}
             	 PauseDialogBoxController controller = loader.getController();
             	  controller.initData(datatable);
-
+//            	 PauseDialogBoxController pdc = new  PauseDialogBoxController();
+//            	 pdc.initData(datatable);
             	  window.show();
             	  loop.pause();
             }
        });
         
-//        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if (event.getCode()== KeyCode.UP ) {
-//                	gameup=1;
-//                }
-//            }
-//        });
-//		
-//		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if (event.getCode()== KeyCode.UP) {
-//                	gameup=-1;
-//                }
-//            }
-//        });
         
         loop.setCycleCount(Timeline.INDEFINITE); 
 //        loop.setAutoReverse(true);
@@ -487,9 +438,25 @@ public class GamePlayController {
 //		
 //	}
 
-	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,
-			ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene ) {
-		 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
+		
+		int cnt=0;
+		for (int i = 0; i <obst_order.size(); i++) {
+			if(Obstacles.get(i).getYpos()<=750){
+				cnt++;
+				if(cnt==1) {
+					obst1 = obst_order.get(i);
+				}
+				if(cnt==2) {
+					obst2 = obst_order.get(i);
+					break;
+				}
+			}
+		}
+		
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
 	            @Override
 	            public void handle(KeyEvent event) {
 	                if (event.getCode()== KeyCode.UP ) {
@@ -506,6 +473,7 @@ public class GamePlayController {
 	                }
 	            }
 	        });
+			
 			
 			final Bounds bounds = canvas.getBoundsInParent();
 //			System.out.println(bounds);
@@ -542,17 +510,19 @@ public class GamePlayController {
 					}
 				}
 		}
+		
 //		System.out.println("ball"+circle.getLayoutY());
 //		System.out.println(Obstacles.get(0).getYpos());
+		
 		for (int i = 0; i < Obstacles.size(); i++) {
-			if(Obstacles.get(i).getYpos()>=750){
+			if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
 //				System.out.println(i+" Yes");
 				continue;
 			}
-			if(Obstacles.get(i).getYpos()<=-750){
-//				System.out.println("NO");
-				continue;
-			}
+//			if(Obstacles.get(i).getYpos()<=-750){
+////				System.out.println("NO");
+//				continue;
+//			}
 			for (int j = 0; j < Obstacles.get(i).getList_shape().size()-5; j++) {
 				
 				Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
@@ -593,6 +563,7 @@ public class GamePlayController {
 			Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
 			boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 			if (intersects) {
+//				System.out.println("what " + player.getCurr_scr());
 				player.setCurr_scr(player.getCurr_scr()+1);
 				player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
 				player.setTotal_stars(player.getTotal_stars()+1);
@@ -607,12 +578,12 @@ public class GamePlayController {
 		}
 //		
 		for (int i = 0; i <Obstacles.size(); i++) {
-			if(Obstacles.get(i).getYpos()>=750){
+			if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
 				continue;
 			}
-			if(Obstacles.get(i).getYpos()<=-750){
-				continue;
-			}
+//			if(Obstacles.get(i).getYpos()<=-750){
+//				continue;
+//			}
 			for (int j =Obstacles.get(i).getList_shape().size()-4 ; j < Obstacles.get(i).getList_shape().size(); j++) {
 				Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
 				boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
@@ -643,6 +614,7 @@ public class GamePlayController {
 		}
 //		System.out.println(circle.getLayoutY()+" oops "+(down_frame+up_frame)/2);
 //		System.out.println("maxY"+bounds.getMaxY());
+
 		if (gameup==1) {
 			
 			circle.setLayoutY(circle.getLayoutY() -7);

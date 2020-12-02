@@ -37,6 +37,8 @@ public class SaveController implements Initializable {
 	
 	@FXML ImageView home;
 	
+	ArrayList<Button> ArrText ;
+	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
@@ -79,11 +81,8 @@ public class SaveController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-		ArrayList<Button> ArrText = new ArrayList<Button>();
-		
 
+		ArrText = new ArrayList<Button>();
 		ArrText.add(str0);
 		ArrText.add(str1);
 		ArrText.add(str2);
@@ -91,6 +90,26 @@ public class SaveController implements Initializable {
 		ArrText.add(str4);
 		ArrText.add(str5);
 		ArrText.add(str6);
+		DataTable dt = new DataTable(0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0);
+		try {
+			for (int i = 0; i < 7; i++) {
+				try {
+					temp = dt.deserialize(i);
+					ArrText.get(i).setText("Game - "+temp.getCurr_scr() +" stars");
+				}
+				catch(Exception e) {
+					
+					System.out.println("wowowowowowow ");
+					continue;
+				}
+				
+			}
+		}
+		catch(Exception e) {
+			System.out.println(" Nowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
+			
+		}
 //		ArrText.add(str0);
 		
 		
@@ -98,7 +117,7 @@ public class SaveController implements Initializable {
 //			ArrText.get(i).setText("");
 //		}
 		
-		ArrText.get(save_counter%7).setText("Game "+star_text);
+//		ArrText.get(save_counter%7).setText("Game "+star_text);
 		
 //		System.out.println("hh");
 	}
