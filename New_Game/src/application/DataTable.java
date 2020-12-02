@@ -26,23 +26,33 @@ public class DataTable implements Serializable{
 	
 	public void serialize() {
 		  try{    
-	            FileOutputStream file = new FileOutputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt"); 
+			  	PauseDialogBoxController pdc = new PauseDialogBoxController();
+//	            FileOutputStream file = new FileOutputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt");
+//			  	System.out.println("Save count in datatable  - " + pdc.getSave_count()%7);
+			  	FileOutputStream file = new FileOutputStream("LoadGame"+(pdc.getSave_count()%7)+".txt");
 	            ObjectOutputStream out = new ObjectOutputStream(file);  
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Object has been serialized");
+	            System.out.println("Datatable Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
 	            System.out.println("IOException is caught"); 
 	        } 
 	}
-	public DataTable deserialize() {
+	public DataTable deserialize(int sv_cnt) {
 		DataTable datatable=null;
 		 try{    
 	            // Reading the object from a file 
 			 	
-	            FileInputStream file = new FileInputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt"); 
+//	            FileInputStream file = new FileInputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt");
+			 	PauseDialogBoxController pdc = new PauseDialogBoxController();
+//	            FileOutputStream file = new FileOutputStream("LoadGame"+(PauseDialogBoxController.getSave_count()%7)+".txt");
+			 	
+			  	
+			 	
+			 	FileInputStream file = new FileInputStream("LoadGame"+(sv_cnt)+".txt");
+//			 	FileInputStream file = new FileInputStream("LoadGame"+(pdc.getSave_count()%7)+".txt");
 	            ObjectInputStream in = new ObjectInputStream(file); 
 	            datatable = (DataTable)in.readObject(); 
 	              
@@ -51,11 +61,16 @@ public class DataTable implements Serializable{
 	            total_stars = datatable.getTotal_stars();
 	            SaveController.setStar_text(total_stars);
 	              
-//	            System.out.println("Object has been deserialized "); 
+	            System.out.println("Datatable Object has been deserialized "); 
 //	            System.out.println("Current Score = " + datatable.getCurr_scr());
 //	            System.out.println("Max Score = " + datatable.getMax_scr());
-	            System.out.println("Total stars = " + datatable.getTotal_stars());
-	            System.out.println("Current Score = " + datatable.getCurr_scr());
+	            
+	            
+//	            System.out.println("Total stars = " + datatable.getTotal_stars());//
+//	            System.out.println("Current Score = " + datatable.getCurr_scr());//
+	            
+	            
+	            
 //	            System.out.println("Ball y = " + player.getTotal_stars()); 
 	        } 
 	        
@@ -77,7 +92,7 @@ public class DataTable implements Serializable{
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Object has been serialized");
+	            System.out.println("Resume Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
 	            System.out.println("IOException is caught"); 
@@ -98,7 +113,7 @@ public class DataTable implements Serializable{
 //	            total_stars = datatable.getTotal_stars();
 //	            SaveController.setStar_text(total_stars);
 	              
-//	            System.out.println("Object has been deserialized "); 
+	            System.out.println("Resume Object has been deserialized "); 
 //	            System.out.println("Current Score = " + datatable.getCurr_scr());
 //	            System.out.println("Max Score = " + datatable.getMax_scr());
 //	            System.out.println("Total stars = " + datatable.getTotal_stars());

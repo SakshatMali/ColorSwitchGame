@@ -16,16 +16,14 @@
       </ImageView>
       <Pane layoutX="466.0" layoutY="26.0" prefHeight="120.0" prefWidth="120.0">
          <children>
-            <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="home" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#home" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/home.png" />
                </image>
-            </ImageView>
-            <Button mnemonicParsing="false" opacity="0.0" prefHeight="120.0" prefWidth="120.0" text="Button" textFill="TRANSPARENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </Button>
+            </ImageView>
          </children>
       </Pane>
       <Button fx:id="str0" layoutX="143.0" layoutY="246.0" mnemonicParsing="false" onAction="#load" prefHeight="42.0" prefWidth="300.0" text="Button">

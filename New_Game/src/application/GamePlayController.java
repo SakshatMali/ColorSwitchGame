@@ -138,11 +138,11 @@ public class GamePlayController {
 //		arr_copy_obst.add(newobst);
 	}
 	
-	public void play(ActionEvent event) {
+	public void play(MouseEvent event) {
 		PlayGame(event);
 	}
 	
-	public void PlayGame(ActionEvent event) {
+	public void PlayGame(MouseEvent event) {
 //		canvas = new Pane();
 		
 //		final Scene scene = new Scene(canvas, frm_width, frm_height);
@@ -378,7 +378,7 @@ public class GamePlayController {
             public void handle(MouseEvent event) {
 //            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
             	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2);
-            	System.out.println("obst1 "+ obst1 + " obst2 " + obst2 );
+//            	System.out.println("obst1 "+ obst1 + " obst2 " + obst2 );
             	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -390,7 +390,8 @@ public class GamePlayController {
 				}
             	 PauseDialogBoxController controller = loader.getController();
             	  controller.initData(datatable);
-
+//            	 PauseDialogBoxController pdc = new  PauseDialogBoxController();
+//            	 pdc.initData(datatable);
             	  window.show();
             	  loop.pause();
             }
@@ -508,7 +509,7 @@ public class GamePlayController {
 			Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
 			boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 			if (intersects) {
-				System.out.println("what " + player.getCurr_scr());
+//				System.out.println("what " + player.getCurr_scr());
 				player.setCurr_scr(player.getCurr_scr()+1);
 				player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
 				player.setTotal_stars(player.getTotal_stars()+1);
@@ -590,9 +591,11 @@ public class GamePlayController {
 	public void setObst1(int obst1) {
 		this.obst1 = obst1;
 	}
+
 	
 	public int getObst2() {
 		return obst2;
+
 	}
 	
 	public void setObst2(int obst2) {

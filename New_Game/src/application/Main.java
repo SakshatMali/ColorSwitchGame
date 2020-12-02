@@ -49,10 +49,13 @@ public class Main extends Application {
 		//MUSIC
 		AudioClip audioPath = new AudioClip("file:src/Colour%20Sounds/BackSound.wav");
 		audioPath.setVolume(0.05);
+		audioPath.setCycleCount(AudioClip.INDEFINITE);
         audioPath.play();
+
         audioPath.setCycleCount(AudioClip.INDEFINITE);
         
         
+
 		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(mainRoot,frm_width,frm_height);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
