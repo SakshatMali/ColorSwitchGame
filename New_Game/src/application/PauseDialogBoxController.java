@@ -128,7 +128,15 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	}
 	
 	public void save_exit(MouseEvent event) throws IOException {
-		
+		save_count=deserialize_savecount();
+		datatable.serialize();
+		save_count++;
+		serialize_savecount();
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
 	}
 
 	public void home(MouseEvent event) throws IOException {

@@ -131,7 +131,51 @@ public class DataTable implements Serializable{
 		
 	}
 	
+	public void serialize_max_scr() {
+		  try{    
+	            FileOutputStream file = new FileOutputStream("Max_Scr_File.txt"); 
+	            ObjectOutputStream out = new ObjectOutputStream(file);  
+	            out.writeObject(this); 
+	            out.close(); 
+	            file.close();  
+	            System.out.println("Max Scr Object has been serialized");
+	        } 
+	        catch(IOException ex) { 
+	            System.out.println("IOException is caught"); 
+	        } 
+	}
 	
+	public DataTable deserialize_max_scr() {
+		DataTable datatable=null;
+		 try{    
+	            // Reading the object from a file 
+			 	
+	            FileInputStream file = new FileInputStream("Max_Scr_File.txt"); 
+	            ObjectInputStream in = new ObjectInputStream(file); 
+	            datatable = (DataTable)in.readObject(); 
+	              
+	            in.close(); 
+	            file.close(); 
+//	            total_stars = datatable.getTotal_stars();
+//	            SaveController.setStar_text(total_stars);
+	              
+	            System.out.println("Max Scr Object has been deserialized "); 
+//	            System.out.println("Current Score = " + datatable.getCurr_scr());
+//	            System.out.println("Max Score = " + datatable.getMax_scr());
+//	            System.out.println("Total stars = " + datatable.getTotal_stars());
+//	            System.out.println("Current Score = " + datatable.getCurr_scr());
+//	            System.out.println("Ball y = " + player.getTotal_stars()); 
+	        } 
+	        
+	        catch(IOException ex) { 
+	            System.out.println("IOException is caught"); 
+	        } 
+	        catch(ClassNotFoundException ex) { 
+	            System.out.println("ClassNotFoundException is caught"); 
+	        }
+		 return datatable;
+		
+	}
 	public int getCurr_scr() {
 		return curr_scr;
 	}

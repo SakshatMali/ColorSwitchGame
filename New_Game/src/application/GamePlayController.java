@@ -67,7 +67,7 @@ public class GamePlayController {
 	private int frm_height = 750;
 	private int ball_radius=15;
 	private int clr_change_radius=13;
-	boolean screen_mover = false;
+	private boolean screen_mover = false;
 	private double diff_obst = 450;
 	private boolean hrzntl_mov=false;
 //	private Button pause_button;
@@ -82,6 +82,7 @@ public class GamePlayController {
 	private int obst2;
 	private ArrayList<ShapeObstacle> arr_copy_obst;
 	private boolean gameover=false;
+	private int lst_cnt = 0;
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	//ok
 
@@ -298,14 +299,6 @@ public class GamePlayController {
         ArrayList<ShapeObstacle> arr_hrzntl_rotate=new ArrayList<>();
         explosion_list = new ArrayList<>();
         
-//        for (int i = 0; i < 1; i++) {
-//			ExplosionBalls eball = new ExplosionBalls(frm_width/2,frm_height-150,5,Color.WHITE);
-////			explosion_list.add(eball);
-//			Circle exball = eball.Ball_make();
-//			explosion_list.add(exball);
-//			canvas.getChildren().add(exball);
-//		}
-        
         for (int i = 0; i < arr_copy_obst.size(); i++) {
         	if (i==0) {
         		arr_copy_obst.get(0).setYpos(300);
@@ -316,7 +309,7 @@ public class GamePlayController {
         		arr_copy_obst.get(i).setYpos(arr_copy_obst.get(i-1).getYpos()-diff_obst);
 //        		arr_copy_obst.get(i).setLayoutY(arr_copy_obst.get(i-1).getYpos()-diff_obst);
         	}
-//        	System.out.println(i+ "hell");
+        	
         	arr_copy_obst.get(i).makeShape();
         	arr_copy_obst.get(i).makeStar();
         	arr_copy_obst.get(i).make_Clr_chng(diff_obst,clr_change_radius);
@@ -337,55 +330,8 @@ public class GamePlayController {
  	        canvas.getChildren().addAll(arr_copy_obst.get(i).getList_shape());
  	        
 		}
-//        for (int i = 0; i < arr_copy_obst.size(); i++) {
-//			System.out.println(arr_copy_obst.get(i).getYpos());
-//		}
-        
-//        for (int i = 0; i < Obstacles.size(); i++) {
-//    		if(Obstacles.get(i).get_rotate()==1) {
-//    			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//	 	        arr_rotate.add(rotate1);
-//    		}
-//    		else {
-//	 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
-//    		}
-// 	        
-//    		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
-// 	        arr_rotate.add(rotate2);
-// 	        
-// 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
-// 	        arr_rotate.add(rotate3);
-// 	        
-// 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
-//	}
-        
-//        for (int i = 0; i < Obstacles.size(); i++) {
-//        		if(Obstacles.get(i).get_rotate()==1) {
-//        			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//		 	        arr_rotate.add(rotate1);
-//        		}
-//        		else {
-////	        		ShapeObsta rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//		 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
-//        		}
-////        		Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-////	 	        arr_rotate.add(rotate1);
-//	 	        
-//        		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
-//	 	        arr_rotate.add(rotate2);
-//	 	        
-//	 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
-//	 	        arr_rotate.add(rotate3);
-//	 	        
-//	 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
-//		}
-        
-        
         
         canvas.getChildren().add(myBall);
-//		final Bounds bounds = canvas.getBoundsInParent();
-//		System.out.println(bounds);
-//        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate,arr_hrzntl_rotate)));
         loop = new Timeline(new KeyFrame(Duration.millis(9), e -> run(myBall,arr_copy_obst,arr_rotate,arr_hrzntl_rotate,scene,imageView)));
         
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -394,7 +340,43 @@ public class GamePlayController {
             public void handle(MouseEvent event) {
 //            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
             	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2);
+            	
+            	
+            	DataTable dt = new DataTable(0,0,0,0,0);
+            	DataTable temp = new DataTable(0,0,0,0,0); 
+         	
+            	try {
+            		temp = dt.deserialize_max_scr();
+            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+            		dt.setMax_scr(temp_max);
+            		dt.setCurr_scr(player.getCurr_scr());
+            		dt.setTotal_stars(total_str);
+            		dt.serialize_max_scr();
+//                	System.out.println("reaching slowly " + dt.getMax_scr());
+//                	System.out.println("Total star " + dt.getTotal_stars());
+            	}
+            	catch(Exception e) {
+            		dt.serialize_max_scr();
+            		temp = dt.deserialize_max_scr();
+            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+            		dt.setMax_scr(temp_max);
+            		dt.setCurr_scr(player.getCurr_scr());
+            		dt.setTotal_stars(total_str);
+            		dt.serialize_max_scr();
+//                	System.out.println("reaching slowly " + dt.getMax_scr());
+//                	System.out.println("Total star " + dt.getTotal_stars());
+//            		System.out.println("firsttttttttttttttttttt");
+            	}
+        	
+            	
+            	
+            	
 //            	System.out.println("obst1 "+ obst1 + " obst2 " + obst2 );
+            	
+            	
+            	
             	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -421,227 +403,11 @@ public class GamePlayController {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-}
-	
-//	public void gameover(Circle circle) {
-//		ArrayList<ExplosionBalls> explosion_list = new ArrayList<>();
-//		System.out.println("Game Over");
-//		for (int i = 0; i < 1; i++) {
-//			ExplosionBalls eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,Color.WHITE);
-//			explosion_list.add(eball);
-//			Circle exball = eball.Ball_make();
-//			canvas.getChildren().add(exball);
-//		}
-//		for (int i = 0; i < 600; i++) {
-//			explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
-//		}
-//		
-//	}
-
+	}
 
 	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
-		
-		int cnt=0;
-		for (int i = 0; i <obst_order.size(); i++) {
-			if(Obstacles.get(i).getYpos()<=750){
-				cnt++;
-				if(cnt==1) {
-					obst1 = obst_order.get(i);
-				}
-				if(cnt==2) {
-					obst2 = obst_order.get(i);
-					break;
-				}
-			}
-		}
-		
-		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-	            @Override
-	            public void handle(KeyEvent event) {
-	                if (event.getCode()== KeyCode.UP ) {
-	                	gameup=1;
-	                }
-	            }
-	        });
-			
-			scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-	            @Override
-	            public void handle(KeyEvent event) {
-	                if (event.getCode()== KeyCode.UP) {
-	                	gameup=-1;
-	                }
-	            }
-	        });
-			
-			
-			final Bounds bounds = canvas.getBoundsInParent();
-//			System.out.println(bounds);
-			
-//			Bounds bl_bounds = circle.getBoundsInLocal();
-//			System.out.println("bal vounds + "+bl_bounds);
-			
-//			if ( circle.getLayoutY() >= bounds.getMaxY() - circle.getRadius() ) {
-			if ( circle.getLayoutY() >= 750 - circle.getRadius() ) {
-//				System.out.println("wtf");
-//				System.out.println("Game Over");
-//				 loop.stop();
-			}
-				
-			
-		for (int i = 0; i < arr_rotate.size(); i++) {
-			arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
-		}
-//		
-		for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
-				if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-300 && hrzntl_mov==false){
-					for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
-						(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-2);
-					}
-					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()==-300)hrzntl_mov=true;
-					
-				}
-				else if(hrzntl_mov==true){
-					for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
-						(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+2);
-					}
-					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=300) {
-						hrzntl_mov=false;
-					}
-				}
-		}
-		
-//		System.out.println("ball"+circle.getLayoutY());
-//		System.out.println(Obstacles.get(0).getYpos());
-		
-		for (int i = 0; i < Obstacles.size(); i++) {
-			if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
-//				System.out.println(i+" Yes");
-				continue;
-			}
-//			if(Obstacles.get(i).getYpos()<=-750){
-////				System.out.println("NO");
-//				continue;
-//			}
-			for (int j = 0; j < Obstacles.get(i).getList_shape().size()-5; j++) {
-				
-				Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
-				boolean intersects = shape.getBoundsInLocal().getWidth() != -1;     //changed to parent
-				if (intersects) {
-					if(circle.getFill()==Obstacles.get(i).getList_shape().get(j).getStroke()) {
-						continue;
-					}
-					else {
-						
-//						gameover(circle);
-						System.out.println("Game Over");
-						gameover=true;
-						circle.setStroke(null);
-						circle.setFill(null);
-						
-						 for (int k = 0; k < 8; k++) {
-								ExplosionBalls eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
-//								explosion_list.add(eball);
-								Circle exball = eball.Ball_make();
-								explosion_list.add(exball);
-								canvas.getChildren().add(exball);
-							}
-						
-						
-//							explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
-//							explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-1);
-							
-						
-//						circle=null;
-//						loop.stop();
-					}
-				}
-			}
-		}
-		
-		for (int i = 0; i < Obstacles.size(); i++) {
-			Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
-			boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
-			if (intersects) {
-//				System.out.println("what " + player.getCurr_scr());
-				player.setCurr_scr(player.getCurr_scr()+1);
-				player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
-				player.setTotal_stars(player.getTotal_stars()+1);
-				Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setFill(null);
-				Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
-				scr.setText(Integer.toString(player.getCurr_scr()));
-				AudioClip audioPath = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
-				audioPath.setVolume(1);
-//				audioPath.setCycleCount(AudioClip.INDEFINITE);
-		        audioPath.play();
-			}
-		}
-//		
-		for (int i = 0; i <Obstacles.size(); i++) {
-			if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
-				continue;
-			}
-//			if(Obstacles.get(i).getYpos()<=-750){
-//				continue;
-//			}
-			for (int j =Obstacles.get(i).getList_shape().size()-4 ; j < Obstacles.get(i).getList_shape().size(); j++) {
-				Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
-				boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
-				if (intersects) {
-					circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
-					for (int k =Obstacles.get(i).getList_shape().size()-4 ; k < Obstacles.get(i).getList_shape().size(); k++) {
-						Obstacles.get(i).getList_shape().get(k).setFill(null);
-						Obstacles.get(i).getList_shape().get(k).setStroke(null);
-					}
-					break;
-				}	
-			}
-		}
-//		if(circle.getLayoutY()>down_frame0) {
-//			System.out.println("down");
-//			loop.stop();
-//		}
-//		if(circle.getLayoutY()<up_frame) {
-//			System.out.println("up");
-//			loop.stop();
-//		}
-//		if(circle.getLayoutY()<(down_frame+up_frame)/2) {
-		if(circle.getLayoutY() <= frm_height/1.5) {
-			screen_mover=true;
-		}
-		else {
-			screen_mover=false;
-		}
-//		System.out.println(circle.getLayoutY()+" oops "+(down_frame+up_frame)/2);
-//		System.out.println("maxY"+bounds.getMaxY());
-
-		if (gameup==1) {
-			
-			circle.setLayoutY(circle.getLayoutY() -7);
-			ball.setYpos(ball.getYpos()-7);
-			if(screen_mover ) {
-				for (int i = 0; i < Obstacles.size(); i++) {
-					Obstacles.get(i).setYpos(Obstacles.get(i).getYpos()+5);
-					for (int j = 0; j < Obstacles.get(i).getList_shape().size(); j++) {
-						Obstacles.get(i).getList_shape().get(j).setLayoutY(Obstacles.get(i).getList_shape().get(j).getLayoutY()+5);
-						
-//						System.out.println("ok");
-					}
-				}
-//				down_frame-=3;
-//				up_frame-=3;
-//				frm_height-=3;  //see coordinates and then shape.intersent will be if centre lies within the frame coordinates then only intersect check
-			}
-		}
-		
-		else if (gameup==-1) {
-			circle.setLayoutY(circle.getLayoutY() +2*(1.0*(player.getCurr_scr()+5)/8));
-			ball.setYpos(ball.getYpos()+2*(1.0*(player.getCurr_scr()+5)/8));
-		}
-		
-		
 		if (gameover) {
-			
+				
 //			for (int i=0 ; i<explosion_list.size() ; i++) {
 				explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+2);
 				explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-2);
@@ -667,6 +433,48 @@ public class GamePlayController {
 				explosion_list.get(7).setLayoutX(explosion_list.get(7).getLayoutX()+3);
 				explosion_list.get(7).setLayoutY(explosion_list.get(7).getLayoutY()+1);
 				
+//				DataTable dt = new DataTable(0,0,0,0,0);
+//            	DataTable temp = new DataTable(0,0,0,0,0);
+//        		temp = dt.deserialize_max_scr();
+//        		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+//        		dt.setMax_scr(temp_max);
+//        		dt.serialize_max_scr();
+//        		
+//            	System.out.println("reaching slowly " + dt.getMax_scr());
+				if(lst_cnt == 0) {
+		          	DataTable dt = new DataTable(0,0,0,0,0);
+	            	DataTable temp = new DataTable(0,0,0,0,0); 
+	         	
+	            	try {
+	            		temp = dt.deserialize_max_scr();
+	            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+	            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+	            		dt.setMax_scr(temp_max);
+	            		dt.setCurr_scr(player.getCurr_scr());
+	            		dt.setTotal_stars(total_str);
+	            		dt.serialize_max_scr();
+	                	System.out.println("reaching slowly " + dt.getMax_scr());
+	                	System.out.println("Total star " + dt.getTotal_stars());
+	            	}
+	            	catch(Exception e) {
+	            		dt.serialize_max_scr();
+	            		temp = dt.deserialize_max_scr();
+	            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+	            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+	            		dt.setMax_scr(temp_max);
+	            		dt.setCurr_scr(player.getCurr_scr());
+	            		dt.setTotal_stars(total_str);
+	            		dt.serialize_max_scr();
+	                	System.out.println("reaching slowly " + dt.getMax_scr());
+	                	System.out.println("Total star " + dt.getTotal_stars());
+//	            		System.out.println("firsttttttttttttttttttt");
+	            	}
+	            	lst_cnt=1;
+				}
+		    	
+//            	datatable=new DataTable(player.getCurr_scr(),dt.getMax_scr(),player.getTotal_stars(),obst1,obst2);
+            	
+            	
 				for (int i = 0; i < explosion_list.size(); i++) {
 					if (explosion_list.get(i).getLayoutY()>750) {
 						Parent tableViewParent = null;
@@ -690,9 +498,197 @@ public class GamePlayController {
 				}
 //			}
 		}
-		
-		
-	//	System.out.println(circle.getLayoutY());
+		else {
+			int cnt=0;
+			for (int i = 0; i <obst_order.size(); i++) {
+				if(Obstacles.get(i).getYpos()<=750){
+					cnt++;
+					if(cnt==1) {
+						obst1 = obst_order.get(i);
+					}
+					if(cnt==2) {
+						obst2 = obst_order.get(i);
+						break;
+					}
+				}
+			}
+			
+			scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+		            @Override
+		            public void handle(KeyEvent event) {
+		                if (event.getCode()== KeyCode.UP ) {
+		                	gameup=1;
+		                }
+		            }
+		        });
+				
+				scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+		            @Override
+		            public void handle(KeyEvent event) {
+		                if (event.getCode()== KeyCode.UP) {
+		                	gameup=-1;
+		                }
+		            }
+		        });
+				
+				if ( circle.getLayoutY() >= 750 + circle.getRadius() ) {
+//					System.out.println("wtf");
+//					System.out.println("Game Over");
+//					gameover = true;
+					 loop.stop();
+				}
+					
+				
+			for (int i = 0; i < arr_rotate.size(); i++) {
+				arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
+			}
+//			
+			for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
+					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-300 && hrzntl_mov==false){
+						for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
+							(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-2);
+						}
+						if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()==-300)hrzntl_mov=true;
+						
+					}
+					else if(hrzntl_mov==true){
+						for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
+							(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+2);
+						}
+						if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=300) {
+							hrzntl_mov=false;
+						}
+					}
+			}
+			
+			for (int i = 0; i < Obstacles.size(); i++) {
+				if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
+					continue;
+				}
+				for (int j = 0; j < Obstacles.get(i).getList_shape().size()-5; j++) {
+					
+					Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
+					boolean intersects = shape.getBoundsInLocal().getWidth() != -1;     //changed to parent
+					if (intersects) {
+						if(circle.getFill()==Obstacles.get(i).getList_shape().get(j).getStroke()) {
+							continue;
+						}
+						else {
+							
+//							gameover(circle);
+//							System.out.println("Game Over");
+							gameover=true;
+							circle.setStroke(null);
+							circle.setFill(null);
+							
+							 for (int k = 0; k < 8; k++) {
+									ExplosionBalls eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
+//									explosion_list.add(eball);
+									Circle exball = eball.Ball_make();
+									explosion_list.add(exball);
+									canvas.getChildren().add(exball);
+								}
+							
+							
+//								explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
+//								explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-1);
+								
+							
+//							circle=null;
+//							loop.stop();
+						}
+					}
+				}
+			}
+			
+			for (int i = 0; i < Obstacles.size(); i++) {
+				Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
+				boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
+				if (intersects) {
+//					System.out.println("what " + player.getCurr_scr());
+					player.setCurr_scr(player.getCurr_scr()+1);
+					player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
+					player.setTotal_stars(player.getTotal_stars()+1);
+					Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setFill(null);
+					Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
+					scr.setText(Integer.toString(player.getCurr_scr()));
+					AudioClip audioPath = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
+					audioPath.setVolume(1);
+//					audioPath.setCycleCount(AudioClip.INDEFINITE);
+			        audioPath.play();
+				}
+			}
+//			
+			for (int i = 0; i <Obstacles.size(); i++) {
+				if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
+					continue;
+				}
+//				if(Obstacles.get(i).getYpos()<=-750){
+//					continue;
+//				}
+				for (int j =Obstacles.get(i).getList_shape().size()-4 ; j < Obstacles.get(i).getList_shape().size(); j++) {
+					Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
+					boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
+					if (intersects) {
+						circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
+						for (int k =Obstacles.get(i).getList_shape().size()-4 ; k < Obstacles.get(i).getList_shape().size(); k++) {
+							Obstacles.get(i).getList_shape().get(k).setFill(null);
+							Obstacles.get(i).getList_shape().get(k).setStroke(null);
+						}
+						break;
+					}	
+				}
+			}
+//			if(circle.getLayoutY()>down_frame0) {
+//				System.out.println("down");
+//				loop.stop();
+//			}
+//			if(circle.getLayoutY()<up_frame) {
+//				System.out.println("up");
+//				loop.stop();
+//			}
+//			if(circle.getLayoutY()<(down_frame+up_frame)/2) {
+			if(circle.getLayoutY() <= frm_height/1.5) {
+				screen_mover=true;
+			}
+			else {
+				screen_mover=false;
+			}
+//			System.out.println(circle.getLayoutY()+" oops "+(down_frame+up_frame)/2);
+//			System.out.println("maxY"+bounds.getMaxY());
+
+			if (gameup==1) {
+				
+				circle.setLayoutY(circle.getLayoutY() -7);
+				ball.setYpos(ball.getYpos()-7);
+				if(screen_mover ) {
+					for (int i = 0; i < Obstacles.size(); i++) {
+						Obstacles.get(i).setYpos(Obstacles.get(i).getYpos()+5);
+						for (int j = 0; j < Obstacles.get(i).getList_shape().size(); j++) {
+							Obstacles.get(i).getList_shape().get(j).setLayoutY(Obstacles.get(i).getList_shape().get(j).getLayoutY()+5);
+							
+//							System.out.println("ok");
+						}
+					}
+//					down_frame-=3;
+//					up_frame-=3;
+//					frm_height-=3;  //see coordinates and then shape.intersent will be if centre lies within the frame coordinates then only intersect check
+				}
+			}
+			
+			else if (gameup==-1) {
+				circle.setLayoutY(circle.getLayoutY() +2*(1.0*(player.getCurr_scr()+5)/8));
+				ball.setYpos(ball.getYpos()+2*(1.0*(player.getCurr_scr()+5)/8));
+			}
+			
+			
+
+			
+			
+		//	System.out.println(circle.getLayoutY());
+		}
+
 	}
 
 

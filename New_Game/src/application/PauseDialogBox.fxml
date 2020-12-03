@@ -51,7 +51,7 @@
       </Pane>
       <Pane layoutX="251.0" layoutY="427.0" prefHeight="115.0" prefWidth="120.0">
          <children>
-            <ImageView fx:id="save_exit" fitHeight="110.0" fitWidth="112.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="save_exit" fitHeight="110.0" fitWidth="112.0" onMouseClicked="#save_exit" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/saveexit.png" />
                </image>

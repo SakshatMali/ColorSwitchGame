@@ -60,7 +60,10 @@ public class GameOverBoxController {
 //	        mediaPlayer.setStartTime(Duration.seconds(0));
 //	        mediaPlayer.setStopTime(Duration.seconds(50));
 //	        mediaPlayer.play();
-	        
+		DataTable dt = new DataTable(0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0);
+		temp = dt.deserialize_max_scr();
+		System.out.println(" Show score in game over  - "+temp.getMax_scr());
 	        
 	        Parent tableViewParent = FXMLLoader.load(getClass().getResource("VideoPlayer.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
@@ -74,5 +77,12 @@ public class GameOverBoxController {
 	        
 //	        GamePlayController.canvas.getChildren().add(mediaView);
 		
+	}
+	
+	public static void show_max_score(MouseEvent event) throws IOException{
+//		System.out.println("max scr - "+mx_scr);
+//		DataTable temp = new DataTable(0,0,0,0,0);
+//		temp.deserialize_max_scr();
+//		System.out.println(" Show score in game over  - "+temp.getMax_scr());
 	}
 }
