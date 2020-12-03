@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,10 +9,13 @@
 <AnchorPane prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.VideoPlayerController">
    <children>
       <MediaView fx:id="media" fitHeight="281.25" fitWidth="500.0" layoutX="59.0" layoutY="224.0" />
-      <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="464.0" layoutY="619.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="back" fitHeight="110.0" fitWidth="110.0" layoutX="464.0" layoutY="619.0" onMouseClicked="#back" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/backmenu.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </children>
 </AnchorPane>

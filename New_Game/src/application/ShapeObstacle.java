@@ -1,8 +1,12 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
@@ -24,6 +28,8 @@ public abstract class ShapeObstacle extends Shape {
 	private double centroid=side/Math.sqrt(3);
 	private double[] xpoints = {0,side/2,-side/2};
 	private double[] ypoints = {centroid,-centroid/2,-centroid/2};
+	private Image star_new;
+	
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	
 	public ShapeObstacle(double height, double width, double xpos, double ypos, int rotate) {
@@ -33,6 +39,7 @@ public abstract class ShapeObstacle extends Shape {
 		this.xpos = xpos;
 		this.ypos = ypos;
 		_rotate=rotate;
+//		star_new = new Image(new FileInputStream("src/Colour Images/star.png")); 
 		star=new Star();
 //		clr_chng=new ColorChange(size_clr_change);
 	
@@ -115,6 +122,11 @@ public abstract class ShapeObstacle extends Shape {
 //				_star.relocate(xpos,ypos);
 				_star.setFill(Color.WHITE);
 				_star.setStroke(Color.WHITE);
+				
+				ImageView imageView = new ImageView(star_new); 
+				imageView.setFitHeight(46);
+			    imageView.setFitWidth(48);
+				
 //				Rotate rotate = new Rotate();    
 //		        rotate.setAngle(0);  
 //		        rotate.setPivotX(xpos);  

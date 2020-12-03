@@ -41,12 +41,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str3" layoutX="143.0" layoutY="426.0" mnemonicParsing="false" onMouseClicked="#load4" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str3" layoutX="143.0" layoutY="426.0" mnemonicParsing="false" onMouseClicked="#load3" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="str4" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onMouseClicked="#load5" prefHeight="42.0" prefWidth="300.0" text="Button">
+      <Button fx:id="str4" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onMouseClicked="#load4" prefHeight="42.0" prefWidth="300.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

@@ -10,11 +10,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
+import javafx.scene.effect.Glow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -22,6 +28,9 @@ public class VideoPlayerController implements Initializable {
 	
 	@FXML
     private MediaView media;
+	
+	@FXML
+    private ImageView back;
 
 	MediaPlayer mediaPlayer;
 
@@ -48,6 +57,29 @@ public class VideoPlayerController implements Initializable {
 	        window.setScene(tableViewScene);
 	        window.show();
 	}
+	
+
+    @FXML
+    void glowImage(MouseEvent event) throws IOException {
+//		System.out.println("On Image");
+        Glow glow=new Glow();
+        Node source = (Node) event.getSource();
+        source.setEffect(glow);
+        glow.setLevel(0.4);
+        
+        Tooltip tool = new Tooltip("Back");
+        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
+        Tooltip.install(back, tool);
+    }
+	
+	 @FXML
+	    void stopGlowing(MouseEvent event) throws IOException{
+//		 System.out.println("Out Image");
+	        Node source= (Node) event.getSource();
+	        Glow glow=(Glow) source.getEffect();
+	        source.setEffect(glow);
+	        glow.setLevel(0.0);
+	    }
 	
 	
 

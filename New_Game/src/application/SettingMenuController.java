@@ -21,10 +21,11 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class SettingMenuController implements Initializable {
+public class SettingMenuController {
 	
 @FXML ImageView home;
 @FXML CheckBox music;
+@FXML CheckBox sound;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -60,20 +61,26 @@ public class SettingMenuController implements Initializable {
 	        glow.setLevel(0.0);
 	    }
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-//		music.setStyle("-fx-padding: 5em 5em 6em 6em;");
-//		music.getStyleClass().add("big-check-box");
-		
-	}
-
 	
 	public void playmusic(ActionEvent event) {
 		if (music.isSelected()) {
 			Main.audioPath.play();
 		} else {
 			Main.audioPath.stop();
+		}
+	}
+	
+	public void playsound(ActionEvent event) {
+		if (sound.isSelected()) {
+			GamePlayController.audiopath1.play();
+			GamePlayController.audiopath2.play();
+			GamePlayController.audiopath3.play();
+		}
+		
+		else {
+			GamePlayController.audiopath1.stop();
+			GamePlayController.audiopath2.stop();
+			GamePlayController.audiopath3.stop();
 		}
 	}
 }

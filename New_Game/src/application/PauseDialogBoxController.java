@@ -106,7 +106,7 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		
 //		GamePlayController gc = new GamePlayController(canvas,loop,ball,player,pause,scr,datatable,Obstacles);
 		Player p1 = new Player(0,0,0);
-		GamePlayController gc = new GamePlayController(p1,4,5);
+		GamePlayController gc = new GamePlayController(p1,0,1);
 		gc.play(event);
 	}
 	

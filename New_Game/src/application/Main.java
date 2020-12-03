@@ -48,12 +48,12 @@ public class Main extends Application {
 		
 		
 		//MUSIC
-		audioPath = new AudioClip("file:src/Colour%20Sounds/BackSound.mp3");
-		audioPath.setVolume(0.05);
+		audioPath = new AudioClip("file:src/Colour%20Sounds/BackgroundSound.mp3");
+		audioPath.setVolume(0.5);
 		audioPath.setCycleCount(AudioClip.INDEFINITE);
         audioPath.play();
 
-        audioPath.setCycleCount(AudioClip.INDEFINITE);
+//        audioPath.setCycleCount(AudioClip.INDEFINITE);
         
         
 
