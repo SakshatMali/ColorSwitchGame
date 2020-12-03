@@ -56,6 +56,7 @@ public class VideoPlayerController implements Initializable {
 	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
 	        window.show();
+	        mediaPlayer.stop();
 	}
 	
 

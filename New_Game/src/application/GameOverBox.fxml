@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,13 +23,16 @@
             <Image url="@../Colour%20Images/playvideo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="140.0" fitWidth="145.0" layoutX="346.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="140.0" fitWidth="145.0" layoutX="346.0" layoutY="452.0" onMouseClicked="#star" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/starover.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Label layoutX="349.0" layoutY="244.0" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: white;" />
-      <Label layoutX="349.0" layoutY="314.0" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: white;" />
-      <Label layoutX="348.0" layoutY="383.0" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: white;" />
+      <Label fx:id="curr" layoutX="349.0" layoutY="244.0" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: white;" />
+      <Label fx:id="max" layoutX="349.0" layoutY="314.0" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: white;" />
+      <Label fx:id="total" layoutX="348.0" layoutY="383.0" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>

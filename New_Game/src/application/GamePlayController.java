@@ -65,9 +65,9 @@ public class GamePlayController {
 	private Timeline loop;
 	private int frm_width = 600;
 	private int frm_height = 750;
-	private int ball_radius=15;
+	private int ball_radius=12;
 	private int clr_change_radius=13;
-	boolean screen_mover = false;
+	private boolean screen_mover = false;
 	private double diff_obst = 450;
 	private boolean hrzntl_mov=false;
 //	private Button pause_button;
@@ -83,10 +83,14 @@ public class GamePlayController {
 	private int dir=1;
 	private ArrayList<ShapeObstacle> arr_copy_obst;
 	private boolean gameover=false;
+
 	private boolean playmusic=false;
 	static AudioClip audiopath1 = new AudioClip("file:src/Colour%20Sounds/points.mp3");
 	static AudioClip audiopath2 = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
 	static AudioClip audiopath3 = new AudioClip("file:src/Colour%20Sounds/Explode.mp3");
+
+	private int lst_cnt = 0;
+
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	//ok
 
@@ -303,14 +307,6 @@ public class GamePlayController {
         ArrayList<ShapeObstacle> arr_hrzntl_rotate=new ArrayList<>();
         explosion_list = new ArrayList<>();
         
-//        for (int i = 0; i < 1; i++) {
-//			ExplosionBalls eball = new ExplosionBalls(frm_width/2,frm_height-150,5,Color.WHITE);
-////			explosion_list.add(eball);
-//			Circle exball = eball.Ball_make();
-//			explosion_list.add(exball);
-//			canvas.getChildren().add(exball);
-//		}
-        
         for (int i = 0; i < arr_copy_obst.size(); i++) {
         	if (i==0) {
         		arr_copy_obst.get(0).setYpos(300);
@@ -321,7 +317,7 @@ public class GamePlayController {
         		arr_copy_obst.get(i).setYpos(arr_copy_obst.get(i-1).getYpos()-diff_obst);
 //        		arr_copy_obst.get(i).setLayoutY(arr_copy_obst.get(i-1).getYpos()-diff_obst);
         	}
-//        	System.out.println(i+ "hell");
+        	
         	arr_copy_obst.get(i).makeShape();
         	arr_copy_obst.get(i).makeStar();
         	arr_copy_obst.get(i).make_Clr_chng(diff_obst,clr_change_radius);
@@ -342,55 +338,8 @@ public class GamePlayController {
  	        canvas.getChildren().addAll(arr_copy_obst.get(i).getList_shape());
  	        
 		}
-//        for (int i = 0; i < arr_copy_obst.size(); i++) {
-//			System.out.println(arr_copy_obst.get(i).getYpos());
-//		}
-        
-//        for (int i = 0; i < Obstacles.size(); i++) {
-//    		if(Obstacles.get(i).get_rotate()==1) {
-//    			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//	 	        arr_rotate.add(rotate1);
-//    		}
-//    		else {
-//	 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
-//    		}
-// 	        
-//    		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
-// 	        arr_rotate.add(rotate2);
-// 	        
-// 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
-// 	        arr_rotate.add(rotate3);
-// 	        
-// 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
-//	}
-        
-//        for (int i = 0; i < Obstacles.size(); i++) {
-//        		if(Obstacles.get(i).get_rotate()==1) {
-//        			Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//		 	        arr_rotate.add(rotate1);
-//        		}
-//        		else {
-////	        		ShapeObsta rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-//		 	        arr_hrzntl_rotate.add(Obstacles.get(i));	
-//        		}
-////        		Rotate rotate1=Obstacles.get(i).makeRotate(Obstacles.get(i).getList_shape());
-////	 	        arr_rotate.add(rotate1);
-//	 	        
-//        		Rotate rotate2=Obstacles.get(i).makeRotate_Clr_chng(Obstacles.get(i).getList_shape(),diff_obst);
-//	 	        arr_rotate.add(rotate2);
-//	 	        
-//	 	        Rotate rotate3=Obstacles.get(i).makeRotate_Star(Obstacles.get(i).getList_shape());
-//	 	        arr_rotate.add(rotate3);
-//	 	        
-//	 	        canvas.getChildren().addAll(Obstacles.get(i).getList_shape());
-//		}
-        
-        
         
         canvas.getChildren().add(myBall);
-//		final Bounds bounds = canvas.getBoundsInParent();
-//		System.out.println(bounds);
-//        loop = new Timeline(new KeyFrame(Duration.millis(10), e -> run(myBall,Obstacles,arr_rotate,arr_hrzntl_rotate)));
         loop = new Timeline(new KeyFrame(Duration.millis(9), e -> run(myBall,arr_copy_obst,arr_rotate,arr_hrzntl_rotate,scene,imageView)));
         
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -399,7 +348,47 @@ public class GamePlayController {
             public void handle(MouseEvent event) {
 //            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
             	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2);
+            	
+            	
+            	DataTable dt = new DataTable(0,0,0,0,0);
+            	DataTable temp = new DataTable(0,0,0,0,0); 
+         	
+            	try {
+            		temp = dt.deserialize_max_scr();
+            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+            		dt.setMax_scr(temp_max);
+            		dt.setCurr_scr(player.getCurr_scr());
+            		dt.setTotal_stars(total_str);
+            		dt.setNum_obst1(obst1);
+            		dt.setNum_obst2(obst2);
+            		dt.serialize_max_scr();
+//                	System.out.println("reaching slowly " + dt.getMax_scr());
+//                	System.out.println("Total star " + dt.getTotal_stars());
+            	}
+            	catch(Exception e) {
+            		dt.serialize_max_scr();
+            		temp = dt.deserialize_max_scr();
+            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+            		dt.setMax_scr(temp_max);
+            		dt.setCurr_scr(player.getCurr_scr());
+            		dt.setTotal_stars(total_str);
+            		dt.setNum_obst1(obst1);
+            		dt.setNum_obst2(obst2);
+            		dt.serialize_max_scr();
+//                	System.out.println("reaching slowly " + dt.getMax_scr());
+//                	System.out.println("Total star " + dt.getTotal_stars());
+//            		System.out.println("firsttttttttttttttttttt");
+            	}
+        	
+            	
+            	
+            	
 //            	System.out.println("obst1 "+ obst1 + " obst2 " + obst2 );
+            	
+            	
+            	
             	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -426,27 +415,10 @@ public class GamePlayController {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-}
-	
-//	public void gameover(Circle circle) {
-//		ArrayList<ExplosionBalls> explosion_list = new ArrayList<>();
-//		System.out.println("Game Over");
-//		for (int i = 0; i < 1; i++) {
-//			ExplosionBalls eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,Color.WHITE);
-//			explosion_list.add(eball);
-//			Circle exball = eball.Ball_make();
-//			canvas.getChildren().add(exball);
-//		}
-//		for (int i = 0; i < 600; i++) {
-//			explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
-//		}
-//		
-//	}
-
+	}
 
 	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
-		
-		
+
 		if (gameover) {
 
 			if (playmusic) {
@@ -459,6 +431,7 @@ public class GamePlayController {
 			}
 //			System.out.println(dir);
 			
+
 //			for (int i=0 ; i<explosion_list.size() ; i++) {
 				explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+(2*dir));
 				explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-2);
@@ -511,9 +484,57 @@ public class GamePlayController {
 				
 				if (explosion_list.get(0).getLayoutX()>600 || explosion_list.get(0).getLayoutX()<0) {
 					dir = dir*(-1);
-					System.out.println(dir);
+//					System.out.println(dir);
 				}
 				
+
+//				DataTable dt = new DataTable(0,0,0,0,0);
+//            	DataTable temp = new DataTable(0,0,0,0,0);
+//        		temp = dt.deserialize_max_scr();
+//        		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+//        		dt.setMax_scr(temp_max);
+//        		dt.serialize_max_scr();
+//        		
+//            	System.out.println("reaching slowly " + dt.getMax_scr());
+				if(lst_cnt == 0) {
+		          	DataTable dt = new DataTable(0,0,0,0,0);
+	            	DataTable temp = new DataTable(0,0,0,0,0); 
+	         	
+	            	try {
+	            		temp = dt.deserialize_max_scr();
+	            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+	            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+	            		dt.setMax_scr(temp_max);
+	            		dt.setCurr_scr(player.getCurr_scr());
+	            		dt.setTotal_stars(total_str);
+	            		dt.setNum_obst1(obst1);
+	            		dt.setNum_obst2(obst2);
+	            		dt.serialize_max_scr();
+	                	System.out.println("reaching slowly " + dt.getMax_scr());
+	                	System.out.println("Total star " + dt.getTotal_stars());
+	            	}
+	            	catch(Exception e) {
+	            		dt.serialize_max_scr();
+	            		temp = dt.deserialize_max_scr();
+	            		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
+	            		int total_str = temp.getTotal_stars() + player.getCurr_scr();
+	            		dt.setMax_scr(temp_max);
+	            		dt.setCurr_scr(player.getCurr_scr());
+	            		dt.setTotal_stars(total_str);
+	            		dt.setNum_obst1(obst1);
+	            		dt.setNum_obst2(obst2);
+	            		dt.serialize_max_scr();
+	                	System.out.println("reaching slowly " + dt.getMax_scr());
+	                	System.out.println("Total star " + dt.getTotal_stars());
+//	            		System.out.println("firsttttttttttttttttttt");
+	            	}
+	            	lst_cnt=1;
+				}
+		    	
+//            	datatable=new DataTable(player.getCurr_scr(),dt.getMax_scr(),player.getTotal_stars(),obst1,obst2);
+            	
+            	
+
 				for (int i = 0; i < explosion_list.size(); i++) {
 					if (explosion_list.get(i).getLayoutY()>1500) {
 						Parent tableViewParent = null;
@@ -583,10 +604,10 @@ public class GamePlayController {
 	//			System.out.println("bal vounds + "+bl_bounds);
 				
 	//			if ( circle.getLayoutY() >= bounds.getMaxY() - circle.getRadius() ) {
-				if ( circle.getLayoutY() >= 750 - circle.getRadius() ) {
+				if ( circle.getLayoutY() >= 750 + circle.getRadius() ) {
 	//				System.out.println("wtf");
 	//				System.out.println("Game Over");
-	//				 loop.stop();
+					 loop.stop();
 				}
 					
 				
@@ -650,7 +671,7 @@ public class GamePlayController {
 								 } 
 								 
 								 else {
-									eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),8,clr_arr[k%4]);
+									eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),7,clr_arr[k%4]);
 								 }
 	//								explosion_list.add(eball);
 									Circle exball = eball.Ball_make();

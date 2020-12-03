@@ -2,13 +2,18 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
@@ -23,10 +28,19 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class GameOverBoxController {
+public class GameOverBoxController implements Initializable {
 	
-	  @FXML
-	  private ImageView cross;
+	  	@FXML
+	  	private ImageView cross;
+	  
+	  	@FXML
+	    private Label curr;
+
+	    @FXML
+	    private Label max;
+
+	    @FXML
+	    private Label total;
 	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
@@ -81,7 +95,10 @@ public class GameOverBoxController {
 //	        mediaPlayer.setStartTime(Duration.seconds(0));
 //	        mediaPlayer.setStopTime(Duration.seconds(50));
 //	        mediaPlayer.play();
-	        
+//		DataTable dt = new DataTable(0,0,0,0,0);
+//		DataTable temp = new DataTable(0,0,0,0,0);
+//		temp = dt.deserialize_max_scr();
+//		System.out.println(" Show score in game over  - "+temp.getMax_scr());
 	        
 	        Parent tableViewParent = FXMLLoader.load(getClass().getResource("VideoPlayer.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
@@ -94,6 +111,43 @@ public class GameOverBoxController {
 	        window.show();
 	        
 //	        GamePlayController.canvas.getChildren().add(mediaView);
+		
+	}
+	
+	public void star(MouseEvent event) throws IOException{
+		
+		System.out.println("Star");
+		
+		DataTable dt = new DataTable(0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0);
+		temp = dt.deserialize_max_scr();
+		
+		temp.setTotal_stars(temp.getTotal_stars()-10);
+		temp.serialize_max_scr();
+		Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
+		GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(), temp.getNum_obst2());
+		gc.play(event);
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		DataTable dt = new DataTable(0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0);
+		temp = dt.deserialize_max_scr();
+		
+		curr.setText(temp.getCurr_scr()+"");
+		curr.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));
+		curr.setAlignment(Pos.CENTER);
+		
+		max.setText(temp.getMax_scr()+"");
+		max.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));
+		max.setAlignment(Pos.CENTER);
+		
+		
+		total.setText(temp.getTotal_stars()+"");
+		total.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));
+		total.setAlignment(Pos.CENTER);
 		
 	}
 }
