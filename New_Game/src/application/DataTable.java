@@ -15,6 +15,8 @@ public class DataTable implements Serializable{
 	private int num_obst1;
 	private int num_obst2;
 	
+	//angle
+	
 	public DataTable(int curr_scr, int max_scr, int total_stars, int num_obst1, int num_obst2) {
 		super();
 		this.curr_scr = curr_scr;

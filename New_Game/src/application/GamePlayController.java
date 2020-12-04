@@ -172,6 +172,7 @@ public class GamePlayController {
 //		scene.setRoot(canvas);
 		Scene scene = new Scene(canvas,frm_width,frm_height);
 //		scene.setFill(Color.BLACK);
+//		canvas.setStyle("-fx-background-color: #393636;");
 		canvas.setStyle("-fx-background-color: #000000;");
 	
 		primaryStage.setTitle("Byll");
@@ -332,8 +333,8 @@ public class GamePlayController {
     		Rotate rotate2=arr_copy_obst.get(i).makeRotate_Clr_chng(arr_copy_obst.get(i).getList_shape(),diff_obst);
  	        arr_rotate.add(rotate2);
  	        
- 	        Rotate rotate3=arr_copy_obst.get(i).makeRotate_Star(arr_copy_obst.get(i).getList_shape());
- 	        arr_rotate.add(rotate3);
+// 	        Rotate rotate3=arr_copy_obst.get(i).makeRotate_Star(arr_copy_obst.get(i).getList_shape());
+// 	        arr_rotate.add(rotate3);
  	        
  	        canvas.getChildren().addAll(arr_copy_obst.get(i).getList_shape());
  	        
@@ -399,7 +400,7 @@ public class GamePlayController {
 					e.printStackTrace();
 				}
             	 PauseDialogBoxController controller = loader.getController();
-            	  controller.initData(datatable);
+            	  controller.initData(datatable,scene,loop);
 //            	 PauseDialogBoxController pdc = new  PauseDialogBoxController();
 //            	 pdc.initData(datatable);
             	  window.show();

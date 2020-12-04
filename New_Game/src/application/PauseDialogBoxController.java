@@ -42,7 +42,8 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	private static final long serialVersionUID = 11L;
 //	private int save_count = deserialize();
 	private int save_count = deserialize_savecount();
-	
+	private Scene scene;
+	Timeline loop;
 //	private ArrayList<ShapeObstacle> Obstacles;
 
 //	void initData(Pane canvas, Timeline loop, Ball ball, Player player, Image pause, Text scr,DataTable datatable,ArrayList<ShapeObstacle> obstacles) {	
@@ -73,8 +74,10 @@ public class PauseDialogBoxController implements Serializable, Initializable{
     private transient ImageView home;
 	
 	
-	void initData(DataTable datatable) {
+	void initData(DataTable datatable,Scene scene, Timeline loop) {
 		this.datatable=datatable;
+		this.scene=scene;
+		this.loop=loop;
 //		save_count=deserialize_savecount();
 //		System.out.println((save_count+1)+" my bad");
 //		save_count++;
@@ -87,9 +90,13 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		datatable.serialize_resume();
 	}
 	public void resume(MouseEvent event) throws IOException {
-		Player p1 = new Player(datatable.getCurr_scr(),datatable.getMax_scr(),datatable.getTotal_stars());
-		GamePlayController gc = new GamePlayController(p1,datatable.getNum_obst1(), datatable.getNum_obst2());
-		gc.play(event);
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		loop.play();
+		
+//		Player p1 = new Player(datatable.getCurr_scr(),datatable.getMax_scr(),datatable.getTotal_stars());
+//		GamePlayController gc = new GamePlayController(p1,datatable.getNum_obst1(), datatable.getNum_obst2());
+//		gc.play(event);
 	}
 	public void restart(MouseEvent event) throws IOException {
 //		 	Parent tableViewParent = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
