@@ -30,8 +30,8 @@ public abstract class ShapeObstacle extends Shape {
 	private double[] ypoints = {centroid,-centroid/2,-centroid/2};
 	private Image star_new;
 	
-	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
-	
+	Color clr_arr[]= {Color.RED, Color.BLUE , Color.PURPLE , Color.YELLOW};
+//	Color clr_arr[]= {Color.rgb(250, 22, 151), Color.CYAN , Color.PURPLE , Color.YELLOW};
 	public ShapeObstacle(double height, double width, double xpos, double ypos, int rotate) {
 		super();
 		this.height = height;
@@ -109,9 +109,14 @@ public abstract class ShapeObstacle extends Shape {
         return star_rotate;
 	}
 	public void makeStar() {
-		Polygon _star = new Polygon(xpos+xpoints[0],ypos+ypoints[0],
-				xpos+xpoints[1],ypos+ypoints[1],
-				xpos+xpoints[2],ypos+ypoints[2]);
+		double points[] = {5, -10, 20, -60, 35, -10, 0, -40, 40, -40};
+		
+		Polygon _star = new Polygon(points);
+		_star.setScaleX(0.6);
+		_star.setScaleY(0.6);
+//		Polygon _star = new Polygon(xpos+xpoints[0],ypos+ypoints[0],
+//				xpos+xpoints[1],ypos+ypoints[1],
+//				xpos+xpoints[2],ypos+ypoints[2]);
 //				xpoints[3],ypoints[3],
 //				xpoints[4],ypoints[4],
 //				xpoints[5],ypoints[5]);
@@ -119,13 +124,13 @@ public abstract class ShapeObstacle extends Shape {
 //				xpoints[7],ypoints[7],
 //				xpoints[8],ypoints[8],
 //				xpoints[9],ypoints[9]);
-//				_star.relocate(xpos,ypos);
+				_star.relocate(xpos-20,ypos - 30);
 				_star.setFill(Color.WHITE);
 				_star.setStroke(Color.WHITE);
 				
-				ImageView imageView = new ImageView(star_new); 
-				imageView.setFitHeight(46);
-			    imageView.setFitWidth(48);
+//				ImageView imageView = new ImageView(star_new); 
+//				imageView.setFitHeight(46);
+//			    imageView.setFitWidth(48);
 				
 //				Rotate rotate = new Rotate();    
 //		        rotate.setAngle(0);  
