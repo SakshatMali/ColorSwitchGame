@@ -41,15 +41,20 @@ public class Main extends Application {
 	private int frm_height = 750;
 	static AudioClip audioPath;
 //	MediaPlayer mediaPlayer;
-	private PauseDialogBoxController pdc = new PauseDialogBoxController();
+//	private PauseDialogBoxController pdc = new PauseDialogBoxController();
+	
+	static boolean playmusicsetting=true;
+	static boolean playsoundsetting=true;
+	static double slidervalue=20;
+	static String webaddress="";
+	static int ballshape=0;
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-
-		
 		
 		//MUSIC
 		audioPath = new AudioClip("file:src/Colour%20Sounds/BackgroundSound.mp3");
-		audioPath.setVolume(0.5);
+		audioPath.setVolume(0.2);
 		audioPath.setCycleCount(AudioClip.INDEFINITE);
         audioPath.play();
 

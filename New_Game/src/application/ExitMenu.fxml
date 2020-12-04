@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ExitMenuController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/ExitMenu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="128.0" fitWidth="126.0" layoutX="130.0" layoutY="373.0" onMouseClicked="#back" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/closegame.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="125.0" fitWidth="130.0" layoutX="346.0" layoutY="376.0" onMouseClicked="#exit" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/tick.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

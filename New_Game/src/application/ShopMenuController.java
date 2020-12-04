@@ -1,37 +1,25 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class SettingMenuController implements Initializable {
+public class ShopMenuController {
 	
-@FXML ImageView home;
-@FXML CheckBox music;
-@FXML CheckBox sound;
-
-//	 boolean playmusicsetting;
-//	 boolean playsoundsetting;
-
-	static boolean soundcheck=true;
+	@FXML 
+	private ImageView home;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -47,7 +35,7 @@ public class SettingMenuController implements Initializable {
 	}
 	
 	@FXML
-    void glowImage(MouseEvent event) throws IOException {
+    void glowImageHome(MouseEvent event) throws IOException {
 //		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
@@ -58,6 +46,15 @@ public class SettingMenuController implements Initializable {
         Tooltip.install(home, tool);
     }
 	
+	@FXML
+    void glowImage(MouseEvent event) throws IOException {
+//		System.out.println("On Image");
+        Glow glow=new Glow();
+        Node source = (Node) event.getSource();
+        source.setEffect(glow);
+        glow.setLevel(0.4);
+    }
+	
 	 @FXML
 	    void stopGlowing(MouseEvent event) throws IOException {
 //		 System.out.println("Out Image");
@@ -66,44 +63,28 @@ public class SettingMenuController implements Initializable {
 	        source.setEffect(glow);
 	        glow.setLevel(0.0);
 	    }
-
-	
-	public void playmusic(ActionEvent event) {
-		if (music.isSelected()) {
-			Main.audioPath.setVolume(0.2);
-			Main.audioPath.setCycleCount(AudioClip.INDEFINITE);
-			Main.audioPath.play();
-			Main.playmusicsetting=true;
-			Main.slidervalue=20;
-		} else {
-			Main.audioPath.stop();
-			Main.playmusicsetting=false;
-			Main.slidervalue=0;
-		}
-	}
-	
-	public void playsound(ActionEvent event) {
-		if (sound.isSelected()) {
-//			GamePlayController.audiopath1.play();
-//			GamePlayController.audiopath2.play();
-//			GamePlayController.audiopath3.play();
-			Main.playsoundsetting=true;
-			soundcheck=true;
-		}
-		
-		else {
-//			GamePlayController.audiopath1.stop();
-//			GamePlayController.audiopath2.stop();
-//			GamePlayController.audiopath3.stop();
-			Main.playsoundsetting=false;
-			soundcheck=false;
-		}
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		music.setSelected(Main.playmusicsetting);
-		sound.setSelected(Main.playsoundsetting);
-		
-	}
+	 
+	 public void circleball(MouseEvent event) {
+		 Main.ballshape=0;
+	 }
+	 
+	 public void squareball(MouseEvent event) {
+		 Main.ballshape=1;
+	 }
+	 
+	 public void triangleball(MouseEvent event) {
+		 Main.ballshape=2;
+	 }
+	 
+	 public void lineball(MouseEvent event) {
+		 Main.ballshape=3;
+	 }
+	 
+	 public void plusball(MouseEvent event) {
+		 Main.ballshape=4;
+	 }
+	 
+	 public void starball(MouseEvent event) {
+		 Main.ballshape=5;
+	 }
 }

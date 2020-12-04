@@ -1,13 +1,18 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
@@ -17,9 +22,15 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class AchievementMenuController {
+public class AchievementMenuController implements Initializable{
 	
-	@FXML ImageView home;
+	@FXML private ImageView home;
+	
+	 	@FXML
+	    private Label max;
+
+	    @FXML
+	    private Label total;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -53,5 +64,24 @@ public class AchievementMenuController {
 	        source.setEffect(glow);
 	        glow.setLevel(0.0);
 	    }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+		DataTable dt = new DataTable(0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0);
+		temp = dt.deserialize_max_scr();
+		
+		max.setText(temp.getMax_scr()+"");
+		max.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));
+		max.setAlignment(Pos.CENTER);
+		
+		
+		total.setText(temp.getTotal_stars()+"");
+		total.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));
+		total.setAlignment(Pos.CENTER);
+		
+	}
 
 }

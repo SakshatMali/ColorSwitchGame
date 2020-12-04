@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WebMenuController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/WebMenu.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="142.0" fitWidth="142.0" layoutX="127.0" layoutY="354.0" onMouseClicked="#insta" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/insta.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="140.0" fitWidth="140.0" layoutX="344.0" layoutY="354.0" onMouseClicked="#fb" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/fb.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="home" fitHeight="113.0" fitWidth="116.0" layoutX="468.0" layoutY="95.0" onMouseClicked="#home" onMouseEntered="#glowImageHome" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/home.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>

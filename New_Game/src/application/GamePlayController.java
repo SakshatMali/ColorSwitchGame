@@ -9,6 +9,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -71,6 +73,7 @@ public class GamePlayController {
 	private double diff_obst = 450;
 	private boolean hrzntl_mov=false;
 //	private Button pause_button;
+	Shape myBall;
 	private Ball ball;
 	private Player player;
 	private Image pause;
@@ -198,6 +201,41 @@ public class GamePlayController {
 	    
 	    imageView.setFitHeight(100);
 	    imageView.setFitWidth(100);
+	    
+	    imageView.setCursor(Cursor.HAND);
+	    imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Glow glow=new Glow(); 
+			    imageView.setEffect(glow);
+			    glow.setLevel(0.4);
+			}
+	    	
+	    	
+	    });
+	    
+	    imageView.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				Glow glow=new Glow(); 
+			    imageView.setEffect(glow);
+			    glow.setLevel(0);
+			}
+	    	
+	    	
+	    });
+	    
+//	    Glow glow=new Glow(); 
+//	    imageView.setEffect(glow);
+//	    glow.setLevel(0.4);
+	    
+	    Tooltip tool = new Tooltip("Pause");
+	    tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
+	    Tooltip.install(imageView, tool);
 //	    pause_button.setGraphic(imageView);
 //	    scr = new Text();       
 //	    scr.setText("0");
@@ -214,8 +252,12 @@ public class GamePlayController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-		ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
-		Circle myBall=ball.Ball_make();
+//		ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
+//		myBall=ball.Ball_make();
+		
+//		if (Main.ballshape==false) {
+//			myBall = ball.Ball_make_rec();
+//		}
 //		System.out.println(myBall.getLayoutY()+"osh");
 //		canvas.getChildren().add(myBall);
 
@@ -284,7 +326,9 @@ public class GamePlayController {
 	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
 	    Obstacles.add(rotating_ring_obst);
 	    
-	    
+	    ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
+		myBall=ball.Ball_make();
+		
 	    ShapeObstacle neww1 = check_instance(obst1);
 	    ShapeObstacle neww2 = check_instance(obst2);
 	    obst_order.add(obst1);
@@ -348,6 +392,15 @@ public class GamePlayController {
             public void handle(MouseEvent event) {
 //            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
             	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2);
+            	
+//            	Glow glow=new Glow();
+//     	        Node source = (Node) event.getSource();
+//     	        source.setEffect(glow);
+//     	        glow.setLevel(0.4);
+     	        
+//     	        Tooltip tool = new Tooltip("Pause");
+//     	        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
+//     	        Tooltip.install(imageView, tool);
             	
             	
             	DataTable dt = new DataTable(0,0,0,0,0);
@@ -417,7 +470,7 @@ public class GamePlayController {
 		}
 	}
 
-	public void run(Circle circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
+	public void run(Shape circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
 
 		if (gameover) {
 
@@ -425,7 +478,9 @@ public class GamePlayController {
 				
 //				 audiopath3 = new AudioClip("file:src/Colour%20Sounds/Explode.mp3");
 				audiopath3.setVolume(0.3);
+				if (SettingMenuController.soundcheck) {
 		        audiopath3.play();
+				}
 		        playmusic=false;
 				
 			}
@@ -604,10 +659,33 @@ public class GamePlayController {
 	//			System.out.println("bal vounds + "+bl_bounds);
 				
 	//			if ( circle.getLayoutY() >= bounds.getMaxY() - circle.getRadius() ) {
-				if ( circle.getLayoutY() >= 750 + circle.getRadius() ) {
+				if ( circle.getLayoutY() >= 750 + 20 ) {
 	//				System.out.println("wtf");
 	//				System.out.println("Game Over");
-					 loop.stop();
+					System.out.println("Game Over");
+					gameover=true;
+					playmusic=true;
+					circle.setStroke(null);
+					circle.setFill(null);
+					
+					 for (int k = 0; k < 16; k++) {
+						 
+						 ExplosionBalls eball=null;
+						 
+						 if (k%2==0) {
+							 eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
+							 
+						 } 
+						 
+						 else {
+							eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),7,clr_arr[k%4]);
+						 }
+//								explosion_list.add(eball);
+							Circle exball = eball.Ball_make();
+							explosion_list.add(exball);
+							canvas.getChildren().add(exball);
+						}
+//					 loop.stop();
 				}
 					
 				
@@ -668,6 +746,7 @@ public class GamePlayController {
 								 
 								 if (k%2==0) {
 									 eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
+									 System.out.println(circle.getLayoutX()+"             "+circle.getLayoutY());
 								 } 
 								 
 								 else {
@@ -705,7 +784,9 @@ public class GamePlayController {
 //					audiopath1 = new AudioClip("file:src/Colour%20Sounds/points.mp3");
 					audiopath1.setVolume(0.5);
 	//				audioPath.setCycleCount(AudioClip.INDEFINITE);
-			        audiopath1.play();
+					if (SettingMenuController.soundcheck) {
+				        audiopath1.play();
+						}
 				}
 			}
 	//		
@@ -724,8 +805,9 @@ public class GamePlayController {
 //						audiopath2 = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
 						audiopath2.setVolume(1);
 	//					audioPath.setCycleCount(AudioClip.INDEFINITE);
-				        audiopath2.play();
-				        
+						if (SettingMenuController.soundcheck) {
+					        audiopath2.play();
+							}
 						circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
 						for (int k =Obstacles.get(i).getList_shape().size()-4 ; k < Obstacles.get(i).getList_shape().size(); k++) {
 							Obstacles.get(i).getList_shape().get(k).setFill(null);

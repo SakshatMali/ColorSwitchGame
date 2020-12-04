@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ShopMenuController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/ShopMenu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="home" fitHeight="113.0" fitWidth="116.0" layoutX="463.0" layoutY="100.0" onMouseClicked="#home" onMouseEntered="#glowImageHome" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/home.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="221.0" onMouseClicked="#circleball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/circleball.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="221.0" onMouseClicked="#squareball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/squareball.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="342.0" onMouseClicked="#triangleball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/triangleball.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="342.0" onMouseClicked="#lineball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/lineball.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="469.0" onMouseClicked="#plusball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/plusball.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="469.0" onMouseClicked="#starball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/starball.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>

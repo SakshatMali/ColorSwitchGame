@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,5 +26,7 @@
             </ImageView>
          </children>
       </Pane>
+      <Label fx:id="max" layoutX="370.0" layoutY="298.0" prefHeight="88.0" prefWidth="120.0" style="-fx-background-color: white;" />
+      <Label fx:id="total" layoutX="370.0" layoutY="500.0" prefHeight="88.0" prefWidth="120.0" style="-fx-background-color: white;" />
    </children>
 </AnchorPane>

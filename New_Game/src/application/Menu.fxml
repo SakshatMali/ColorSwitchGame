@@ -43,7 +43,7 @@
       </Pane>
       <Pane layoutX="308.0" layoutY="457.0" prefHeight="127.0" prefWidth="125.0">
          <children>
-            <ImageView fx:id="setting" fitHeight="127.0" fitWidth="125.0" layoutX="14.0" layoutY="-7.0" onMouseClicked="#setting" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="setting" fitHeight="127.0" fitWidth="125.0" layoutX="28.0" layoutY="-8.0" onMouseClicked="#setting" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/setting.png" />
                </image>
@@ -79,7 +79,7 @@
       </Pane>
       <Pane layoutX="2.0" layoutY="647.0" prefHeight="102.0" prefWidth="111.0">
          <children>
-            <ImageView fx:id="reward" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseClicked="#rewards" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="social" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseClicked="#social" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/Rewards.png" />
                </image>
@@ -91,7 +91,7 @@
       </Pane>
       <Pane layoutX="474.0" layoutY="640.0" prefHeight="102.0" prefWidth="111.0">
          <children>
-            <ImageView fx:id="exit" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exit" fitHeight="89.0" fitWidth="92.0" layoutX="12.0" onMouseClicked="#exit" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/exit.png" />
                </image>
@@ -101,5 +101,13 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fx:id="shop" fitHeight="97.0" fitWidth="93.0" layoutX="245.0" layoutY="649.0" onMouseClicked="#shop" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Colour%20Images/shop.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

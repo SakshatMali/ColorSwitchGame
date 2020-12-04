@@ -48,7 +48,7 @@ public class VideoPlayerController implements Initializable {
 	
 	public void back(MouseEvent event) throws IOException {
 		
-		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("GameOverBox.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
 	        tableViewScene.setFill(Color.BLACK);
 	        

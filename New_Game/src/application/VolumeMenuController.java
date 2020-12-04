@@ -1,9 +1,12 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +23,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class VolumeMenuController   {
+public class VolumeMenuController implements Initializable  {
 	
 		@FXML
 	    private ImageView home;
@@ -69,7 +72,21 @@ public class VolumeMenuController   {
 			Main.audioPath.setVolume(slider.getValue()/100);
 			Main.audioPath.setCycleCount(AudioClip.INDEFINITE);
 	        Main.audioPath.play();
+	        Main.slidervalue=slider.getValue();
+	        if (slider.getValue()>0) {
+	        	Main.playmusicsetting=true;
+	        }
+	        else {
+	        	Main.playmusicsetting=false;
+	        }
 		 }
+
+
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			slider.setValue(Main.slidervalue);
+		}
 	    
 
 }
