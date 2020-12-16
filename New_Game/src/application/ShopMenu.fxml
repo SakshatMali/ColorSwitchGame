@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ShopMenuController">
    <children>
@@ -20,7 +22,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="221.0" onMouseClicked="#circleball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="232.0" onMouseClicked="#circleball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/circleball.png" />
          </image>
@@ -28,7 +30,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="221.0" onMouseClicked="#squareball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="232.0" onMouseClicked="#squareball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/squareball.png" />
          </image>
@@ -36,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="342.0" onMouseClicked="#triangleball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="353.0" onMouseClicked="#triangleball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/triangleball.png" />
          </image>
@@ -44,7 +46,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="342.0" onMouseClicked="#lineball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="353.0" onMouseClicked="#lineball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/lineball.png" />
          </image>
@@ -52,7 +54,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="469.0" onMouseClicked="#plusball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="141.0" layoutY="480.0" onMouseClicked="#plusball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/plusball.png" />
          </image>
@@ -60,7 +62,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="469.0" onMouseClicked="#starball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="110.0" fitWidth="126.0" layoutX="334.0" layoutY="480.0" onMouseClicked="#starball" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Colour%20Images/starball.png" />
          </image>
@@ -68,5 +70,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Label fx:id="success" alignment="CENTER" layoutX="86.0" layoutY="659.0" prefHeight="87.0" prefWidth="423.0" textAlignment="CENTER" textFill="#12dd12">
+         <font>
+            <Font name="System Bold Italic" size="32.0" />
+         </font></Label>
    </children>
 </AnchorPane>

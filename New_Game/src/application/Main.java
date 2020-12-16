@@ -69,7 +69,7 @@ public class Main extends Application {
 //        scene.getStylesheets().add("big-check-box.css");
         scene.setFill(Color.BLACK);
         mainRoot.setStyle("-fx-background-color: #000000;");
-        primaryStage.setTitle("Bouncing Ball");
+        primaryStage.setTitle("Color Switch");
         
         primaryStage.setScene(scene);
 //        scene.setFill(Color.BLACK);

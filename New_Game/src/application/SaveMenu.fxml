@@ -11,12 +11,12 @@
    <children>
       <ImageView fitHeight="750.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Colour%20Images/SaveMenu2.png" />
+            <Image url="@../Colour%20Images/SaveMenu.png" />
          </image>
       </ImageView>
       <Pane layoutX="466.0" layoutY="26.0" prefHeight="120.0" prefWidth="120.0">
          <children>
-            <ImageView fx:id="home" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#home" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="home" fitHeight="120.0" fitWidth="120.0" layoutX="8.0" onMouseClicked="#home" onMouseEntered="#glowImage" onMouseExited="#stopGlowing" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Colour%20Images/home.png" />
                </image>

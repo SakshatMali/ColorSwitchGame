@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,9 @@ public class ShopMenuController {
 	
 	@FXML 
 	private ImageView home;
+	
+	@FXML
+	private Label success;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -66,25 +70,32 @@ public class ShopMenuController {
 	 
 	 public void circleball(MouseEvent event) {
 		 Main.ballshape=0;
+		 success.setText("Ball Changed to Circle");
+//		 success.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
 	 }
 	 
 	 public void squareball(MouseEvent event) {
 		 Main.ballshape=1;
+		 success.setText("Ball Changed to Square");
 	 }
 	 
 	 public void triangleball(MouseEvent event) {
 		 Main.ballshape=2;
+		 success.setText("Ball Changed to Triangle");
 	 }
 	 
 	 public void lineball(MouseEvent event) {
 		 Main.ballshape=3;
+		 success.setText("Ball Changed to Line");
 	 }
 	 
 	 public void plusball(MouseEvent event) {
 		 Main.ballshape=4;
+		 success.setText("Ball Changed to Plus");
 	 }
 	 
 	 public void starball(MouseEvent event) {
 		 Main.ballshape=5;
+		 success.setText("Ball Changed to Star");
 	 }
 }
