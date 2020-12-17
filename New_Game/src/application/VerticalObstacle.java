@@ -68,7 +68,6 @@ public class VerticalObstacle extends ShapeObstacle {
 
 	@Override
 	public Rotate makeRotate(List<Shape> list) {
-	
 		return null;
 	}
 

@@ -47,6 +47,7 @@ public Ball(double xpos, double ypos, double radius, Color clr_ball) {
 	public void setClr_ball(Color clr_ball) {
 		this.clr_ball = clr_ball;
 	}
+	
 	public Shape Ball_make() {
 		
 		Shape circle = null;

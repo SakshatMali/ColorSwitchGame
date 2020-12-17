@@ -60,7 +60,8 @@ public class Main extends Application {
         mainRoot.setStyle("-fx-background-color: #000000;");
         primaryStage.setTitle("Color Switch");
         primaryStage.setScene(scene);
-        primaryStage.show();	}
+        primaryStage.show();	
+    }
 	
 	public static void main(String[] args) {
 		launch(args);

@@ -67,19 +67,18 @@ public class VolumeMenuController implements Initializable  {
 			Main.audioPath.setCycleCount(AudioClip.INDEFINITE);
 	        Main.audioPath.play();
 	        Main.slidervalue=slider.getValue();
+	        
 	        if (slider.getValue()>0) {
 	        	Main.playmusicsetting=true;
 	        }
 	        else {
 	        	Main.playmusicsetting=false;
 	        }
+	        
 		 }
-
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			slider.setValue(Main.slidervalue);
 		}
-	    
-
 }

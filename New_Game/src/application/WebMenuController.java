@@ -21,7 +21,6 @@ public class WebMenuController {
 	@FXML 
 	ImageView home;
 	
-	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
         Glow glow=new Glow();
@@ -38,15 +37,14 @@ public class WebMenuController {
         glow.setLevel(0.0);
     }
 	 
-	 
-	 public void home(MouseEvent event) throws IOException {
-			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-	        Scene tableViewScene = new Scene(tableViewParent);
-	        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	        window.setScene(tableViewScene);
-	        window.show();
-		}
+	public void home(MouseEvent event) throws IOException {
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+	}
 	 
 	@FXML
     void glowImageHome(MouseEvent event) throws IOException {
@@ -60,25 +58,22 @@ public class WebMenuController {
     }
 	 
 	 public void insta(MouseEvent event) throws IOException {
-		 
-		 	Main.webaddress="https://www.instagram.com";
-			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Web.fxml"));
-	        Scene tableViewScene = new Scene(tableViewParent);
-	        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	        window.setScene(tableViewScene);
-	        window.show();
-		}
+	 	Main.webaddress="https://www.instagram.com";
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Web.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+	}
 	 
 	 public void fb(MouseEvent event) throws IOException {
-		 
-		 	Main.webaddress="https://www.facebook.com";
-			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Web.fxml"));
-	        Scene tableViewScene = new Scene(tableViewParent);
-	        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	        window.setScene(tableViewScene);
-	        window.show();
-		}
-
+	 	Main.webaddress="https://www.facebook.com";
+		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Web.fxml"));
+        Scene tableViewScene = new Scene(tableViewParent);
+        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(tableViewScene);
+        window.show();
+	}
 }

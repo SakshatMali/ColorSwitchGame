@@ -21,8 +21,10 @@ public class SquareObstacle extends ShapeObstacle{
 									getXpos()-getWidth()/2,getYpos()+getHeight()/2,
 									getXpos()+getWidth()/2,getYpos()+getHeight()/2,
 									getXpos()+getWidth()/2,getYpos()-getHeight()/2);
+		
 		int size = square.getPoints().size();
 	    int count=0;
+	    
         for (int i = 0; i < size; i += 2) {
         	
             double startX = square.getPoints().get(i);

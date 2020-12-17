@@ -31,7 +31,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class PauseDialogBoxController implements Serializable, Initializable{
+public class PauseDialogBoxController implements Serializable, Initializable {
+	
 	private DataTable datatable;
 	private static final long serialVersionUID = 11L;
 	private int save_count = deserialize_savecount();
@@ -63,11 +64,13 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		SaveController.setSave_counter(save_count);
 		datatable.serialize_resume();
 	}
+	
 	public void resume(MouseEvent event) throws IOException {
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		loop.play();
 	}
+	
 	public void restart(MouseEvent event) throws IOException {
 		Player p1 = new Player(0,0,0);
 		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1);
@@ -109,10 +112,10 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Pause Object has been serialized");
+//	            System.out.println("Pause Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	}
 	public int deserialize_savecount() {
@@ -126,19 +129,19 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	            in.close(); 
 	            file.close(); 
 	              
-	            System.out.println("Pause Object has been deserialized "); 
-	            System.out.println("Save Count hu= " + savetable.getSave_count());
+//	            System.out.println("Pause Object has been deserialized "); 
+//	            System.out.println("Save Count hu= " + savetable.getSave_count());
 	            temp_save_count = savetable.getSave_count();
 	        } 
 	          
 	        catch(IOException ex) { 
-	        	System.out.println("am i here");
+//	        	System.out.println("am i here");
 	        	serialize_savecount();
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	            temp_save_count = -1;
 	        } 
 	        catch(ClassNotFoundException ex) { 
-	            System.out.println("ClassNotFoundException is caught");
+//	            System.out.println("ClassNotFoundException is caught");
 	            temp_save_count = -1;
 	        }
 		 
@@ -171,6 +174,7 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		img_list.add(save) ; name_list.add("Save Game");
 		img_list.add(save_exit) ; name_list.add("Save & Exit Game");
 		img_list.add(home) ; name_list.add("Home");
+		
 		for (int i = 0; i < img_list.size(); i++) {
 			 	Tooltip tool = new Tooltip(name_list.get(i));
 		        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));

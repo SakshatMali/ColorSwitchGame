@@ -10,7 +10,9 @@ public class ColorChange {
 	private ShapeObstacle obstacle;
 	private Color clr_arr[]= {Color.RED, Color.BLUE , Color.PURPLE , Color.YELLOW};
 	private Random rand = new Random();
+	
 	public void make_Clr_chng(double diff,double clr_change_radius,int cc) {
+		
 		for (int i=0 ; i<4 ; i++) {
 			Arc arc = new Arc();
 			arc.setCenterX(obstacle.getXpos());
@@ -34,6 +36,7 @@ public class ColorChange {
 		}
 		
 	}
+	
 	public ShapeObstacle getObstacle() {
 		return obstacle;
 	}

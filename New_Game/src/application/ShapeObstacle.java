@@ -40,6 +40,7 @@ public abstract class ShapeObstacle extends Shape {
 		_rotate=rotate;
 		star=new Star();
 	}
+	
 	public double getHeight() {
 		return height;
 	}
@@ -87,6 +88,7 @@ public abstract class ShapeObstacle extends Shape {
 	public abstract Rotate makeRotate(List<Shape> list);
 	
 	public Rotate makeRotate_Clr_chng(List<Shape> list,double diff) {
+		
 		Rotate clr_chng_rotate =new Rotate();
 		clr_chng_rotate.setAngle(0);  
 	    clr_chng_rotate.setPivotX(xpos);  
@@ -97,6 +99,7 @@ public abstract class ShapeObstacle extends Shape {
         return clr_chng_rotate;
 	}
 	public Rotate makeRotate_Star(List<Shape> list) {
+		
 		Rotate star_rotate =new Rotate();
 		star_rotate.setAngle(0);  
 	    star_rotate.setPivotX(xpos);  
@@ -104,13 +107,16 @@ public abstract class ShapeObstacle extends Shape {
 	    list.get(list.size()-5).getTransforms().add(star_rotate);
         return star_rotate;
 	}
+	
 	public void makeStar(int ss) {
+		
 		double points[] = {5, -10, 20, -60, 35, -10, 0, -40, 40, -40};
 		
 		Polygon _star = new Polygon(points);
 		_star.setScaleX(0.6);
 		_star.setScaleY(0.6);
 		_star.relocate(xpos-20,ypos - 30);
+		
 		if(ss==1) {
 			_star.setFill(Color.WHITE);
 			_star.setStroke(Color.WHITE);
@@ -122,6 +128,7 @@ public abstract class ShapeObstacle extends Shape {
         getList_shape().add(_star);
 	}
 	public void make_Clr_chng(double diff,double clr_change_radius,int cc) {
+		
 		for (int i=0 ; i<4 ; i++) {
 			Arc arc = new Arc();
 			arc.setCenterX(xpos);
@@ -145,6 +152,7 @@ public abstract class ShapeObstacle extends Shape {
 		}
 		
 	}
+	
 	public int get_rotate() {
 		return _rotate;
 	}

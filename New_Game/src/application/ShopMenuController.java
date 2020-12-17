@@ -62,32 +62,135 @@ public class ShopMenuController {
     }
 	 
 	 public void circleball(MouseEvent event) {
-		 Main.ballshape=0;
-		 success.setText("Ball Changed to Circle");
-	 }
+		 
+		 if (Main.ballshape==0) {
+			success.setText("Ball is Already Circle");
+		}
+		 
+		else {
+			 Main.ballshape=0;
+			 success.setText("Ball Changed to Circle");
+		}
+	}
 	 
 	 public void squareball(MouseEvent event) {
-		 Main.ballshape=1;
-		 success.setText("Ball Changed to Square");
+		 
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			temp = dt.deserialize_max_scr();
+			
+			if (Main.ballshape==1) {
+				success.setText("Ball is Already Square");
+			}
+			
+			else {
+				
+				if (temp.getTotal_stars()>=5) {
+					temp.setTotal_stars(temp.getTotal_stars()-5);
+					temp.serialize_max_scr();
+					Main.ballshape=1;
+					success.setText("Ball Changed to Square"); 
+				} 
+				
+				else {
+					success.setText("Not Enough Stars");
+				}
+			}
 	 }
 	 
 	 public void triangleball(MouseEvent event) {
-		 Main.ballshape=2;
-		 success.setText("Ball Changed to Triangle");
+		 
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			temp = dt.deserialize_max_scr();
+			
+			if (Main.ballshape==2) {
+				success.setText("Ball is Already Triangle");
+			}
+			
+			else {
+			
+				if (temp.getTotal_stars()>=10) {
+					temp.setTotal_stars(temp.getTotal_stars()-10);
+					temp.serialize_max_scr();
+					Main.ballshape=2;
+					success.setText("Ball Changed to Triangle"); 
+				} 
+				else {
+					success.setText("Not Enough Stars");
+				}
+			}
 	 }
 	 
 	 public void lineball(MouseEvent event) {
-		 Main.ballshape=3;
-		 success.setText("Ball Changed to Line");
+
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			temp = dt.deserialize_max_scr();
+			
+			if (Main.ballshape==3) {
+				success.setText("Ball is Already Line");
+			}
+			
+			else {
+			
+				if (temp.getTotal_stars()>=20) {
+					temp.setTotal_stars(temp.getTotal_stars()-20);
+					temp.serialize_max_scr();
+					Main.ballshape=3;
+					success.setText("Ball Changed to Line"); 
+				} 
+				else {
+					success.setText("Not Enough Stars");
+				}
+			}
 	 }
 	 
 	 public void plusball(MouseEvent event) {
-		 Main.ballshape=4;
-		 success.setText("Ball Changed to Plus");
+
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			temp = dt.deserialize_max_scr();
+			
+			if (Main.ballshape==4) {
+				success.setText("Ball is Already Plus");
+			}
+			
+			else {
+			
+				if (temp.getTotal_stars()>=30) {
+					temp.setTotal_stars(temp.getTotal_stars()-30);
+					temp.serialize_max_scr();
+					Main.ballshape=4;
+					success.setText("Ball Changed to Plus"); 
+				} 
+				else {
+					success.setText("Not Enough Stars");
+				}
+			}
 	 }
 	 
 	 public void starball(MouseEvent event) {
-		 Main.ballshape=5;
-		 success.setText("Ball Changed to Star");
+
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			temp = dt.deserialize_max_scr();
+			
+			if (Main.ballshape==5) {
+				success.setText("Ball is Already Square");
+			}
+			
+			else {
+			
+				if (temp.getTotal_stars()>=50) {
+					temp.setTotal_stars(temp.getTotal_stars()-50);
+					temp.serialize_max_scr();
+					Main.ballshape=5;
+					success.setText("Ball Changed to Star"); 
+				} 
+				else {
+					success.setText("Not Enough Stars");
+				}
+			}
 	 }
 }

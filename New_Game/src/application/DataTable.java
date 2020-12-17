@@ -42,10 +42,10 @@ public class DataTable implements Serializable{
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Datatable Object has been serialized");
+//	            System.out.println("Datatable Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	}
 	public DataTable deserialize(int sv_cnt) {
@@ -61,19 +61,18 @@ public class DataTable implements Serializable{
 	            total_stars = datatable.getTotal_stars();
 	            SaveController.setStar_text(total_stars);
 	              
-	            System.out.println("Datatable Object has been deserialized "); 
+//	            System.out.println("Datatable Object has been deserialized "); 
 	        } 
 	        
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	        catch(ClassNotFoundException ex) { 
-	            System.out.println("ClassNotFoundException is caught"); 
+//	            System.out.println("ClassNotFoundException is caught"); 
 	        }
 		 return datatable;
 		
 	}
-	
 	
 	public void serialize_resume() {
 		  try{    
@@ -82,10 +81,10 @@ public class DataTable implements Serializable{
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Resume Object has been serialized");
+//	            System.out.println("Resume Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	}
 	
@@ -99,14 +98,14 @@ public class DataTable implements Serializable{
 	              
 	            in.close(); 
 	            file.close(); 
-	            System.out.println("Resume Object has been deserialized "); 
+//	            System.out.println("Resume Object has been deserialized "); 
 	        } 
 	        
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	        catch(ClassNotFoundException ex) { 
-	            System.out.println("ClassNotFoundException is caught"); 
+//	            System.out.println("ClassNotFoundException is caught"); 
 	        }
 		 return datatable;
 		
@@ -119,10 +118,10 @@ public class DataTable implements Serializable{
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-	            System.out.println("Max Scr Object has been serialized");
+//	            System.out.println("Max Scr Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	}
 	
@@ -135,14 +134,14 @@ public class DataTable implements Serializable{
 	              
 	            in.close(); 
 	            file.close(); 
-	            System.out.println("Max Scr Object has been deserialized "); 
+//	            System.out.println("Max Scr Object has been deserialized "); 
 	        } 
 	        
 	        catch(IOException ex) { 
-	            System.out.println("IOException is caught"); 
+//	            System.out.println("IOException is caught"); 
 	        } 
 	        catch(ClassNotFoundException ex) { 
-	            System.out.println("ClassNotFoundException is caught"); 
+//	            System.out.println("ClassNotFoundException is caught"); 
 	        }
 		 return datatable;
 		

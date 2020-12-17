@@ -81,9 +81,11 @@ public class SaveController implements Initializable {
 		ArrText.add(str6);
 		DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
 		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		
 		for (int i = 0; i < ArrText.size(); i++) {
 			ArrText.get(i).setText("");
 		}
+		
 		try {
 			for (int i = 0; i < ArrText.size(); i++) {
 				try {
@@ -92,39 +94,38 @@ public class SaveController implements Initializable {
 				}
 				catch(Exception e) {
 					
-					System.out.println("wowowowowowow ");
+//					System.out.println("wowowowowowow ");
 					continue;
 				}
-				
 			}
 		}
 		catch(Exception e) {
-			System.out.println(" Nowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
+//			System.out.println(" Nowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww ");
 			
 		}
 	}
 
 	public void load0(MouseEvent event) throws FileNotFoundException {
 		
-			DataTable d0 = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			temp=d0.deserialize(0);
-			
-			Player p0 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
-			GamePlayController gc = new GamePlayController(p0,temp.getNum_obst1(),temp.getNum_obst2(),temp.getBall_x(),temp.getBall_y(),temp.getObst_y(),temp.getStar_present(),temp.getClr_present());
-			gc.play(event);
+		DataTable d0 = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		temp=d0.deserialize(0);
+		
+		Player p0 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
+		GamePlayController gc = new GamePlayController(p0,temp.getNum_obst1(),temp.getNum_obst2(),temp.getBall_x(),temp.getBall_y(),temp.getObst_y(),temp.getStar_present(),temp.getClr_present());
+		gc.play(event);
 	}
 	
 	public void load1(MouseEvent event) throws FileNotFoundException {
 			
-			DataTable d1 = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			temp=d1.deserialize(1);
-			
-			Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
-			GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(),temp.getNum_obst2(),temp.getBall_x(),temp.getBall_y(),temp.getObst_y(),temp.getStar_present(),temp.getClr_present());
-			gc.play(event);
-		}
+		DataTable d1 = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		temp=d1.deserialize(1);
+		
+		Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
+		GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(),temp.getNum_obst2(),temp.getBall_x(),temp.getBall_y(),temp.getObst_y(),temp.getStar_present(),temp.getClr_present());
+		gc.play(event);
+	}
 	
 	public void load2(MouseEvent event) throws FileNotFoundException {
 		
@@ -180,8 +181,6 @@ public class SaveController implements Initializable {
 		GamePlayController gc = new GamePlayController(p6,temp.getNum_obst1(),temp.getNum_obst2(),temp.getBall_x(),temp.getBall_y(),temp.getObst_y(),temp.getStar_present(),temp.getClr_present());
 		gc.play(event);
 	}
-
-
 
 	public int getStar_text() {
 		return star_text;

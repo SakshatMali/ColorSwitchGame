@@ -15,6 +15,7 @@ public class Rotating_Ring_Obst extends ShapeObstacle{
 
 	@Override
 	public void makeShape() {
+		
 		for (int i=0 ; i<4 ; i++) {
 			Arc arc = new Arc();
 			arc.setCenterX(getXpos()-50);
@@ -28,8 +29,7 @@ public class Rotating_Ring_Obst extends ShapeObstacle{
 			arc.setFill(null);
 			arc.setType(ArcType.OPEN);
 			getList_shape().add(arc);
-		}
-		
+		}	
 	}
 
 	@Override
@@ -44,6 +44,4 @@ public class Rotating_Ring_Obst extends ShapeObstacle{
 		}
         return rotate;
 	}
-
-	
 }

@@ -37,14 +37,14 @@ public class WebController implements Initializable {
 		
 		public void back(MouseEvent event) throws IOException {
 			
-			 Parent tableViewParent = FXMLLoader.load(getClass().getResource("WebMenu.fxml"));
-		        Scene tableViewScene = new Scene(tableViewParent);
-		        tableViewScene.setFill(Color.BLACK);
-		        
-		        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-		        tableViewParent.setStyle("-fx-background-color: #000000;");
-		        window.setScene(tableViewScene);
-		        window.show();
+			Parent tableViewParent = FXMLLoader.load(getClass().getResource("WebMenu.fxml"));
+	        Scene tableViewScene = new Scene(tableViewParent);
+	        tableViewScene.setFill(Color.BLACK);
+	        
+	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+	        tableViewParent.setStyle("-fx-background-color: #000000;");
+	        window.setScene(tableViewScene);
+	        window.show();
 		}
 		
 		@FXML
@@ -65,7 +65,5 @@ public class WebController implements Initializable {
 	        source.setEffect(glow);
 	        glow.setLevel(0.0);
 	    }
-	  	
-	  	
-	  	
+	  	  	
 }

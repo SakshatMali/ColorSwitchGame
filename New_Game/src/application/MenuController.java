@@ -31,8 +31,10 @@ import jdk.nashorn.api.tree.ForInLoopTree;
 import javafx.scene.control.Tooltip;
 
 public class MenuController implements Initializable {
+	
 		private int frm_width = 600;
 		private int frm_height = 750;
+		
 		@FXML
 		private AnchorPane mainRoot;
 	
@@ -62,7 +64,6 @@ public class MenuController implements Initializable {
 	    
 	    @FXML
 	    private ImageView shop;
-	    
 	
 	public void StartGame(MouseEvent event) throws IOException {
 		Player p1 = new Player(0, 0,0);
@@ -70,7 +71,6 @@ public class MenuController implements Initializable {
 		gc.play(event);
 
 	}
-	
 
 	public void help(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("HelpMenu.fxml"));
@@ -81,8 +81,6 @@ public class MenuController implements Initializable {
         window.setScene(tableViewScene);
         window.show();
 	}
-
-	
 
 	public void setting(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));

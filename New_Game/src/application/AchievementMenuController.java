@@ -53,13 +53,14 @@ public class AchievementMenuController implements Initializable{
     }
 	
 	 @FXML
-	    void stopGlowing(MouseEvent event) throws IOException {
-	        Node source= (Node) event.getSource();
-	        Glow glow=(Glow) source.getEffect();
-	        source.setEffect(glow);
-	        glow.setLevel(0.0);
-	    }
-
+	 void stopGlowing(MouseEvent event) throws IOException {
+        Node source= (Node) event.getSource();
+        Glow glow=(Glow) source.getEffect();
+        source.setEffect(glow);
+        glow.setLevel(0.0);
+    }
+	 
+	 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
@@ -69,7 +70,6 @@ public class AchievementMenuController implements Initializable{
 		max.setText(temp.getMax_scr()+"");
 		max.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));
 		max.setAlignment(Pos.CENTER);
-		
 		
 		total.setText(temp.getTotal_stars()+"");
 		total.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 32));

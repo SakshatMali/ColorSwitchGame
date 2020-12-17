@@ -59,6 +59,7 @@ public class SettingMenuController implements Initializable {
 
 	
 	public void playmusic(ActionEvent event) {
+		
 		if (music.isSelected()) {
 			Main.audioPath.setVolume(0.2);
 			Main.audioPath.setCycleCount(AudioClip.INDEFINITE);
@@ -73,6 +74,7 @@ public class SettingMenuController implements Initializable {
 	}
 	
 	public void playsound(ActionEvent event) {
+		
 		if (sound.isSelected()) {
 			Main.playsoundsetting=true;
 			soundcheck=true;

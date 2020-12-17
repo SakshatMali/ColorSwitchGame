@@ -98,11 +98,13 @@ public class GameOverBoxController implements Initializable {
 		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
 		temp = dt.deserialize_max_scr();
 		
-		temp.setTotal_stars(temp.getTotal_stars()-5);
-		temp.serialize_max_scr();
-		Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
-		GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(), temp.getNum_obst2(),600/2,750-150,300,1,1);
-		gc.play(event);
+		if (temp.getTotal_stars()>=5) {
+			temp.setTotal_stars(temp.getTotal_stars()-5);
+			temp.serialize_max_scr();
+			Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
+			GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(), temp.getNum_obst2(),600/2,750-150,300,1,1);
+			gc.play(event);
+		}
 	}
 
 	@Override

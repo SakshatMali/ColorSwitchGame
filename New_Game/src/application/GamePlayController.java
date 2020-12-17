@@ -85,22 +85,19 @@ public class GamePlayController {
 	private int dir=1;
 	private ArrayList<ShapeObstacle> arr_copy_obst;
 	private boolean gameover=false;
-
 	private boolean playmusic=false;
 	static AudioClip audiopath1 = new AudioClip("file:src/Colour%20Sounds/points.mp3");
 	static AudioClip audiopath2 = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
 	static AudioClip audiopath3 = new AudioClip("file:src/Colour%20Sounds/Explode.mp3");
-
 	private int lst_cnt = 0;
-
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	private ArrayList<Integer> obst_order = new ArrayList<>();	
-	
 	private double ball_x;
 	private double ball_y;
 	private double obst_y;
 	private int star_present;
 	private int clr_present;
+	
 	public GamePlayController(Player player, int obst1, int obst2,double ball_x,double ball_y, double obst_y,int star_present,int clr_present) throws FileNotFoundException {
 		super();
 		canvas = new Pane();
@@ -185,7 +182,6 @@ public class GamePlayController {
 			    glow.setLevel(0.4);
 			}
 	    	
-	    	
 	    });
 	    
 	    imageView.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -197,7 +193,6 @@ public class GamePlayController {
 			    glow.setLevel(0);
 			}
 	    	
-	    	
 	    });
 	 
 	    Tooltip tool = new Tooltip("Pause");
@@ -208,7 +203,6 @@ public class GamePlayController {
 	    scr.setY(80); 
 	    scr.setFill(Color.WHITE);
 	    scr.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 60));
-	    
 	    
 	    canvas.getChildren().addAll(imageView,scr);
 		scene.setFill(Color.BLACK);
@@ -291,8 +285,6 @@ public class GamePlayController {
 			arr_copy_obst.add(neww);
 			obst_order.add(p);
 		}
-	    System.out.println(obst_order);
-	    
 	    
         ArrayList<Rotate> arr_rotate=new ArrayList<>();
         ArrayList<ShapeObstacle> arr_hrzntl_rotate=new ArrayList<>();
@@ -389,7 +381,6 @@ public class GamePlayController {
 		}
 	}
 
-
 	public void run(ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
 
 		if (gameover) {
@@ -469,9 +460,10 @@ public class GamePlayController {
 	            		dt.setNum_obst1(obst1);
 	            		dt.setNum_obst2(obst2);
 	            		dt.serialize_max_scr();
-	                	System.out.println("reaching slowly " + dt.getMax_scr());
-	                	System.out.println("Total star " + dt.getTotal_stars());
+//	                	System.out.println("reaching slowly " + dt.getMax_scr());
+//	                	System.out.println("Total star " + dt.getTotal_stars());
 	            	}
+	            	
 	            	catch(Exception e) {
 	            		dt.serialize_max_scr();
 	            		temp = dt.deserialize_max_scr();
@@ -483,11 +475,13 @@ public class GamePlayController {
 	            		dt.setNum_obst1(obst1);
 	            		dt.setNum_obst2(obst2);
 	            		dt.serialize_max_scr();
-	                	System.out.println("reaching slowly " + dt.getMax_scr());
-	                	System.out.println("Total star " + dt.getTotal_stars());
+//	                	System.out.println("reaching slowly " + dt.getMax_scr());
+//	                	System.out.println("Total star " + dt.getTotal_stars());
 	            	}
+	            	
 	            	lst_cnt=1;
 				}
+				
 				for (int i = 0; i < explosion_list.size(); i++) {
 					if (explosion_list.get(i).getLayoutY()>1500) {
 						Parent tableViewParent = null;
@@ -505,11 +499,9 @@ public class GamePlayController {
 		            	loop.pause();
 		            	break;
 					}
-					
-					
+		
 				}
-//			}
-		}
+			}
 		
 		else {
 		
@@ -559,7 +551,6 @@ public class GamePlayController {
 		            }
 		        });
 				
-				
 				final Bounds bounds = canvas.getBoundsInParent();
 
 				if ( circle.getLayoutY() >= 750 + 20 ) {
@@ -574,7 +565,6 @@ public class GamePlayController {
 						 
 						 if (k%2==0) {
 							 eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
-							 
 						 } 
 						 
 						 else {
@@ -583,25 +573,28 @@ public class GamePlayController {
 							Circle exball = eball.Ball_make();
 							explosion_list.add(exball);
 							canvas.getChildren().add(exball);
-						}
+					}
 				}
-					
 				
 			for (int i = 0; i < arr_rotate.size(); i++) {
 				arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
 			}
+			
 			for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
 					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-300 && hrzntl_mov==false){
 						for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
 							(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()-2);
 						}
+						
 						if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()==-300)hrzntl_mov=true;
 						
 					}
+					
 					else if(hrzntl_mov==true){
 						for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
 							(arr_hrzntl_rotate.get(i).getList_shape().get(j)).setLayoutX(arr_hrzntl_rotate.get(i).getList_shape().get(j).getLayoutX()+2);
 						}
+						
 						if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=300) {
 							hrzntl_mov=false;
 						}
@@ -613,15 +606,14 @@ public class GamePlayController {
 					continue;
 				}
 				for (int j = 0; j < Obstacles.get(i).getList_shape().size()-5; j++) {
-					
 					Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
 					boolean intersects = shape.getBoundsInLocal().getWidth() != -1;     //changed to parent
 					if (intersects) {
 						if(circle.getFill()==Obstacles.get(i).getList_shape().get(j).getStroke()) {
 							continue;
 						}
+						
 						else {
-							System.out.println("Game Over");
 							gameover=true;
 							playmusic=true;
 							circle.setStroke(null);
@@ -633,7 +625,6 @@ public class GamePlayController {
 								 
 								 if (k%2==0) {
 									 eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),5,clr_arr[k%4]);
-									 System.out.println(circle.getLayoutX()+"             "+circle.getLayoutY());
 								 } 
 								 
 								 else {
@@ -642,7 +633,7 @@ public class GamePlayController {
 									Circle exball = eball.Ball_make();
 									explosion_list.add(exball);
 									canvas.getChildren().add(exball);
-								}
+							}
 						}
 					}
 				}
@@ -661,7 +652,7 @@ public class GamePlayController {
 					audiopath1.setVolume(0.5);
 					if (SettingMenuController.soundcheck) {
 				        audiopath1.play();
-						}
+					}
 				}
 			}
 
@@ -669,6 +660,7 @@ public class GamePlayController {
 				if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
 					continue;
 				}
+				
 				for (int j =Obstacles.get(i).getList_shape().size()-4 ; j < Obstacles.get(i).getList_shape().size(); j++) {
 					Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
 					boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
@@ -677,6 +669,7 @@ public class GamePlayController {
 						if (SettingMenuController.soundcheck) {
 					        audiopath2.play();
 							}
+						
 						circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
 						for (int k =Obstacles.get(i).getList_shape().size()-4 ; k < Obstacles.get(i).getList_shape().size(); k++) {
 							Obstacles.get(i).getList_shape().get(k).setFill(null);
@@ -686,6 +679,7 @@ public class GamePlayController {
 					}	
 				}
 			}
+			
 			if(circle.getLayoutY() <= frm_height/1.5) {
 				screen_mover=true;
 			}

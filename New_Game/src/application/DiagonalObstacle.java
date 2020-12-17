@@ -15,6 +15,7 @@ public class DiagonalObstacle extends ShapeObstacle{
 
 	@Override
 	public void makeShape() {
+		
 		Line l1 = new Line(getXpos()-2*quarter_frm,getYpos()-50,getXpos()-2*quarter_frm+quarter_frm,getYpos());
 		l1.setStroke(clr_arr[0]);
 		l1.setStrokeWidth(15);
@@ -51,6 +52,7 @@ public class DiagonalObstacle extends ShapeObstacle{
 		Line l12 = new Line(getXpos()+4*quarter_frm+quarter_frm,getYpos(),getXpos()+4*quarter_frm+2*quarter_frm,getYpos()-50);
 		l12.setStroke(clr_arr[3]);
 		l12.setStrokeWidth(15);
+		
 		getList_shape().add(l1);
 		getList_shape().add(l2);
 		getList_shape().add(l3);
