@@ -19,8 +19,8 @@ public class DataTable implements Serializable{
 	private double obst_y;
 	private int star_present;
 	private int clr_present;
-	
-	public DataTable(int curr_scr, int max_scr, int total_stars, int num_obst1, int num_obst2, double ball_x,double ball_y, double obst_y,int star_present,int clr_present) {
+	private int ball_clr;
+	public DataTable(int curr_scr, int max_scr, int total_stars, int num_obst1, int num_obst2, double ball_x,double ball_y, double obst_y,int star_present,int clr_present, int ball_clr) {
 		super();
 		this.curr_scr = curr_scr;
 		this.max_scr = max_scr;
@@ -32,6 +32,7 @@ public class DataTable implements Serializable{
 		this.obst_y=obst_y;
 		this.star_present=star_present;
 		this.clr_present=clr_present;
+		this.ball_clr=ball_clr;
 	}
 	
 	public void serialize() {
@@ -215,5 +216,13 @@ public class DataTable implements Serializable{
 
 	public void setClr_present(int clr_present) {
 		this.clr_present = clr_present;
+	}
+
+	public int getBall_clr() {
+		return ball_clr;
+	}
+
+	public void setBall_clr(int ball_clr) {
+		this.ball_clr = ball_clr;
 	}
 }

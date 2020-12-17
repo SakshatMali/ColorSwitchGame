@@ -97,8 +97,8 @@ public class GamePlayController {
 	private double obst_y;
 	private int star_present;
 	private int clr_present;
-	
-	public GamePlayController(Player player, int obst1, int obst2,double ball_x,double ball_y, double obst_y,int star_present,int clr_present) throws FileNotFoundException {
+	private int ball_clr;
+	public GamePlayController(Player player, int obst1, int obst2,double ball_x,double ball_y, double obst_y,int star_present,int clr_present, int ball_clr) throws FileNotFoundException {
 		super();
 		canvas = new Pane();
 		this.player = player;
@@ -109,6 +109,7 @@ public class GamePlayController {
 		this.obst_y=obst_y;
 		this.star_present = star_present;
 		this.clr_present=clr_present;
+		this.ball_clr=ball_clr;
 		pause = new Image(new FileInputStream("src/Colour Images/Pause.png")); 
 		scr = new Text();
 	}
@@ -267,7 +268,8 @@ public class GamePlayController {
 	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(rotating_ring_obst);
 	    
-	    ball=new Ball(ball_x,ball_y,ball_radius,Color.BLUE);
+//	    ball=new Ball(ball_x,ball_y,ball_radius,Color.BLUE);
+	    ball=new Ball(ball_x,ball_y,ball_radius,clr_arr[ball_clr]);
 		circle=ball.Ball_make(); 
 		
 	    ShapeObstacle neww1 = check_instance(obst1);
@@ -330,9 +332,9 @@ public class GamePlayController {
         	
             @Override
             public void handle(MouseEvent event) {
-            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2,circle.getLayoutX(),circle.getLayoutY(),obst_y,star_present,clr_present);
-            	DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-            	DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0); 
+            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2,circle.getLayoutX(),circle.getLayoutY(),obst_y,star_present,clr_present,ball_clr);
+            	DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+            	DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0); 
          	
             	try {
             		temp = dt.deserialize_max_scr();
@@ -447,8 +449,8 @@ public class GamePlayController {
 				}
 				
 				if(lst_cnt == 0) {
-		          	DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-	            	DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0); 
+		          	DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+	            	DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0); 
 	         	
 	            	try {
 	            		temp = dt.deserialize_max_scr();
@@ -460,8 +462,6 @@ public class GamePlayController {
 	            		dt.setNum_obst1(obst1);
 	            		dt.setNum_obst2(obst2);
 	            		dt.serialize_max_scr();
-//	                	System.out.println("reaching slowly " + dt.getMax_scr());
-//	                	System.out.println("Total star " + dt.getTotal_stars());
 	            	}
 	            	
 	            	catch(Exception e) {
@@ -475,8 +475,6 @@ public class GamePlayController {
 	            		dt.setNum_obst1(obst1);
 	            		dt.setNum_obst2(obst2);
 	            		dt.serialize_max_scr();
-//	                	System.out.println("reaching slowly " + dt.getMax_scr());
-//	                	System.out.println("Total star " + dt.getTotal_stars());
 	            	}
 	            	
 	            	lst_cnt=1;
@@ -550,8 +548,6 @@ public class GamePlayController {
 		                }
 		            }
 		        });
-				
-				final Bounds bounds = canvas.getBoundsInParent();
 
 				if ( circle.getLayoutY() >= 750 + 20 ) {
 					gameover=true;
@@ -671,6 +667,12 @@ public class GamePlayController {
 							}
 						
 						circle.setFill(Obstacles.get(i).getList_shape().get(j).getStroke());
+						for (int l = 0; l < clr_arr.length; l++) {
+							if(circle.getFill()==clr_arr[l]) {
+								ball_clr=l;
+							}
+						}
+						
 						for (int k =Obstacles.get(i).getList_shape().size()-4 ; k < Obstacles.get(i).getList_shape().size(); k++) {
 							Obstacles.get(i).getList_shape().get(k).setFill(null);
 							Obstacles.get(i).getList_shape().get(k).setStroke(null);

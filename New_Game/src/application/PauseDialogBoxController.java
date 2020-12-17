@@ -73,7 +73,7 @@ public class PauseDialogBoxController implements Serializable, Initializable {
 	
 	public void restart(MouseEvent event) throws IOException {
 		Player p1 = new Player(0,0,0);
-		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1);
+		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1,1);
 		gc.play(event);
 	}
 	
@@ -130,12 +130,10 @@ public class PauseDialogBoxController implements Serializable, Initializable {
 	            file.close(); 
 	              
 //	            System.out.println("Pause Object has been deserialized "); 
-//	            System.out.println("Save Count hu= " + savetable.getSave_count());
 	            temp_save_count = savetable.getSave_count();
 	        } 
 	          
 	        catch(IOException ex) { 
-//	        	System.out.println("am i here");
 	        	serialize_savecount();
 //	            System.out.println("IOException is caught"); 
 	            temp_save_count = -1;

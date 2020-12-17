@@ -63,8 +63,8 @@ public class AchievementMenuController implements Initializable{
 	 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 		temp = dt.deserialize_max_scr();
 		
 		max.setText(temp.getMax_scr()+"");
