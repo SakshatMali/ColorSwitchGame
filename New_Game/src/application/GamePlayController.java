@@ -99,7 +99,6 @@ public class GamePlayController {
 	private int clr_present;
 	private int ball_clr;
 	private double speed;
-	
 	public GamePlayController(Player player, int obst1, int obst2,double ball_x,double ball_y, double obst_y,int star_present,int clr_present, int ball_clr) throws FileNotFoundException {
 		super();
 		canvas = new Pane();
