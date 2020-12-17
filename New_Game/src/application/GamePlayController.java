@@ -98,6 +98,7 @@ public class GamePlayController {
 	private int star_present;
 	private int clr_present;
 	private int ball_clr;
+	private double speed;
 	public GamePlayController(Player player, int obst1, int obst2,double ball_x,double ball_y, double obst_y,int star_present,int clr_present, int ball_clr) throws FileNotFoundException {
 		super();
 		canvas = new Pane();
@@ -220,7 +221,7 @@ public class GamePlayController {
 	    rng.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(rng);
 	    
-	    ShapeObstacle sqr_obst=new SquareObstacle(150,150,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1);
+	    ShapeObstacle sqr_obst=new SquareObstacle(170,170,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1);
 	    sqr_obst.makeShape();
 	    sqr_obst.makeStar(1);
 	    sqr_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
@@ -268,7 +269,6 @@ public class GamePlayController {
 	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(rotating_ring_obst);
 	    
-//	    ball=new Ball(ball_x,ball_y,ball_radius,Color.BLUE);
 	    ball=new Ball(ball_x,ball_y,ball_radius,clr_arr[ball_clr]);
 		circle=ball.Ball_make(); 
 		
@@ -280,7 +280,7 @@ public class GamePlayController {
 	    arr_copy_obst.add(neww1);
 	    arr_copy_obst.add(neww2);
 
-	    for (int i = 0; i <25; i++) {
+	    for (int i = 0; i < 50; i++) {
 			Random rd = new Random();
 			int p =rd.nextInt(9);
 			ShapeObstacle neww = check_instance(p);
@@ -573,7 +573,7 @@ public class GamePlayController {
 				}
 				
 			for (int i = 0; i < arr_rotate.size(); i++) {
-				arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
+				arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+0.7+speed);
 			}
 			
 			for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
@@ -639,6 +639,7 @@ public class GamePlayController {
 				Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
 				boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 				if (intersects) {
+					
 					player.setCurr_scr(player.getCurr_scr()+1);
 					player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
 					player.setTotal_stars(player.getTotal_stars()+1);
@@ -646,6 +647,7 @@ public class GamePlayController {
 					Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
 					scr.setText(Integer.toString(player.getCurr_scr()));
 					audiopath1.setVolume(0.5);
+					if(player.getCurr_scr()%2==0)speed+=0.2;
 					if (SettingMenuController.soundcheck) {
 				        audiopath1.play();
 					}
@@ -704,8 +706,10 @@ public class GamePlayController {
 			}
 			
 			else if (gameup==-1) {
-				circle.setLayoutY(circle.getLayoutY() +2*(1.0*(player.getCurr_scr()+5)/8));
-				ball.setYpos(ball.getYpos()+2*(1.0*(player.getCurr_scr()+5)/8));
+//				circle.setLayoutY(circle.getLayoutY() +2*(1.0*(player.getCurr_scr()+5)/8));
+//				ball.setYpos(ball.getYpos()+2*(1.0*(player.getCurr_scr()+5)/8));
+				circle.setLayoutY(circle.getLayoutY() +1.4);
+				ball.setYpos(ball.getYpos()+1.4);
 			}
 		
 		}
