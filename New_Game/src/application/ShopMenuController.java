@@ -75,8 +75,8 @@ public class ShopMenuController {
 	 
 	 public void squareball(MouseEvent event) {
 		 
-			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 			temp = dt.deserialize_max_scr();
 			
 			if (Main.ballshape==1) {
@@ -100,8 +100,8 @@ public class ShopMenuController {
 	 
 	 public void triangleball(MouseEvent event) {
 		 
-			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 			temp = dt.deserialize_max_scr();
 			
 			if (Main.ballshape==2) {
@@ -124,8 +124,8 @@ public class ShopMenuController {
 	 
 	 public void lineball(MouseEvent event) {
 
-			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 			temp = dt.deserialize_max_scr();
 			
 			if (Main.ballshape==3) {
@@ -148,8 +148,8 @@ public class ShopMenuController {
 	 
 	 public void plusball(MouseEvent event) {
 
-			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 			temp = dt.deserialize_max_scr();
 			
 			if (Main.ballshape==4) {
@@ -172,8 +172,8 @@ public class ShopMenuController {
 	 
 	 public void starball(MouseEvent event) {
 
-			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 			temp = dt.deserialize_max_scr();
 			
 			if (Main.ballshape==5) {

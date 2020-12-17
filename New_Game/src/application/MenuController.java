@@ -67,7 +67,7 @@ public class MenuController implements Initializable {
 	
 	public void StartGame(MouseEvent event) throws IOException {
 		Player p1 = new Player(0, 0,0);
-		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1);
+		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1,1);
 		gc.play(event);
 
 	}

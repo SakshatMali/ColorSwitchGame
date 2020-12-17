@@ -46,12 +46,12 @@ public class VideoPlayerController implements Initializable {
 	}
 	
 	public void back(MouseEvent event) throws IOException {
-			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
-			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0,0);
 			temp = dt.deserialize_max_scr();
 			temp.serialize_max_scr();
 			Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
-			GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(), temp.getNum_obst2(),600/2,750-150,300,1,1);
+			GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(), temp.getNum_obst2(),600/2,750-150,300,1,1,1);
 			mediaPlayer.stop();
 			gc.play(event);
 	}
