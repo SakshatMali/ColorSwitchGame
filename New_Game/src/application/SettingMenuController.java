@@ -24,9 +24,15 @@ import javafx.stage.Stage;
 
 public class SettingMenuController implements Initializable {
 	
-	@FXML ImageView home;
-	@FXML CheckBox music;
-	@FXML CheckBox sound;
+	@FXML 
+	private ImageView home;
+	
+	@FXML 
+	private CheckBox music;
+	
+	@FXML 
+	private CheckBox sound;
+	
 	static boolean soundcheck=true;
 	
 	public void home(MouseEvent event) throws IOException {

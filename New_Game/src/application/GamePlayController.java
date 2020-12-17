@@ -90,7 +90,7 @@ public class GamePlayController {
 	static AudioClip audiopath2 = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
 	static AudioClip audiopath3 = new AudioClip("file:src/Colour%20Sounds/Explode.mp3");
 	private int lst_cnt = 0;
-	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
+	private Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
 	private ArrayList<Integer> obst_order = new ArrayList<>();	
 	private double ball_x;
 	private double ball_y;
@@ -162,28 +162,28 @@ public class GamePlayController {
 	
 	public void PlayGame(MouseEvent event) {
 		try {
-		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		Scene scene = new Scene(canvas,frm_width,frm_height);
-		canvas.setStyle("-fx-background-color: #000000;");
-		primaryStage.setTitle("Byll");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	    ImageView imageView = new ImageView(pause); 
-	    imageView.setX(480);
-	    imageView.setY(20);
-	    imageView.setFitHeight(100);
-	    imageView.setFitWidth(100);
-	    
-	    imageView.setCursor(Cursor.HAND);
-	    imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				Glow glow=new Glow(); 
-			    imageView.setEffect(glow);
-			    glow.setLevel(0.4);
-			}
-	    	
+			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			Scene scene = new Scene(canvas,frm_width,frm_height);
+			canvas.setStyle("-fx-background-color: #000000;");
+			primaryStage.setTitle("Ball");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		    ImageView imageView = new ImageView(pause); 
+		    imageView.setX(480);
+		    imageView.setY(20);
+		    imageView.setFitHeight(100);
+		    imageView.setFitWidth(100);
+		    
+		    imageView.setCursor(Cursor.HAND);
+		    imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
+	
+				@Override
+				public void handle(MouseEvent arg0) {
+					Glow glow=new Glow(); 
+				    imageView.setEffect(glow);
+				    glow.setLevel(0.4);
+				}
+		    	
 	    });
 	    
 	    imageView.setOnMouseExited(new EventHandler<MouseEvent>() {
