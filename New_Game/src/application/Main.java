@@ -40,9 +40,6 @@ public class Main extends Application {
 	private int frm_width = 600;
 	private int frm_height = 750;
 	static AudioClip audioPath;
-//	MediaPlayer mediaPlayer;
-//	private PauseDialogBoxController pdc = new PauseDialogBoxController();
-	
 	static boolean playmusicsetting=true;
 	static boolean playsoundsetting=true;
 	static double slidervalue=20;
@@ -51,35 +48,19 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		
-		//MUSIC
 		audioPath = new AudioClip("file:src/Colour%20Sounds/BackgroundSound.mp3");
 		audioPath.setVolume(0.2);
 		audioPath.setCycleCount(AudioClip.INDEFINITE);
-        audioPath.play();
-
-//        audioPath.setCycleCount(AudioClip.INDEFINITE);
-        
-        
-
+        audioPath.play();     
 		Parent mainRoot=FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene scene = new Scene(mainRoot,frm_width,frm_height);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-//        scene.getStylesheets().add("big-check-box.css");
         scene.setFill(Color.BLACK);
         mainRoot.setStyle("-fx-background-color: #000000;");
         primaryStage.setTitle("Color Switch");
-        
         primaryStage.setScene(scene);
-//        scene.setFill(Color.BLACK);
-//        new File(path).toURI().toString()
-//        "/src/Game Sounds/BackSound.mp3"
-        primaryStage.show();
-//        mediaPlayer.play();
-//        mediaPlayer.setAutoPlay(true);
-        
-	}
+        primaryStage.show();	}
 	
 	public static void main(String[] args) {
 		launch(args);

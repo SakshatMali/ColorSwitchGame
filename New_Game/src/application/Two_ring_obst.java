@@ -55,7 +55,6 @@ public class Two_ring_obst extends ShapeObstacle{
 			list.get(i).getTransforms().add(rotate);
 		}
         return rotate;
-//		return null;
 	}
 	
 }

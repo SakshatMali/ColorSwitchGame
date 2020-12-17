@@ -72,8 +72,7 @@ public class GamePlayController {
 	private boolean screen_mover = false;
 	private double diff_obst = 450;
 	private boolean hrzntl_mov=false;
-//	private Button pause_button;
-	Shape myBall;
+	private Shape circle;
 	private Ball ball;
 	private Player player;
 	private Image pause;
@@ -95,22 +94,26 @@ public class GamePlayController {
 	private int lst_cnt = 0;
 
 	Color clr_arr[]= {Color.RED , Color.BLUE , Color.PURPLE , Color.YELLOW};
-	//ok
-
 	private ArrayList<Integer> obst_order = new ArrayList<>();	
 	
-	public GamePlayController(Player player, int obst1, int obst2) throws FileNotFoundException {
+	private double ball_x;
+	private double ball_y;
+	private double obst_y;
+	private int star_present;
+	private int clr_present;
+	public GamePlayController(Player player, int obst1, int obst2,double ball_x,double ball_y, double obst_y,int star_present,int clr_present) throws FileNotFoundException {
 		super();
-//		this.canvas = canvas;
 		canvas = new Pane();
-//		this.ball = ball;
 		this.player = player;
-//		Obstacles = obstacles;
 		this.setObst1(obst1);
 		this.setObst2(obst2);
+		this.ball_x=ball_x;
+		this.ball_y=ball_y;
+		this.obst_y=obst_y;
+		this.star_present = star_present;
+		this.clr_present=clr_present;
 		pause = new Image(new FileInputStream("src/Colour Images/Pause.png")); 
 		scr = new Text();
-		
 	}
 	
 	public ShapeObstacle check_instance(int ind) {
@@ -147,13 +150,11 @@ public class GamePlayController {
 			 newobst = new Two_ring_obst(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
 					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
 		} 
-//		if (Obstacles.get(ind) instanceof Rotating_Ring_Obst) {
 		else {
 			 newobst = new Rotating_Ring_Obst(Obstacles.get(ind).getHeight(),Obstacles.get(ind).getWidth(),
 					Obstacles.get(ind).getXpos(),Obstacles.get(ind).getYpos(),Obstacles.get(ind).get_rotate()); 
 		} 
 		return newobst;
-//		arr_copy_obst.add(newobst);
 	}
 	
 	public void play(MouseEvent event) {
@@ -161,45 +162,16 @@ public class GamePlayController {
 	}
 	
 	public void PlayGame(MouseEvent event) {
-//		canvas = new Pane();
-		
-//		final Scene scene = new Scene(canvas, frm_width, frm_height);
 		try {
-//		canvas = new Pane();
-//		canvas.getChildren().add(backg);
 		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		
-		
-		
-//		Scene scene = primaryStage.getScene();
-//		scene.setRoot(canvas);
 		Scene scene = new Scene(canvas,frm_width,frm_height);
-//		scene.setFill(Color.BLACK);
-//		canvas.setStyle("-fx-background-color: #393636;");
 		canvas.setStyle("-fx-background-color: #000000;");
-	
 		primaryStage.setTitle("Byll");
-		
-		
-		
 		primaryStage.setScene(scene);
-////		scene.setFill(Color.BLACK);
 		primaryStage.show();
-		
-		
-//		pause = new Image(new FileInputStream("src/Colour Images/Pause.png"));  
-//		pause_button = new Button();
-	      
-	      //Setting the image view 
 	    ImageView imageView = new ImageView(pause); 
-	    
-	    
 	    imageView.setX(480);
 	    imageView.setY(20);
-//	    pause_button.setTranslateX(480);
-//	    pause_button.setTranslateY(20);
-//	    pause_button.setPrefSize(100, 100);
-	    
 	    imageView.setFitHeight(100);
 	    imageView.setFitWidth(100);
 	    
@@ -208,7 +180,6 @@ public class GamePlayController {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 				Glow glow=new Glow(); 
 			    imageView.setEffect(glow);
 			    glow.setLevel(0.4);
@@ -221,7 +192,6 @@ public class GamePlayController {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
 				Glow glow=new Glow(); 
 			    imageView.setEffect(glow);
 			    glow.setLevel(0);
@@ -229,17 +199,10 @@ public class GamePlayController {
 	    	
 	    	
 	    });
-	    
-//	    Glow glow=new Glow(); 
-//	    imageView.setEffect(glow);
-//	    glow.setLevel(0.4);
-	    
+	 
 	    Tooltip tool = new Tooltip("Pause");
 	    tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
 	    Tooltip.install(imageView, tool);
-//	    pause_button.setGraphic(imageView);
-//	    scr = new Text();       
-//	    scr.setText("0");
 	    scr.setText(Integer.toString(player.getCurr_scr()));
 	    scr.setX(50); 
 	    scr.setY(80); 
@@ -253,82 +216,65 @@ public class GamePlayController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-//		ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
-//		myBall=ball.Ball_make();
-		
-//		if (Main.ballshape==false) {
-//			myBall = ball.Ball_make_rec();
-//		}
-//		System.out.println(myBall.getLayoutY()+"osh");
-//		canvas.getChildren().add(myBall);
-
 		Obstacles=new ArrayList<>();
 		arr_copy_obst = new ArrayList<>();
-		
-//		double[] xpoints = {10, 85, 110, 135, 210, 160,
-//		        170, 110, 50, 60};
-//		double[] ypoints = {85, 75, 10, 75, 85, 125,
-//		        190, 150, 190, 125};
-//		double[] xpoints = {4,0,3.5,2,5,4};
-//		double[] ypoints = {4,4,1,5,1,4};
-		
-		
+
 	    ShapeObstacle rng=new Ring(100,100,frm_width/2,300,1);  
 	    rng.makeShape();
-	    rng.makeStar();
-	    rng.make_Clr_chng(diff_obst,clr_change_radius);
+	    rng.makeStar(1);
+	    rng.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(rng);
 	    
 	    ShapeObstacle sqr_obst=new SquareObstacle(150,150,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1);
 	    sqr_obst.makeShape();
-	    sqr_obst.makeStar();
-	    sqr_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    sqr_obst.makeStar(1);
+	    sqr_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(sqr_obst);
 
 	    ShapeObstacle plus=new Plus(100,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
 	    plus.makeShape();
-	    plus.makeStar();
-	    plus.make_Clr_chng(diff_obst,clr_change_radius);
+	    plus.makeStar(1);
+	    plus.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(plus);
 	    
 	    ShapeObstacle _line=new LineObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
 	    _line.makeShape();
-	    _line.makeStar();
-	    _line.make_Clr_chng(diff_obst,clr_change_radius);
+	    _line.makeStar(1);
+	    _line.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(_line);
 	    
 	    ShapeObstacle vert_line=new VerticalObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
 	    vert_line.makeShape();
-	    vert_line.makeStar();
-	    vert_line.make_Clr_chng(diff_obst,clr_change_radius);
+	    vert_line.makeStar(1);
+	    vert_line.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(vert_line);
 	    
 	    ShapeObstacle dot_obst=new DotObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
 	    dot_obst.makeShape();
-	    dot_obst.makeStar();
-	    dot_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    dot_obst.makeStar(1);
+	    dot_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(dot_obst);
 	    
 	    ShapeObstacle diag_obst=new DiagonalObstacle(0,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,0); 
 	    diag_obst.makeShape();
-	    diag_obst.makeStar();
-	    diag_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    diag_obst.makeStar(1);
+	    diag_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(diag_obst);
 	    
 	    ShapeObstacle two_ring_obst=new Two_ring_obst(100,100,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
 	    two_ring_obst.makeShape();
-	    two_ring_obst.makeStar();
-	    two_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    two_ring_obst.makeStar(1);
+	    two_ring_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(two_ring_obst);
 	    
 	    ShapeObstacle rotating_ring_obst=new Rotating_Ring_Obst(130,130,frm_width/2,Obstacles.get(Obstacles.size()-1).getYpos()-diff_obst,1); 
 	    rotating_ring_obst.makeShape();
-	    rotating_ring_obst.makeStar();
-	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius);
+	    rotating_ring_obst.makeStar(1);
+	    rotating_ring_obst.make_Clr_chng(diff_obst,clr_change_radius,1);
 	    Obstacles.add(rotating_ring_obst);
 	    
-	    ball=new Ball(frm_width/2,frm_height-150,ball_radius,Color.BLUE);
-		myBall=ball.Ball_make();
+	    ball=new Ball(ball_x,ball_y,ball_radius,Color.BLUE);
+		circle=ball.Ball_make(); 
 		
 	    ShapeObstacle neww1 = check_instance(obst1);
 	    ShapeObstacle neww2 = check_instance(obst2);
@@ -338,7 +284,7 @@ public class GamePlayController {
 	    arr_copy_obst.add(neww1);
 	    arr_copy_obst.add(neww2);
 
-	    for (int i = 0; i <30; i++) {
+	    for (int i = 0; i <25; i++) {
 			Random rd = new Random();
 			int p =rd.nextInt(9);
 			ShapeObstacle neww = check_instance(p);
@@ -353,19 +299,24 @@ public class GamePlayController {
         explosion_list = new ArrayList<>();
         
         for (int i = 0; i < arr_copy_obst.size(); i++) {
+        	Star star = new Star();
+        	star.setObstacle(arr_copy_obst.get(i));
+        	ColorChange clr_chng = new ColorChange();
+        	clr_chng.setObstacle(arr_copy_obst.get(i));
         	if (i==0) {
-        		arr_copy_obst.get(0).setYpos(300);
-//        		arr_copy_obst.get(0).setLayoutY(300);
+        		arr_copy_obst.get(0).setYpos(obst_y);
+        		arr_copy_obst.get(i).makeShape();
+        		star._makeStar(star_present);
+        		clr_chng.make_Clr_chng(diff_obst,clr_change_radius,clr_present);
         	} 
         	
         	else {
         		arr_copy_obst.get(i).setYpos(arr_copy_obst.get(i-1).getYpos()-diff_obst);
-//        		arr_copy_obst.get(i).setLayoutY(arr_copy_obst.get(i-1).getYpos()-diff_obst);
         	}
         	
-        	arr_copy_obst.get(i).makeShape();
-        	arr_copy_obst.get(i).makeStar();
-        	arr_copy_obst.get(i).make_Clr_chng(diff_obst,clr_change_radius);
+        	if(i>=1)arr_copy_obst.get(i).makeShape();
+        	if(i>=1)star._makeStar(1);
+        	if(i>=1)clr_chng.make_Clr_chng(diff_obst,clr_change_radius,1);
         	if(arr_copy_obst.get(i).get_rotate()==1) {
     			Rotate rotate1=arr_copy_obst.get(i).makeRotate(arr_copy_obst.get(i).getList_shape());
 	 	        arr_rotate.add(rotate1);
@@ -376,36 +327,20 @@ public class GamePlayController {
  	        
     		Rotate rotate2=arr_copy_obst.get(i).makeRotate_Clr_chng(arr_copy_obst.get(i).getList_shape(),diff_obst);
  	        arr_rotate.add(rotate2);
- 	        
-// 	        Rotate rotate3=arr_copy_obst.get(i).makeRotate_Star(arr_copy_obst.get(i).getList_shape());
-// 	        arr_rotate.add(rotate3);
- 	        
  	        canvas.getChildren().addAll(arr_copy_obst.get(i).getList_shape());
  	        
 		}
         
-        canvas.getChildren().add(myBall);
-        loop = new Timeline(new KeyFrame(Duration.millis(9), e -> run(myBall,arr_copy_obst,arr_rotate,arr_hrzntl_rotate,scene,imageView)));
+        canvas.getChildren().add(circle);
+        loop = new Timeline(new KeyFrame(Duration.millis(9), e -> run(arr_copy_obst,arr_rotate,arr_hrzntl_rotate,scene,imageView)));
         
         imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
         	
             @Override
             public void handle(MouseEvent event) {
-//            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),1,2);
-            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2);
-            	
-//            	Glow glow=new Glow();
-//     	        Node source = (Node) event.getSource();
-//     	        source.setEffect(glow);
-//     	        glow.setLevel(0.4);
-     	        
-//     	        Tooltip tool = new Tooltip("Pause");
-//     	        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
-//     	        Tooltip.install(imageView, tool);
-            	
-            	
-            	DataTable dt = new DataTable(0,0,0,0,0);
-            	DataTable temp = new DataTable(0,0,0,0,0); 
+            	datatable=new DataTable(player.getCurr_scr(),player.getMax_scr(),player.getTotal_stars(),obst1,obst2,circle.getLayoutX(),circle.getLayoutY(),obst_y,star_present,clr_present);
+            	DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+            	DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0); 
          	
             	try {
             		temp = dt.deserialize_max_scr();
@@ -417,8 +352,6 @@ public class GamePlayController {
             		dt.setNum_obst1(obst1);
             		dt.setNum_obst2(obst2);
             		dt.serialize_max_scr();
-//                	System.out.println("reaching slowly " + dt.getMax_scr());
-//                	System.out.println("Total star " + dt.getTotal_stars());
             	}
             	catch(Exception e) {
             		dt.serialize_max_scr();
@@ -431,31 +364,17 @@ public class GamePlayController {
             		dt.setNum_obst1(obst1);
             		dt.setNum_obst2(obst2);
             		dt.serialize_max_scr();
-//                	System.out.println("reaching slowly " + dt.getMax_scr());
-//                	System.out.println("Total star " + dt.getTotal_stars());
-//            		System.out.println("firsttttttttttttttttttt");
             	}
         	
-            	
-            	
-            	
-//            	System.out.println("obst1 "+ obst1 + " obst2 " + obst2 );
-            	
-            	
-            	
-            	
             	 FXMLLoader loader = new FXMLLoader(getClass().getResource("PauseDialogBox.fxml"));
             	 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             	 try {
 					window.setScene(new Scene(loader.load()));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             	 PauseDialogBoxController controller = loader.getController();
             	  controller.initData(datatable,scene,loop);
-//            	 PauseDialogBoxController pdc = new  PauseDialogBoxController();
-//            	 pdc.initData(datatable);
             	  window.show();
             	  loop.pause();
             }
@@ -463,7 +382,6 @@ public class GamePlayController {
         
         
         loop.setCycleCount(Timeline.INDEFINITE); 
-//        loop.setAutoReverse(true);
         loop.play();
 		} 
 		catch(Exception e) {
@@ -472,13 +390,11 @@ public class GamePlayController {
 	}
 
 
-	public void run(Shape circle, ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
+	public void run(ArrayList<ShapeObstacle> Obstacles ,ArrayList<Rotate> arr_rotate,ArrayList<ShapeObstacle> arr_hrzntl_rotate,Scene scene, ImageView imageView) {
 
 		if (gameover) {
 
 			if (playmusic) {
-				
-//				 audiopath3 = new AudioClip("file:src/Colour%20Sounds/Explode.mp3");
 				audiopath3.setVolume(0.3);
 				if (SettingMenuController.soundcheck) {
 		        audiopath3.play();
@@ -486,10 +402,6 @@ public class GamePlayController {
 		        playmusic=false;
 				
 			}
-//			System.out.println(dir);
-			
-
-//			for (int i=0 ; i<explosion_list.size() ; i++) {
 				explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+(2*dir));
 				explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-2);
 				
@@ -541,21 +453,11 @@ public class GamePlayController {
 				
 				if (explosion_list.get(0).getLayoutX()>600 || explosion_list.get(0).getLayoutX()<0) {
 					dir = dir*(-1);
-//					System.out.println(dir);
 				}
 				
-
-//				DataTable dt = new DataTable(0,0,0,0,0);
-//            	DataTable temp = new DataTable(0,0,0,0,0);
-//        		temp = dt.deserialize_max_scr();
-//        		int temp_max = Math.max(player.getCurr_scr(), temp.getMax_scr());
-//        		dt.setMax_scr(temp_max);
-//        		dt.serialize_max_scr();
-//        		
-//            	System.out.println("reaching slowly " + dt.getMax_scr());
 				if(lst_cnt == 0) {
-		          	DataTable dt = new DataTable(0,0,0,0,0);
-	            	DataTable temp = new DataTable(0,0,0,0,0); 
+		          	DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+	            	DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0); 
 	         	
 	            	try {
 	            		temp = dt.deserialize_max_scr();
@@ -583,28 +485,19 @@ public class GamePlayController {
 	            		dt.serialize_max_scr();
 	                	System.out.println("reaching slowly " + dt.getMax_scr());
 	                	System.out.println("Total star " + dt.getTotal_stars());
-//	            		System.out.println("firsttttttttttttttttttt");
 	            	}
 	            	lst_cnt=1;
 				}
-		    	
-//            	datatable=new DataTable(player.getCurr_scr(),dt.getMax_scr(),player.getTotal_stars(),obst1,obst2);
-            	
-            	
-
 				for (int i = 0; i < explosion_list.size(); i++) {
 					if (explosion_list.get(i).getLayoutY()>1500) {
 						Parent tableViewParent = null;
 						try {
 							tableViewParent = FXMLLoader.load(getClass().getResource("GameOverBox.fxml"));
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 				        Scene tableViewScene = new Scene(tableViewParent);
 				        tableViewScene.setFill(Color.BLACK);
-				        
-				        //This line gets the Stage information
 				        Stage window = (Stage)circle.getScene().getWindow();
 				        tableViewParent.setStyle("-fx-background-color: #000000;");
 				        window.setScene(tableViewScene);
@@ -622,10 +515,23 @@ public class GamePlayController {
 		
 			int cnt=0;
 			for (int i = 0; i <obst_order.size(); i++) {
-				if(Obstacles.get(i).getYpos()<=750){
+				if(Obstacles.get(i).getYpos() - (Obstacles.get(i).getHeight()/2)<=750){
 					cnt++;
 					if(cnt==1) {
 						obst1 = obst_order.get(i);
+						obst_y = Obstacles.get(i).getYpos();
+						if(Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).getFill()==null) {
+							star_present=0;
+						}
+						else {
+							star_present=1;
+						}
+						if(Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-4).getFill()==null) {
+							clr_present=0;
+						}
+						else {
+							clr_present=1;
+						}
 					}
 					if(cnt==2) {
 						obst2 = obst_order.get(i);
@@ -655,16 +561,8 @@ public class GamePlayController {
 				
 				
 				final Bounds bounds = canvas.getBoundsInParent();
-	//			System.out.println(bounds);
-				
-	//			Bounds bl_bounds = circle.getBoundsInLocal();
-	//			System.out.println("bal vounds + "+bl_bounds);
-				
-	//			if ( circle.getLayoutY() >= bounds.getMaxY() - circle.getRadius() ) {
+
 				if ( circle.getLayoutY() >= 750 + 20 ) {
-	//				System.out.println("wtf");
-	//				System.out.println("Game Over");
-					System.out.println("Game Over");
 					gameover=true;
 					playmusic=true;
 					circle.setStroke(null);
@@ -682,19 +580,16 @@ public class GamePlayController {
 						 else {
 							eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),7,clr_arr[k%4]);
 						 }
-//								explosion_list.add(eball);
 							Circle exball = eball.Ball_make();
 							explosion_list.add(exball);
 							canvas.getChildren().add(exball);
 						}
-//					 loop.stop();
 				}
 					
 				
 			for (int i = 0; i < arr_rotate.size(); i++) {
 				arr_rotate.get(i).setAngle(arr_rotate.get(i).getAngle()+1);
 			}
-	//		
 			for (int i = 0; i < arr_hrzntl_rotate.size(); i++) {
 					if(arr_hrzntl_rotate.get(i).getList_shape().get(0).getLayoutX()>=-300 && hrzntl_mov==false){
 						for (int j = 0; j < arr_hrzntl_rotate.get(i).getList_shape().size()-5; j++) {
@@ -713,18 +608,10 @@ public class GamePlayController {
 					}
 			}
 			
-	//		System.out.println("ball"+circle.getLayoutY());
-	//		System.out.println(Obstacles.get(0).getYpos());
-			
 			for (int i = 0; i < Obstacles.size(); i++) {
 				if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
-	//				System.out.println(i+" Yes");
 					continue;
 				}
-	//			if(Obstacles.get(i).getYpos()<=-750){
-	////				System.out.println("NO");
-	//				continue;
-	//			}
 				for (int j = 0; j < Obstacles.get(i).getList_shape().size()-5; j++) {
 					
 					Shape shape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
@@ -734,8 +621,6 @@ public class GamePlayController {
 							continue;
 						}
 						else {
-							
-	//						gameover(circle);
 							System.out.println("Game Over");
 							gameover=true;
 							playmusic=true;
@@ -754,19 +639,10 @@ public class GamePlayController {
 								 else {
 									eball = new ExplosionBalls(circle.getLayoutX(),circle.getLayoutY(),7,clr_arr[k%4]);
 								 }
-	//								explosion_list.add(eball);
 									Circle exball = eball.Ball_make();
 									explosion_list.add(exball);
 									canvas.getChildren().add(exball);
 								}
-							
-							
-	//							explosion_list.get(0).setLayoutX(explosion_list.get(0).getLayoutX()+1);
-	//							explosion_list.get(0).setLayoutY(explosion_list.get(0).getLayoutY()-1);
-								
-							
-	//						circle=null;
-	//						loop.stop();
 						}
 					}
 				}
@@ -776,37 +652,28 @@ public class GamePlayController {
 				Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5));
 				boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 				if (intersects) {
-	//				System.out.println("what " + player.getCurr_scr());
 					player.setCurr_scr(player.getCurr_scr()+1);
 					player.setMax_scr(Math.max(player.getCurr_scr(), player.getMax_scr()));
 					player.setTotal_stars(player.getTotal_stars()+1);
 					Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setFill(null);
 					Obstacles.get(i).getList_shape().get(Obstacles.get(i).getList_shape().size()-5).setStroke(null);
 					scr.setText(Integer.toString(player.getCurr_scr()));
-//					audiopath1 = new AudioClip("file:src/Colour%20Sounds/points.mp3");
 					audiopath1.setVolume(0.5);
-	//				audioPath.setCycleCount(AudioClip.INDEFINITE);
 					if (SettingMenuController.soundcheck) {
 				        audiopath1.play();
 						}
 				}
 			}
-	//		
+
 			for (int i = 0; i <Obstacles.size(); i++) {
 				if(Obstacles.get(i).getYpos()<=-750 || Obstacles.get(i).getYpos()>=750){
 					continue;
 				}
-	//			if(Obstacles.get(i).getYpos()<=-750){
-	//				continue;
-	//			}
 				for (int j =Obstacles.get(i).getList_shape().size()-4 ; j < Obstacles.get(i).getList_shape().size(); j++) {
 					Shape newshape = Shape.intersect(circle, Obstacles.get(i).getList_shape().get(j));
 					boolean intersects = newshape.getBoundsInLocal().getWidth() != -1;
 					if (intersects) {
-						
-//						audiopath2 = new AudioClip("file:src/Colour%20Sounds/ballbounce.mp3");
 						audiopath2.setVolume(1);
-	//					audioPath.setCycleCount(AudioClip.INDEFINITE);
 						if (SettingMenuController.soundcheck) {
 					        audiopath2.play();
 							}
@@ -819,23 +686,12 @@ public class GamePlayController {
 					}	
 				}
 			}
-	//		if(circle.getLayoutY()>down_frame0) {
-	//			System.out.println("down");
-	//			loop.stop();
-	//		}
-	//		if(circle.getLayoutY()<up_frame) {
-	//			System.out.println("up");
-	//			loop.stop();
-	//		}
-	//		if(circle.getLayoutY()<(down_frame+up_frame)/2) {
 			if(circle.getLayoutY() <= frm_height/1.5) {
 				screen_mover=true;
 			}
 			else {
 				screen_mover=false;
 			}
-	//		System.out.println(circle.getLayoutY()+" oops "+(down_frame+up_frame)/2);
-	//		System.out.println("maxY"+bounds.getMaxY());
 	
 			if (gameup==1) {
 				
@@ -846,13 +702,8 @@ public class GamePlayController {
 						Obstacles.get(i).setYpos(Obstacles.get(i).getYpos()+5);
 						for (int j = 0; j < Obstacles.get(i).getList_shape().size(); j++) {
 							Obstacles.get(i).getList_shape().get(j).setLayoutY(Obstacles.get(i).getList_shape().get(j).getLayoutY()+5);
-							
-	//						System.out.println("ok");
 						}
 					}
-	//				down_frame-=3;
-	//				up_frame-=3;
-	//				frm_height-=3;  //see coordinates and then shape.intersent will be if centre lies within the frame coordinates then only intersect check
 				}
 			}
 			
@@ -862,7 +713,6 @@ public class GamePlayController {
 			}
 		
 		}
-	//	System.out.println(circle.getLayoutY());
 	}
 
 
@@ -890,6 +740,22 @@ public class GamePlayController {
 	
 	public void setArr_copy_obst(ArrayList<ShapeObstacle> arr_copy_obst) {
 		this.arr_copy_obst = arr_copy_obst;
+	}
+
+	public int getStar_present() {
+		return star_present;
+	}
+
+	public void setStar_present(int star_present) {
+		this.star_present = star_present;
+	}
+
+	public int getClr_present() {
+		return clr_present;
+	}
+
+	public void setClr_present(int clr_present) {
+		this.clr_present = clr_present;
 	}
 
 }

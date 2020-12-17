@@ -24,31 +24,22 @@ import javafx.stage.Stage;
 
 public class SettingMenuController implements Initializable {
 	
-@FXML ImageView home;
-@FXML CheckBox music;
-@FXML CheckBox sound;
-
-//	 boolean playmusicsetting;
-//	 boolean playsoundsetting;
-
+	@FXML ImageView home;
+	@FXML CheckBox music;
+	@FXML CheckBox sound;
 	static boolean soundcheck=true;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-//        tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
         window.show();
 	}
 	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
@@ -58,14 +49,13 @@ public class SettingMenuController implements Initializable {
         Tooltip.install(home, tool);
     }
 	
-	 @FXML
-	    void stopGlowing(MouseEvent event) throws IOException {
-//		 System.out.println("Out Image");
-	        Node source= (Node) event.getSource();
-	        Glow glow=(Glow) source.getEffect();
-	        source.setEffect(glow);
-	        glow.setLevel(0.0);
-	    }
+	@FXML
+    void stopGlowing(MouseEvent event) throws IOException {
+        Node source= (Node) event.getSource();
+        Glow glow=(Glow) source.getEffect();
+        source.setEffect(glow);
+        glow.setLevel(0.0);
+    }
 
 	
 	public void playmusic(ActionEvent event) {
@@ -84,17 +74,11 @@ public class SettingMenuController implements Initializable {
 	
 	public void playsound(ActionEvent event) {
 		if (sound.isSelected()) {
-//			GamePlayController.audiopath1.play();
-//			GamePlayController.audiopath2.play();
-//			GamePlayController.audiopath3.play();
 			Main.playsoundsetting=true;
 			soundcheck=true;
 		}
 		
 		else {
-//			GamePlayController.audiopath1.stop();
-//			GamePlayController.audiopath2.stop();
-//			GamePlayController.audiopath3.stop();
 			Main.playsoundsetting=false;
 			soundcheck=false;
 		}

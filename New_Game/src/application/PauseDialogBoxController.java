@@ -32,31 +32,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PauseDialogBoxController implements Serializable, Initializable{
-//	private Pane canvas;
-//	private Timeline loop;
-//	Ball ball;
-//	Player player;
-//	private Image pause;
-//	private Text scr;
 	private DataTable datatable;
 	private static final long serialVersionUID = 11L;
-//	private int save_count = deserialize();
 	private int save_count = deserialize_savecount();
-	private Scene scene;
-	Timeline loop;
-//	private ArrayList<ShapeObstacle> Obstacles;
-
-//	void initData(Pane canvas, Timeline loop, Ball ball, Player player, Image pause, Text scr,DataTable datatable,ArrayList<ShapeObstacle> obstacles) {	
-//		this.canvas = canvas;
-//		this.loop = loop;
-//		this.ball = ball;
-//		this.player = player;
-//		this.pause = pause;
-//		this.scr = scr;
-//		this.datatable = datatable;
-//		Obstacles = obstacles;
-//	}
-	
+	private transient Scene scene;
+	private transient Timeline loop;
+	private int frm_width = 600;
+	private int frm_height = 750;
 	
     @FXML
     private transient ImageView resume;
@@ -78,60 +60,25 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		this.datatable=datatable;
 		this.scene=scene;
 		this.loop=loop;
-//		save_count=deserialize_savecount();
-//		System.out.println((save_count+1)+" my bad");
-//		save_count++;
-////		setSave_count(save_count+1);
-//		serialize_savecount();
-		
 		SaveController.setSave_counter(save_count);
-		
-//		System.out.println("init Pause dialog  "+datatable.getNum_obst1()+" "+datatable.getNum_obst2());
 		datatable.serialize_resume();
 	}
 	public void resume(MouseEvent event) throws IOException {
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		loop.play();
-		
-//		Player p1 = new Player(datatable.getCurr_scr(),datatable.getMax_scr(),datatable.getTotal_stars());
-//		GamePlayController gc = new GamePlayController(p1,datatable.getNum_obst1(), datatable.getNum_obst2());
-//		gc.play(event);
 	}
 	public void restart(MouseEvent event) throws IOException {
-//		 	Parent tableViewParent = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
-//	        Scene tableViewScene = new Scene(tableViewParent);
-//	        tableViewScene.setFill(Color.BLACK);
-//	        
-//	        //This line gets the Stage information
-//	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//	        tableViewParent.setStyle("-fx-background-color: #000000;");
-//	        window.setScene(tableViewScene);
-//	        window.show();
-//		datatable.serialize();
-//		datatable.deserialize();
-		
-//		GamePlayController gc = new GamePlayController(canvas,loop,ball,player,pause,scr,datatable,Obstacles);
 		Player p1 = new Player(0,0,0);
-		GamePlayController gc = new GamePlayController(p1,0,1);
+		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1);
 		gc.play(event);
 	}
 	
 	public void save(MouseEvent event) throws IOException {
 		save_count=deserialize_savecount();
-//		SaveController.setSave_counter(save_count);
-//		System.out.println((save_count+1)+" my bad");
-//		save_count++;
-//		setSave_count(save_count+1);
-//		serialize_savecount();
-		
 		datatable.serialize();
 		save_count++;
 		serialize_savecount();
-//		datatable.deserialize();
-		
-		
-//		datatable.deserialize();
 	}
 	
 	public void save_exit(MouseEvent event) throws IOException {
@@ -149,11 +96,7 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-//        tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
         window.show();
 	}
@@ -166,7 +109,6 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	            out.writeObject(this); 
 	            out.close(); 
 	            file.close();  
-//	            System.out.println("ok kkkkkkkkkkkkk");
 	            System.out.println("Pause Object has been serialized");
 	        } 
 	        catch(IOException ex) { 
@@ -176,7 +118,6 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	public int deserialize_savecount() {
 		int temp_save_count;
 		 try{    
-	            // Reading the object from a file 
 			 	PauseDialogBoxController savetable=null;
 	            FileInputStream file = new FileInputStream("Save_Count.txt"); 
 	            ObjectInputStream in = new ObjectInputStream(file); 
@@ -188,16 +129,10 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 	            System.out.println("Pause Object has been deserialized "); 
 	            System.out.println("Save Count hu= " + savetable.getSave_count());
 	            temp_save_count = savetable.getSave_count();
-	            
-//	            save_count++;
-//	            serialize_savecount();
-	            
-//	            setSave_coun:t(getSave_count() + 1);
-//	            savetable.setSave_count(savetable.getSave_count()+1);
 	        } 
 	          
 	        catch(IOException ex) { 
-//	        	System.out.println("am i here");
+	        	System.out.println("am i here");
 	        	serialize_savecount();
 	            System.out.println("IOException is caught"); 
 	            temp_save_count = -1;
@@ -210,30 +145,24 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		 return temp_save_count;
 	}	
 	
-
-	
-	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
         glow.setLevel(0.4);
     }
 	
-	 @FXML
-	    void stopGlowing(MouseEvent event) throws IOException{
-//		 System.out.println("Out Image");
-	        Node source= (Node) event.getSource();
-	        Glow glow=(Glow) source.getEffect();
-	        source.setEffect(glow);
-	        glow.setLevel(0.0);
-	    }
+	@FXML
+    void stopGlowing(MouseEvent event) throws IOException{
+        Node source= (Node) event.getSource();
+        Glow glow=(Glow) source.getEffect();
+        source.setEffect(glow);
+        glow.setLevel(0.0);
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		ArrayList<ImageView> img_list = new ArrayList<ImageView>();
 		ArrayList<String> name_list = new ArrayList<String>();
 		
@@ -242,10 +171,6 @@ public class PauseDialogBoxController implements Serializable, Initializable{
 		img_list.add(save) ; name_list.add("Save Game");
 		img_list.add(save_exit) ; name_list.add("Save & Exit Game");
 		img_list.add(home) ; name_list.add("Home");
-//		img_list.add(help) ; name_list.add("Help");
-//		img_list.add(reward) ; name_list.add("Rewards");
-//		img_list.add(exit) ; name_list.add("Exit Game");
-//		
 		for (int i = 0; i < img_list.size(); i++) {
 			 	Tooltip tool = new Tooltip(name_list.get(i));
 		        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));

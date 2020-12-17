@@ -71,34 +71,8 @@ public Ball(double xpos, double ypos, double radius, Color clr_ball) {
 					xpoints[1],ypoints[1],
 					xpoints[2],ypoints[2]);
 			circle.relocate(xpos, ypos);
-//			circle.setLayoutX(xpos);
-//			circle.setLayoutY(ypos);
 			circle.setFill(clr_ball);
 		}
-		
-//		else if (Main.ballshape==3) {
-//				circle = new Ellipse(radius+10,radius); 
-////				circle.setCenterX(50.0f);
-////				circle.setCenterY(50.0f);
-////				circle.setRadiusX(50.0f);
-////				circle.setRadiusY(25.0f);
-//				circle.setLayoutX(xpos);
-//				circle.setLayoutY(ypos);
-//				circle.setFill(clr_ball);
-//				
-////			circle = new Polygon(xpos-10,ypos-3,xpos-3,ypos-3,xpos-3,ypos-10,xpos+3,
-////					ypos-10,xpos+3,ypos-3,xpos+10,ypos-3,xpos+10,ypos+3
-////					,xpos+3,ypos+3,xpos+3,ypos+10,xpos-3,ypos+10,xpos-3,
-////					ypos+3,xpos-10,ypos+3);
-////			
-////			
-//////			circle.relocate(xpos, ypos);
-//////			circle.setLayoutX(xpos-circle.getLayoutBounds().getMinX());
-//////			circle.setLayoutY(ypos+circle.getLayoutBounds().getMaxY());
-////			circle.setFill(clr_ball);
-////			circle.setStroke(clr_ball);
-//			
-//		}
 		
 		else if (Main.ballshape==3) {
 			circle = new Line(radius,radius+15, radius, radius);
@@ -114,9 +88,6 @@ public Ball(double xpos, double ypos, double radius, Color clr_ball) {
 					radius-10,radius+3,radius-3,radius+10,radius-3,radius+10,radius+3
 					,radius+3,radius+3,radius+3,radius+10,radius-3,radius+10,radius-3,
 					radius+3,radius-10,radius+3);
-			
-//			circle.setLayoutX(xpos);
-//			circle.setLayoutX(ypos);
 			circle.relocate(xpos, ypos);
 			circle.setFill(clr_ball);
 		}
@@ -132,21 +103,7 @@ public Ball(double xpos, double ypos, double radius, Color clr_ball) {
 			circle.setFill(clr_ball);
 
 		}
-//		Circle circle=new Circle(radius,clr_ball);
-//		circle.setLayoutX(xpos);
-//		circle.setLayoutY(ypos);
-//		circle.setCenterX(xpos); 
-//		circle.setCenterY(ypos);
 		return circle;
 	}
-	
-//	public Rectangle Ball_make_rec() {
-//		Rectangle circle=new Rectangle(radius,radius,clr_ball);
-//		circle.setLayoutX(xpos);
-//		circle.setLayoutY(ypos);
-////		circle.setCenterX(xpos); 
-////		circle.setCenterY(ypos);
-//		return circle;
-//	}
 	
 }

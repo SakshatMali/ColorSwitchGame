@@ -35,11 +35,7 @@ public class VolumeMenuController implements Initializable  {
 	    public void home(MouseEvent event) throws IOException {
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
-//	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
 	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
 	        window.show();
 		}
@@ -47,7 +43,6 @@ public class VolumeMenuController implements Initializable  {
 	    
 	    @FXML
 	    void glowImage(MouseEvent event) throws IOException {
-//			System.out.println("On Image");
 	        Glow glow=new Glow();
 	        Node source = (Node) event.getSource();
 	        source.setEffect(glow);
@@ -58,14 +53,13 @@ public class VolumeMenuController implements Initializable  {
 	        Tooltip.install(home, tool);
 	    }
 		
-		 @FXML
-		    void stopGlowing(MouseEvent event) throws IOException{
-//			 System.out.println("Out Image");
-		        Node source= (Node) event.getSource();
-		        Glow glow=(Glow) source.getEffect();
-		        source.setEffect(glow);
-		        glow.setLevel(0.0);
-		    }
+	    @FXML
+	    void stopGlowing(MouseEvent event) throws IOException{
+	        Node source= (Node) event.getSource();
+	        Glow glow=(Glow) source.getEffect();
+	        source.setEffect(glow);
+	        glow.setLevel(0.0);
+	    }
 		 
 		 public void volumeChange(MouseEvent event) {
 			Main.audioPath.stop();
@@ -84,7 +78,6 @@ public class VolumeMenuController implements Initializable  {
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
-			// TODO Auto-generated method stub
 			slider.setValue(Main.slidervalue);
 		}
 	    

@@ -31,7 +31,6 @@ public abstract class ShapeObstacle extends Shape {
 	private Image star_new;
 	
 	Color clr_arr[]= {Color.RED, Color.BLUE , Color.PURPLE , Color.YELLOW};
-//	Color clr_arr[]= {Color.rgb(250, 22, 151), Color.CYAN , Color.PURPLE , Color.YELLOW};
 	public ShapeObstacle(double height, double width, double xpos, double ypos, int rotate) {
 		super();
 		this.height = height;
@@ -39,10 +38,7 @@ public abstract class ShapeObstacle extends Shape {
 		this.xpos = xpos;
 		this.ypos = ypos;
 		_rotate=rotate;
-//		star_new = new Image(new FileInputStream("src/Colour Images/star.png")); 
 		star=new Star();
-//		clr_chng=new ColorChange(size_clr_change);
-	
 	}
 	public double getHeight() {
 		return height;
@@ -108,38 +104,24 @@ public abstract class ShapeObstacle extends Shape {
 	    list.get(list.size()-5).getTransforms().add(star_rotate);
         return star_rotate;
 	}
-	public void makeStar() {
+	public void makeStar(int ss) {
 		double points[] = {5, -10, 20, -60, 35, -10, 0, -40, 40, -40};
 		
 		Polygon _star = new Polygon(points);
 		_star.setScaleX(0.6);
 		_star.setScaleY(0.6);
-//		Polygon _star = new Polygon(xpos+xpoints[0],ypos+ypoints[0],
-//				xpos+xpoints[1],ypos+ypoints[1],
-//				xpos+xpoints[2],ypos+ypoints[2]);
-//				xpoints[3],ypoints[3],
-//				xpoints[4],ypoints[4],
-//				xpoints[5],ypoints[5]);
-//				xpoints[6],ypoints[6]);
-//				xpoints[7],ypoints[7],
-//				xpoints[8],ypoints[8],
-//				xpoints[9],ypoints[9]);
-				_star.relocate(xpos-20,ypos - 30);
-				_star.setFill(Color.WHITE);
-				_star.setStroke(Color.WHITE);
-				
-//				ImageView imageView = new ImageView(star_new); 
-//				imageView.setFitHeight(46);
-//			    imageView.setFitWidth(48);
-				
-//				Rotate rotate = new Rotate();    
-//		        rotate.setAngle(0);  
-//		        rotate.setPivotX(xpos);  
-//		        rotate.setPivotY(ypos);
-//		        _star.getTransforms().add(rotate);
-		        getList_shape().add(_star);
+		_star.relocate(xpos-20,ypos - 30);
+		if(ss==1) {
+			_star.setFill(Color.WHITE);
+			_star.setStroke(Color.WHITE);
 		}
-	public void make_Clr_chng(double diff,double clr_change_radius) {
+		else {
+			_star.setFill(null);
+			_star.setStroke(null);
+		}
+        getList_shape().add(_star);
+	}
+	public void make_Clr_chng(double diff,double clr_change_radius,int cc) {
 		for (int i=0 ; i<4 ; i++) {
 			Arc arc = new Arc();
 			arc.setCenterX(xpos);
@@ -148,9 +130,16 @@ public abstract class ShapeObstacle extends Shape {
 			arc.setRadiusY(clr_change_radius);
 			arc.setStartAngle(90*i);
 			arc.setLength(90);
-			arc.setStroke(clr_arr[i]);
-//			arc.setStrokeWidth(5);
-			arc.setFill(clr_arr[i]);
+		
+			if(cc==1) {
+				arc.setStroke(clr_arr[i]);
+				arc.setFill(clr_arr[i]);
+			}
+			else {
+				arc.setStroke(null);
+				arc.setFill(null);
+			}
+			
 			arc.setType(ArcType.ROUND);
 			getList_shape().add(arc);
 		}

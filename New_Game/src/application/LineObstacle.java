@@ -67,13 +67,6 @@ public class LineObstacle extends ShapeObstacle{
 	@Override
 	public Rotate makeRotate(List<Shape> list) {
 	    Rotate rotate = new Rotate(); 
-//        rotate.setAngle(0);  
-//        rotate.setPivotX(getXpos());  
-//        rotate.setPivotY(getYpos()-50);
-//      
-//        for (int i = 0; i < list.size()-5; i++) {
-//			list.get(i).getTransforms().add(rotate);
-//		}
         return rotate;
 	}
 

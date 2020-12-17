@@ -31,7 +31,8 @@ import jdk.nashorn.api.tree.ForInLoopTree;
 import javafx.scene.control.Tooltip;
 
 public class MenuController implements Initializable {
-
+		private int frm_width = 600;
+		private int frm_height = 750;
 		@FXML
 		private AnchorPane mainRoot;
 	
@@ -64,24 +65,8 @@ public class MenuController implements Initializable {
 	    
 	
 	public void StartGame(MouseEvent event) throws IOException {
-//		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GamePlay.fxml"));
-//		 AnchorPane pane=fxmlLoader.load();
-//		mainRoot.getChildren().setAll(pane);
-//		GamePlayController gc=new GamePlayController();
-//		gc.play(event);
-
-//		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("GamePlay.fxml"));
-//	        Scene tableViewScene = new Scene(tableViewParent);
-//	        tableViewScene.setFill(Color.BLACK);
-//	        
-//	        //This line gets the Stage information
-//	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//	        tableViewParent.setStyle("-fx-background-color: #000000;");
-//	        window.setScene(tableViewScene);
-//	        window.show();
-//		dt=dt.deserialize();			//doubt
 		Player p1 = new Player(0, 0,0);
-		GamePlayController gc = new GamePlayController(p1,0,1);
+		GamePlayController gc = new GamePlayController(p1,0,1,frm_width/2,frm_height-150,300,1,1);
 		gc.play(event);
 
 	}
@@ -91,8 +76,6 @@ public class MenuController implements Initializable {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("HelpMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
@@ -105,8 +88,6 @@ public class MenuController implements Initializable {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SettingMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
@@ -117,8 +98,6 @@ public class MenuController implements Initializable {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("AchievementMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
@@ -127,42 +106,24 @@ public class MenuController implements Initializable {
 
 	
 	public void save(MouseEvent event) throws IOException {
-//		setSave_count(getSave_count() + 1);
-		
-		
 		 AnchorPane pane= FXMLLoader.load(getClass().getResource("SaveMenu.fxml"));
 	     mainRoot.getChildren().setAll(pane);
-		
-		
-//		Parent tableViewParent = FXMLLoader.load(getClass().getResource("SaveMenu.fxml"));
-//        Scene tableViewScene = new Scene(tableViewParent);
-//        tableViewScene.setFill(Color.BLACK);
-//        
-//        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        tableViewParent.setStyle("-fx-background-color: #000000;");
-//        window.setScene(tableViewScene);
-//        window.show();
 	}
 	
 	public void volume(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("VolumeMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
         window.show();
-//		System.out.println("Volume");
 	}
 	
 	public void social(MouseEvent event) throws IOException {
 		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("WebMenu.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
 	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
 	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
@@ -170,40 +131,27 @@ public class MenuController implements Initializable {
 	}
 	
 	public void exit(MouseEvent event) throws IOException {
-//		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//		window.close();
-		
 		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("ExitMenu.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
 	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
 	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
 	        window.show();
-		
 	}
 	
 	public void shop(MouseEvent event) throws IOException {
-//		Scanner user = new Scanner(System.in);
-//		Main.ballshape=user.nextInt();
-		
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("ShopMenu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
         window.show();
-		
 	}
 	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
@@ -212,7 +160,6 @@ public class MenuController implements Initializable {
 	
 	 @FXML
 	    void stopGlowing(MouseEvent event) throws IOException{
-//		 System.out.println("Out Image");
 	        Node source= (Node) event.getSource();
 	        Glow glow=(Glow) source.getEffect();
 	        source.setEffect(glow);
@@ -221,7 +168,6 @@ public class MenuController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		ArrayList<ImageView> img_list = new ArrayList<ImageView>();
 		ArrayList<String> name_list = new ArrayList<String>();
 		
@@ -241,8 +187,4 @@ public class MenuController implements Initializable {
 		        Tooltip.install(img_list.get(i), tool);
 		}
 	}
-
-	
-
-
 }

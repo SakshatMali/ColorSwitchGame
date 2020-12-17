@@ -43,7 +43,6 @@ public class Rotating_Ring_Obst extends ShapeObstacle{
 			list.get(i).getTransforms().add(rotate);
 		}
         return rotate;
-//		return null;
 	}
 
 	

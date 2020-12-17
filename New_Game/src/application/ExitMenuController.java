@@ -34,20 +34,18 @@ public class ExitMenuController {
 	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
         glow.setLevel(0.4);
     }
 	
-	 @FXML
-	    void stopGlowing(MouseEvent event) throws IOException{
-//		 System.out.println("Out Image");
-	        Node source= (Node) event.getSource();
-	        Glow glow=(Glow) source.getEffect();
-	        source.setEffect(glow);
-	        glow.setLevel(0.0);
-	    }
+	@FXML
+    void stopGlowing(MouseEvent event) throws IOException{
+        Node source= (Node) event.getSource();
+        Glow glow=(Glow) source.getEffect();
+        source.setEffect(glow);
+        glow.setLevel(0.0);
+    }
 
 }

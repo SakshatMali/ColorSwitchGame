@@ -36,7 +36,6 @@ public class VideoPlayerController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		Media sound = new Media(getClass().getResource("/Colour Sounds/addfilm.mp4").toString());
 		mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setAutoPlay(true);
@@ -47,41 +46,32 @@ public class VideoPlayerController implements Initializable {
 	}
 	
 	public void back(MouseEvent event) throws IOException {
-		
-		 Parent tableViewParent = FXMLLoader.load(getClass().getResource("GameOverBox.fxml"));
-	        Scene tableViewScene = new Scene(tableViewParent);
-	        tableViewScene.setFill(Color.BLACK);
-	        
-	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	        tableViewParent.setStyle("-fx-background-color: #000000;");
-	        window.setScene(tableViewScene);
-	        window.show();
-	        mediaPlayer.stop();
+			DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
+			temp = dt.deserialize_max_scr();
+			temp.serialize_max_scr();
+			Player p1 = new Player(temp.getCurr_scr(),temp.getMax_scr(),temp.getTotal_stars());
+			GamePlayController gc = new GamePlayController(p1,temp.getNum_obst1(), temp.getNum_obst2(),600/2,750-150,300,1,1);
+			mediaPlayer.stop();
+			gc.play(event);
 	}
-	
 
     @FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
         glow.setLevel(0.4);
-        
         Tooltip tool = new Tooltip("Back");
         tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
         Tooltip.install(back, tool);
     }
 	
-	 @FXML
-	    void stopGlowing(MouseEvent event) throws IOException{
-//		 System.out.println("Out Image");
-	        Node source= (Node) event.getSource();
-	        Glow glow=(Glow) source.getEffect();
-	        source.setEffect(glow);
-	        glow.setLevel(0.0);
-	    }
-	
-	
-
+	@FXML
+    void stopGlowing(MouseEvent event) throws IOException{
+        Node source= (Node) event.getSource();
+        Glow glow=(Glow) source.getEffect();
+        source.setEffect(glow);
+        glow.setLevel(0.0);
+    }
 }

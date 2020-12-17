@@ -46,8 +46,6 @@ public ExplosionBalls(double xpos, double ypos, double radius, Color clr_ball) {
 		Circle circle=new Circle(radius,clr_ball);
 		circle.setLayoutX(xpos);
 		circle.setLayoutY(ypos);
-//		circle.setCenterX(xpos); 
-//		circle.setCenterY(ypos);
 		return circle;
 	}
 	

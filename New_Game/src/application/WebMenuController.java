@@ -18,52 +18,46 @@ import javafx.stage.Stage;
 
 public class WebMenuController {
 	
-	@FXML ImageView home;
+	@FXML 
+	ImageView home;
 	
 	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
         glow.setLevel(0.4);
     }
 	
-	 @FXML
-	    void stopGlowing(MouseEvent event) throws IOException{
-//		 System.out.println("Out Image");
-	        Node source= (Node) event.getSource();
-	        Glow glow=(Glow) source.getEffect();
-	        source.setEffect(glow);
-	        glow.setLevel(0.0);
-	    }
+	@FXML
+    void stopGlowing(MouseEvent event) throws IOException{
+        Node source= (Node) event.getSource();
+        Glow glow=(Glow) source.getEffect();
+        source.setEffect(glow);
+        glow.setLevel(0.0);
+    }
 	 
 	 
 	 public void home(MouseEvent event) throws IOException {
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
 	        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-//	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
 	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
 	        window.show();
 		}
 	 
-	 @FXML
-	    void glowImageHome(MouseEvent event) throws IOException {
-//			System.out.println("On Image");
-	        Glow glow=new Glow();
-	        Node source = (Node) event.getSource();
-	        source.setEffect(glow);
-	        glow.setLevel(0.4);
-	        Tooltip tool = new Tooltip("Home");
-	        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
-	        Tooltip.install(home, tool);
-	    }
+	@FXML
+    void glowImageHome(MouseEvent event) throws IOException {
+        Glow glow=new Glow();
+        Node source = (Node) event.getSource();
+        source.setEffect(glow);
+        glow.setLevel(0.4);
+        Tooltip tool = new Tooltip("Home");
+        tool.setFont(Font.font("System", FontWeight.BOLD, FontPosture.ITALIC, 24));
+        Tooltip.install(home, tool);
+    }
 	 
 	 public void insta(MouseEvent event) throws IOException {
 		 
@@ -71,11 +65,7 @@ public class WebMenuController {
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Web.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
 	        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-//	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
 	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
 	        window.show();
 		}
@@ -86,11 +76,7 @@ public class WebMenuController {
 			Parent tableViewParent = FXMLLoader.load(getClass().getResource("Web.fxml"));
 	        Scene tableViewScene = new Scene(tableViewParent);
 	        tableViewScene.getStylesheets().add(getClass().getResource("big-check-box.css").toExternalForm());
-//	        tableViewScene.setFill(Color.BLACK);
-	        
-	        //This line gets the Stage information
 	        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//	        tableViewParent.setStyle("-fx-background-color: #000000;");
 	        window.setScene(tableViewScene);
 	        window.show();
 		}

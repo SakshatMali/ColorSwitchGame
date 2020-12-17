@@ -24,29 +24,25 @@ import javafx.stage.Stage;
 
 public class AchievementMenuController implements Initializable{
 	
-	@FXML private ImageView home;
-	
-	 	@FXML
-	    private Label max;
+	@FXML
+	private ImageView home;
 
-	    @FXML
-	    private Label total;
+ 	@FXML
+    private Label max;
+
+    @FXML
+    private Label total;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-//        tableViewScene.setFill(Color.BLACK);
-        
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        tableViewParent.setStyle("-fx-background-color: #000000;");
         window.setScene(tableViewScene);
         window.show();
 	}
 	
 	@FXML
     void glowImage(MouseEvent event) throws IOException {
-//		System.out.println("On Image");
         Glow glow=new Glow();
         Node source = (Node) event.getSource();
         source.setEffect(glow);
@@ -58,7 +54,6 @@ public class AchievementMenuController implements Initializable{
 	
 	 @FXML
 	    void stopGlowing(MouseEvent event) throws IOException {
-//		 System.out.println("Out Image");
 	        Node source= (Node) event.getSource();
 	        Glow glow=(Glow) source.getEffect();
 	        source.setEffect(glow);
@@ -67,10 +62,8 @@ public class AchievementMenuController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-		DataTable dt = new DataTable(0,0,0,0,0);
-		DataTable temp = new DataTable(0,0,0,0,0);
+		DataTable dt = new DataTable(0,0,0,0,0,0,0,0,0,0);
+		DataTable temp = new DataTable(0,0,0,0,0,0,0,0,0,0);
 		temp = dt.deserialize_max_scr();
 		
 		max.setText(temp.getMax_scr()+"");
