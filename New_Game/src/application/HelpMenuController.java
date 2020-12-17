@@ -17,7 +17,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class HelpMenuController {
-	@FXML ImageView home;
+	@FXML 
+	private ImageView home;
 	
 	public void home(MouseEvent event) throws IOException {
 		Parent tableViewParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));

@@ -34,6 +34,7 @@ public class ColorChange {
 			arc.setType(ArcType.ROUND);
 			obstacle.getList_shape().add(arc);
 		}
+		rand.nextInt();
 		
 	}
 	

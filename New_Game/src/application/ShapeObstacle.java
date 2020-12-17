@@ -24,11 +24,6 @@ public abstract class ShapeObstacle extends Shape {
 	private List<Shape> list_shape = new ArrayList<>();
 	private Star star;
 	private ColorChange clr_chng;
-	private int side=35;
-	private double centroid=side/Math.sqrt(3);
-	private double[] xpoints = {0,side/2,-side/2};
-	private double[] ypoints = {centroid,-centroid/2,-centroid/2};
-	private Image star_new;
 	
 	Color clr_arr[]= {Color.RED, Color.BLUE , Color.PURPLE , Color.YELLOW};
 	public ShapeObstacle(double height, double width, double xpos, double ypos, int rotate) {

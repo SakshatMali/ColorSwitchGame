@@ -37,14 +37,9 @@ import javafx.geometry.Bounds;
 
 
 public class Main extends Application {
+	
 	private int frm_width = 600;
 	private int frm_height = 750;
-	static AudioClip audioPath;
-	static boolean playmusicsetting=true;
-	static boolean playsoundsetting=true;
-	static double slidervalue=20;
-	static String webaddress="";
-	static int ballshape=0;
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -66,4 +61,10 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	static AudioClip audioPath;
+	static boolean playmusicsetting=true;
+	static boolean playsoundsetting=true;
+	static double slidervalue=20;
+	static String webaddress="";
+	static int ballshape=0;
 }
